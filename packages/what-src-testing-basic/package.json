@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "what-src-testing-basic",
   "version": "1.0.0",
   "description": "A test project for the what-src-plugin using react.",
