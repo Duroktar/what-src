@@ -1,0 +1,21 @@
+{
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "*.md",
+        "*.txt",
+        "test/**",
+        "@(!(package)).json"
+      ]
+    }
+  },
+  "packages": [
+    "packages/*"
+  ],
+
+  "version": "1.0.0",
+  "npmClient": "yarn",
+  "npmClientArgs": [
+    "--no-lockfile"
+  ]
+}

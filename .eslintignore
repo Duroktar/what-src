@@ -1,0 +1,6 @@
+/.git
+package.json
+lerna.json
+packages/*/node_modules
+packages/*/dist
+packages/what-src-testing-flatris

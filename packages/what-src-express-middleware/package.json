@@ -1,0 +1,22 @@
+{
+  "name": "@what-src/express-middleware",
+  "version": "1.0.0",
+  "author": "Scott Doucet <duroktar@gmail.com>",
+  "license": "MIT",
+  "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-express-middleware",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env EDITOR=vscode node server.js"
+  },
+  "engines": {
+    "node": ">=6.9.0"
+  },
+  "dependencies": {
+		"chalk": "^2.4.2",
+    "open-editor": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "@types/express": "^4.17.1"
+  }
+}

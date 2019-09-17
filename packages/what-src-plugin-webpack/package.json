@@ -1,0 +1,32 @@
+{
+	"name": "@what-src/webpack-plugin",
+	"version": "1.0.0",
+  "author": "Scott Doucet <duroktar@gmail.com>",
+  "license": "MIT",
+  "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-plugin-webpack",
+	"main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean:dist": "rimraf ./dist",
+    "build": "tsc -p tsconfig.json",
+    "build:dist": "npm run build"
+  },
+  "engines": {
+    "node": ">=6.9.0"
+  },
+	"dependencies": {
+		"chalk": "^2.4.2",
+		"tapable": "^1.1.3",
+		"webpack": "^4.40.2",
+		"webpack-log": "^3.0.1",
+		"@what-src/express": "^1.0.0"
+	},
+	"devDependencies": {
+		"@types/chalk": "^2.2.0",
+		"@types/node": "^12.7.5",
+		"@types/tapable": "^1.0.4",
+		"@types/webpack": "^4.39.1"
+	}
+}

@@ -1,0 +1,31 @@
+{
+  "name": "what-src",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "prepublish": "./scripts/clone-license.sh",
+    "publish": "echo 'lerna publish (TODO)'",
+    "build": "lerna run build:dist && lerna run build:plugin",
+    "build:clean": "lerna run clean:dist && npm run build",
+    "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx .",
+    "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix .",
+    "lint:fix-dry-run": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix-dry-run ."
+  },
+  "engines": {
+    "node": ">= 6.9.0 < 13.0.0",
+    "npm": ">= 3.x <= 6.x",
+    "yarn": ">=0.27.5 || >=1.0.0-20170811"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/parser": "^2.2.0",
+    "eslint": "^6.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "lerna": "^3.16.4",
+    "typescript": "^3.6.3"
+  }
+}

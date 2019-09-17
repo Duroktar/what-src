@@ -1,0 +1,26 @@
+{
+	"name": "@what-src/plugin",
+	"version": "1.0.0",
+  "author": "Scott Doucet <duroktar@gmail.com>",
+	"license": "MIT",
+  "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-plugin",
+	"main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean:dist": "rimraf ./dist",
+    "build": "tsc -p tsconfig.json",
+    "build:plugin": "npm run build"
+  },
+  "engines": {
+    "node": ">=6.9.0"
+  },
+	"dependencies": {
+		"@what-src/babel-plugin": "^1.0.0",
+		"@what-src/webpack-plugin": "^1.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "^12.7.5"
+	}
+}
