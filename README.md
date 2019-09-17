@@ -193,7 +193,7 @@ the day job and this is the result.
 
 Check out the
 [@what-src/testing-basic](/packages/what-src-testing-basic) and
-[@what-src/what-src-testing-flatris](/packages/what-src-plugin-webpack) packages.
+[@what-src/what-src-testing-flatris](/packages/what-src-testing-flatris) packages.
 
 ### Want to report a bug or request a feature?
 
