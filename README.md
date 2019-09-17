@@ -8,7 +8,8 @@
   <a href="https://lerna.js.org/"><img alt="Managed By Lerna" src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg"></a>
 </p>
 
-`@what-src/plugin` is a tool for developers that puts the code for every element on the page, a single click away.
+`@what-src/plugin` is a tool for developers that puts the code for every element
+on the page, a single click away.
 
 [Check out the demo](https://github.com/Duroktar/what-src-logo/tree/master/demo)
 
@@ -168,19 +169,19 @@ complete standalone application.
 
 Opening a local filepath from javascript in your browser is not possible, so the
 `@what-src/express` server is responsible for opening the requested file in the
-correct editor on your system at the correct location. To do this it use the
+correct editor on your system at the correct location. To do this it uses the
 `open-editor` package from [@sindresorhus](https://github.com/sindresorhus)
 which works on multiple platforms, is well maintained, and highly configurable.
 
 The `@what-src/babel-plugin` tags any html elements it comes across in your code
-with a key to a cache line containing the necessary data can then be sent to the
-server whenever a click is detected over an element while pressing the hotkey.
-(`windows` key for windows, `command` key on mac). The key for each element is
-stored in its `data--what-src` attribute and is unique across all nodes.
+with a key to a cache line containing the necessary data, which can then be sent
+to the server whenever a "valid" click event is detected (ie: with the hotkey
+pressed). The cache key for each element is stored in its `data--what-src`
+attribute and is unique across all nodes.
 
 The actual click events are detected using a global listener on the
 `window.document` object which then sends a native xhr request to the server
-with the relevant cache info.
+with the relevant cache line for the clicked element.
 
 ## Why?
 
