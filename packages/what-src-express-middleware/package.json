@@ -8,15 +8,18 @@
   "scripts": {
     "start": "cross-env EDITOR=vscode node server.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=6.9.0"
   },
   "dependencies": {
-		"chalk": "^2.4.2",
+    "chalk": "^2.4.2",
     "open-editor": "^2.0.1"
   },
   "devDependencies": {
-    "@types/node": "^12.7.5",
-    "@types/express": "^4.17.1"
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.5"
   }
 }

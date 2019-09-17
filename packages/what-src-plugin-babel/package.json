@@ -1,21 +1,24 @@
 {
 	"name": "@what-src/babel-plugin",
 	"version": "1.0.0",
-  "author": "Scott Doucet <duroktar@gmail.com>",
+	"author": "Scott Doucet <duroktar@gmail.com>",
 	"license": "MIT",
-  "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-plugin-babel",
+	"repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-plugin-babel",
 	"main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "clean:dist": "rimraf ./dist",
-    "build": "tsc -p tsconfig.json",
-    "build:dist": "npm run build"
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"clean:dist": "rimraf ./dist",
+		"build": "tsc -p tsconfig.json",
+		"build:dist": "npm run build"
+	},
+  "publishConfig": {
+    "access": "public"
   },
-  "engines": {
-    "node": ">=6.9.0"
-  },
+	"engines": {
+		"node": ">=6.9.0"
+	},
 	"dependencies": {
 		"@babel/cli": "^7.6.0",
 		"@babel/generator": "^7.6.0",
