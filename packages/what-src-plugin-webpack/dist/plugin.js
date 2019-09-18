@@ -22,14 +22,14 @@ class WhatSrcServerWebpackPlugin {
         this.compiler = undefined;
         this.doneCallback = () => { };
         this.isRunning = false;
-        this.WHAT_SRC_DAEMON_ENDPOINT = '__what_src';
-        this.WHAT_SRC_DAEMON_PORT = '8018';
-        this.WHAT_SRC_DAEMON_SHH = 'true';
         options = options || {};
         this.options = { ...options };
         this.logger = options.logger || logger_1.createLogger();
         this.silent = options.silent === true; // default false
         this.productionMode = options.productionMode === true; // default false
+        this.WHAT_SRC_DAEMON_ENDPOINT = options.endpoint || '__what_src';
+        this.WHAT_SRC_DAEMON_PORT = options.port || 8018;
+        this.WHAT_SRC_DAEMON_SHH = options.shh === true;
         // don't run in production unless 'productionMode' is set
         if (process.env.NODE_ENV === 'production' && !this.productionMode) {
             console.log('@what-src/webpack-plugin - running in production mode is disabled. ' +
@@ -151,9 +151,9 @@ class WhatSrcServerWebpackPlugin {
         const env = {
             ...process.env,
             CONTEXT: this.compiler.options.context,
-            WHAT_SRC_DAEMON_SHH: this.WHAT_SRC_DAEMON_SHH,
-            WHAT_SRC_DAEMON_PORT: this.WHAT_SRC_DAEMON_PORT,
             WHAT_SRC_DAEMON_ENDPOINT: this.WHAT_SRC_DAEMON_ENDPOINT,
+            WHAT_SRC_DAEMON_PORT: JSON.stringify(this.WHAT_SRC_DAEMON_PORT),
+            WHAT_SRC_DAEMON_SHH: JSON.stringify(this.WHAT_SRC_DAEMON_SHH),
         };
         this.service = childProcess.fork(path.resolve(__dirname, './service.js'), [], {
             env,

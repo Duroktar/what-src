@@ -1,10 +1,11 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
 
 const Button = ({ children, ...rest }) => (
   <button {...rest}>{children}</button>
 )
 Button.propTypes = {
-  children: React.Children.only,
+  children: PropTypes.node,
 }
 
 export default Button

@@ -61,7 +61,8 @@ exports.babelPlugin = ({ types: t }) => ({
     visitor: {
         JSXElement: {
             enter(path, state) {
-                if (disabled || utils_1.isNullOrUndefined(path.node.openingElement.loc))
+                const isFragment = utils_1.getIn('name.property.name', path.node.openingElement) === 'Fragment';
+                if (disabled || isFragment || utils_1.isNullOrUndefined(path.node.openingElement.loc))
                     return;
                 const opts = Object.assign({}, defaultOptions, state.opts);
                 const meta = path.node.openingElement.loc.start;

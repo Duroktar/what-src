@@ -1,5 +1,5 @@
 import template from '@babel/template'
-import { isNullOrUndefined } from './utils'
+import { isNullOrUndefined, getIn } from './utils'
 import * as T from './types'
 
 const defaultOptions: Required<T.WhatSrcPluginOptions> = {
@@ -67,7 +67,8 @@ export const babelPlugin = ({ types: t }: T.BabelPluginContext): T.BabelPlugin =
   visitor: {
     JSXElement: {
       enter(path, state): void {
-        if (disabled || isNullOrUndefined(path.node.openingElement.loc)) return
+        const isFragment = getIn('name.property.name', path.node.openingElement) === 'Fragment'
+        if (disabled || isFragment || isNullOrUndefined(path.node.openingElement.loc)) return
 
         const opts: Required<T.WhatSrcPluginOptions> = Object.assign(
           {}, defaultOptions, state.opts)
