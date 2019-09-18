@@ -1,6 +1,6 @@
 {
  "name": "@what-src/plugin",
- "version": "1.0.0",
+ "version": "1.0.1",
  "author": "Scott Doucet <duroktar@gmail.com>",
  "license": "MIT",
  "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-plugin",
@@ -14,14 +14,14 @@
   "build:plugin": "npm run build"
  },
  "publishConfig": {
-   "access": "public"
+  "access": "public"
  },
  "engines": {
   "node": ">=6.9.0"
  },
  "dependencies": {
-  "@what-src/babel-plugin": "^1.0.0",
-  "@what-src/webpack-plugin": "^1.0.0"
+  "@what-src/babel-plugin": "^1.0.1",
+  "@what-src/webpack-plugin": "^1.0.1"
  },
  "devDependencies": {
   "@types/node": "^12.7.5"
