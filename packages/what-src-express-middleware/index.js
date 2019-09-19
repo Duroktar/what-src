@@ -24,7 +24,7 @@ module.exports = function whatSrcMiddleware(req, res) {
   const targetFile = `${filename}:${line}:${column}`
   if (!shh) {
     console.log(
-      chalk.cyanBright('Opening file'),
+      chalk.cyanBright('Opening'),
       chalk.whiteBright.bold(targetFile),
       'in',
       chalk.black.bgGreen(process.env.EDITOR)
