@@ -4,3 +4,6 @@ build/
 .vscode/
 
 .DS_Store
+
+/packages/*/LICENSE
+/packages/*/dist/

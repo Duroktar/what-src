@@ -3,8 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "prepublish": "./scripts/clone-license.sh",
-    "publish": "echo 'lerna publish (TODO)'",
+    "prepublish": "./scripts/clone-license.sh && npm run build:clean",
     "build": "lerna run build:dist && lerna run build:plugin",
     "build:clean": "lerna run clean:dist && npm run build",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx .",
