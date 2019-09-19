@@ -29,8 +29,7 @@ annoying, and that time adds up pretty quickly (see relevant
 Now ***every single element*** on the page is only **one click away** from
 being inside your editor, **at the line it was declared**! Nice.
 
-> System hotkey must be pressed to register page clicks. See configuration
-> section below. 
+> NOTE: [System Hotkey](#system-hotkey) must be pressed when clicking elements.
 
 ## Usage
 
@@ -147,7 +146,7 @@ app.listen(port, () => {
 
 ## Configuration
 
-### Global Hotkey
+### System Hotkey
 
 ***The hotkey must be pressed for page clicks to trigger the plugin.***
 

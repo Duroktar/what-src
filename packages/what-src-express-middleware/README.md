@@ -1,7 +1,9 @@
 
 # @what-src/express-middleware
 
-[![npm](https://img.shields.io/npm/v/@what-src/express-middleware.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/express-middleware) [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-express-middleware)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express-middleware) [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-express-middleware)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express-middleware&type=dev)
+> what-src express middleware.
+
+Check out the [packages folder](/packages) for more information.
 
 ## Usage
 

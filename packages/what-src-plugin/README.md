@@ -1,7 +1,9 @@
 
 # @what-src/plugin
 
-[![npm](https://img.shields.io/npm/v/@what-src/plugin.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/plugin) [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-plugin)](https://david-dm.org/duroktar/what-src?path=packages/what-src-plugin) [![devDependencies Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-plugin)](https://david-dm.org/duroktar/what-src?path=packages/what-src-plugin&type=dev)
+> what-src plugin bundle.
+
+Check out the [packages folder](/packages) for more information.
 
 ## Usage
 

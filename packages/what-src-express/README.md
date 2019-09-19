@@ -1,7 +1,9 @@
 
 # @what-src/express
 
-[![npm](https://img.shields.io/npm/v/@what-src/express.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/express) [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-express)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express) [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-express)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express&type=dev)
+> what-src express server.
+
+Check out the [packages folder](/packages) for more information.
 
 ## Usage
 

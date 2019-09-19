@@ -1,7 +1,9 @@
 
 # @what-src/webpack-plugin
 
-[![npm](https://img.shields.io/npm/v/@what-src/webpack-plugin.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/webpack-plugin) [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-plugin-webpack)](https://david-dm.org/duroktar/what-src?path=packages/what-src-plugin-webpack) [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-plugin-webpack)](https://david-dm.org/duroktar/what-src?path=packages/what-src-plugin-webpack&type=dev)
+> what-src webpack-plugin.
+
+Check out the [packages folder](/packages) for more information.
 
 ## Usage
 

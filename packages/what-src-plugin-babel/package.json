@@ -1,6 +1,7 @@
 {
 	"name": "@what-src/babel-plugin",
 	"version": "1.0.2",
+  "description": "what-src babel-plugin.",
 	"author": "Scott Doucet <duroktar@gmail.com>",
 	"license": "MIT",
 	"repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-plugin-babel",

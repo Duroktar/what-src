@@ -1,11 +1,15 @@
 # What-Src Packages
 
 - [Plugins](#plugins)
-  - [Babel Plugin](#babel-plugin)
-  - [Webpack Plugin](#webpack-plugin)
+  - [Plugin Bundle](/packages/what-src-plugin)
+  - [Babel Plugin](/packages/what-src-plugin-babel)
+  - [Webpack Plugin](/packages/what-src-plugin-webpack)
 - [Express](#express)
-  - [Express Server](#express-server)
-  - [Express Middleware](#express-middleware)
+  - [Express Server](/packages/what-src-express)
+  - [Express Middleware](/packages/what-src-express-middleware)
+- [Examples](#examples)
+  - [Basic Example (React)](/packages/what-src-example-basic)
+  - [TS Example (React)](/packages/what-src-example-typescript)
 
 ### Plugins
 
@@ -21,6 +25,11 @@
 |--------|-------|------------|------------|
 | [`@what-src/express`](/packages/what-src-express) | [![npm](https://img.shields.io/npm/v/@what-src/express.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/express) | [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-express)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express) | [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-express)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express&type=dev) |
 | [`@what-src/express-middleware`](/packages/what-src-express-middleware) | [![npm](https://img.shields.io/npm/v/@what-src/express-middleware.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/express-middleware) | [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-express-middleware)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express-middleware) | [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-express-middleware)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express-middleware&type=dev) |
+
+## Examples
+
+The examples serve as a good starting point for small to medium size projects
+but can also be useful as a guide to some of the more common what-src configurations.
 
 ## License
 

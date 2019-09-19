@@ -1,6 +1,7 @@
 {
   "name": "@what-src/express",
   "version": "1.0.3",
+  "description": "what-src express server.",
   "author": "Scott Doucet <duroktar@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-express",

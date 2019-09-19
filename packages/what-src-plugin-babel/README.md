@@ -1,7 +1,9 @@
 
 # @what-src/babel-plugin
 
-[![npm](https://img.shields.io/npm/v/@what-src/babel-plugin.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/babel-plugin) [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-plugin-babel)](https://david-dm.org/duroktar/what-src?path=packages/what-src-plugin-babel) [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-plugin-babel)](https://david-dm.org/duroktar/what-src?path=packages/what-src-plugin-babel&type=dev)
+> what-src babel-plugin.
+
+Check out the [packages folder](/packages) for more information.
 
 ## Usage
 
