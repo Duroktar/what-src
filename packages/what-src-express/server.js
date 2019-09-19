@@ -3,8 +3,14 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
+const host = process.env.WHAT_SRC_DAEMON_HOST || 'localhost'
+const port = process.env.WHAT_SRC_DAEMON_PORT || 8018
+const endpoint = process.env.WHAT_SRC_DAEMON_ENDPOINT || '__what_src'
+const shh = JSON.parse(process.env.WHAT_SRC_DAEMON_SHH) === true
+const editor = process.env.WHAT_SRC_DAEMON_EDITOR || 'vscode'
+
 if (!process.env.EDITOR) {
-  Object.defineProperty(process.env, 'EDITOR', { value: 'vscode' })
+  Object.defineProperty(process.env, 'EDITOR', { value: editor })
 }
 
 const app = express()
@@ -13,17 +19,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors({ origin: '*' }))
 
-const port = process.env.WHAT_SRC_DAEMON_PORT || 8018
-const endpoint = process.env.WHAT_SRC_DAEMON_ENDPOINT || '__what_src'
-
 app.post('/' + endpoint, require('@what-src/express-middleware'))
 
 app.listen(port, () => {
-  if (!process.env.WHAT_SRC_DAEMON_SHH) {
+  if (!shh) {
     console.log(
       chalk.gray('[@what-src/express]'),
-      'Listening on port',
-      chalk.cyanBright.bold(port),
+      'Listening on ',
+      chalk.cyanBright.bold(host + ':' + port + '/' + endpoint),
     )
   }
 })

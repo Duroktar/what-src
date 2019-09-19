@@ -14,6 +14,7 @@
   "engines": {
     "node": ">=6.9.0"
   },
+  "types": "index.d.ts",
   "dependencies": {
     "chalk": "^2.4.2",
     "open-editor": "^2.0.1"

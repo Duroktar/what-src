@@ -17,6 +17,7 @@
   "engines": {
     "node": ">=6.9.0"
   },
+  "types": "index.d.ts",
   "dependencies": {
     "@what-src/express-middleware": "^1.0.1",
     "body-parser": "^1.19.0",
