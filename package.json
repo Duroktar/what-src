@@ -6,9 +6,9 @@
     "prepublish": "./scripts/clone-license.sh && npm run build:clean",
     "build": "lerna run build:dist && lerna run build:plugin",
     "build:clean": "lerna run clean:dist && npm run build",
-    "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx .",
-    "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix .",
-    "lint:fix-dry-run": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix-dry-run ."
+    "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./packages",
+    "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix ./packages",
+    "lint:fix-dry-run": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix-dry-run ./packages"
   },
   "engines": {
     "node": ">= 6.9.0 < 13.0.0",
