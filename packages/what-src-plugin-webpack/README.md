@@ -1,6 +1,8 @@
 
 # @what-src/webpack-plugin
 
+[![npm](https://img.shields.io/npm/v/@what-src/webpack-plugin.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/webpack-plugin) [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-plugin-webpack)](https://david-dm.org/duroktar/what-src?path=packages/what-src-plugin-webpack) [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-plugin-webpack)](https://david-dm.org/duroktar/what-src?path=packages/what-src-plugin-webpack&type=dev)
+
 ## Usage
 
 Via .webpack.config.js
@@ -28,17 +30,20 @@ options are defined by the type
 ```ts
 type Options = {
   productionMode?: boolean;
-  endpoint?: string;
+  host?: string;
   port?: number;
+  endpoint?: string;
   shh?: boolean;
 };
 ```
 
 #### - productionMode: [boolean]
-  - Set 'true' to enable running what-src in production mode.
-#### - endpoint: [boolean]
-  - TODO
-#### - port: [boolean]
-  - TODO
+  - Enable running what-src in production mode (default: `false`)
+#### - host: [string]
+  - The host to serve on (default: `localhost`)
+#### - port: [number]
+  - The port to serve on (default: `8018`)
+#### - endpoint: [string]
+  - The url mount path of the @what-src/middleware (default: `__what_src`)
 #### - shh: [boolean]
-  - TODO
+  - Turns off logging (default: `false`)

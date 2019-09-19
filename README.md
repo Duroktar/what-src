@@ -5,6 +5,7 @@
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/@what-src/plugin"><img alt="npm Downloads" src="https://img.shields.io/npm/dm/@what-src/plugin.svg?maxAge=43200"></a>
+  <a href="https://david-dm.org/duroktar/what-src?type=dev" title="devDependencies status"><img src="https://david-dm.org/duroktar/what-src/dev-status.svg"/></a>
   <a href="https://lerna.js.org/"><img alt="Managed By Lerna" src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg"></a>
 </p>
 
@@ -193,8 +194,7 @@ the day job and this is the result.
 ### Are there any examples?
 
 Check out the
-[@what-src/testing-basic](/packages/what-src-testing-basic) and
-[@what-src/what-src-testing-flatris](/packages/what-src-testing-flatris) packages.
+[@what-src/testing-basic](/packages/what-src-example-basic).
 
 ### Want to report a bug or request a feature?
 
@@ -211,4 +211,4 @@ packages](packages/README.md) and takes inspiration from the
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://opensource.org/licenses/MIT)
