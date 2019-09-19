@@ -25,8 +25,8 @@ app.listen(port, () => {
   if (!shh) {
     console.log(
       chalk.gray('[@what-src/express]'),
-      'Listening on ',
-      chalk.cyanBright.bold(host + ':' + port + '/' + endpoint),
+      'Listening on',
+      chalk.cyanBright.bold('http://' + host + ':' + port + '/' + endpoint),
     )
   }
 })

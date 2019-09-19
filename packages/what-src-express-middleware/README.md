@@ -22,6 +22,10 @@ app.listen(port, () => {
 })
 ```
 
+## Environment Variables
+
+- WHAT_SRC_MIDDLEWARE_SHH (default: `false`)
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)

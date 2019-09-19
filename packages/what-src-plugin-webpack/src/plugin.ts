@@ -174,11 +174,12 @@ class WhatSrcServerWebpackPlugin {
     const env: { [key: string]: string | undefined } = {
       ...process.env,
       CONTEXT: this.compiler.options.context,
-      WHAT_SRC_DAEMON_HOST: JSON.stringify(this.options.host),
+      WHAT_SRC_DAEMON_HOST: this.options.host,
       WHAT_SRC_DAEMON_PORT: JSON.stringify(this.options.port),
-      WHAT_SRC_DAEMON_ENDPOINT: JSON.stringify(this.options.endpoint),
-      WHAT_SRC_DAEMON_EDITOR: JSON.stringify(this.options.editor),
-      WHAT_SRC_DAEMON_SHH: JSON.stringify(this.options.shh),
+      WHAT_SRC_DAEMON_ENDPOINT: this.options.endpoint,
+      WHAT_SRC_DAEMON_EDITOR: this.options.editor,
+      WHAT_SRC_DAEMON_SHH: JSON.stringify(true),
+      WHAT_SRC_MIDDLEWARE_SHH: JSON.stringify(this.options.shh),
     }
 
     this.service = childProcess.fork(

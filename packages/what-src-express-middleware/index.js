@@ -6,7 +6,7 @@ const isNullOrUndefined = v => v === null || v === undefined
 module.exports = function whatSrcMiddleware(req, res) {
   /** @type {{filename: string; line: string; column: string}} */
   const { filename, line, column } = req.body
-  const shh = JSON.parse(process.env.WHAT_SRC_DAEMON_SHH) === true
+  const shh = JSON.parse(process.env.WHAT_SRC_MIDDLEWARE_SHH) === true
 
   // validation. failure in any case short-circuits the entire operation
   if ([filename, line, column].filter(isNullOrUndefined).length) {
