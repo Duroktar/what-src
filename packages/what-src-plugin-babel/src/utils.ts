@@ -9,3 +9,11 @@ export const getIn = (p: Array<string | number> | string, o: object) => {
   return p.reduce((xs, x) =>
     (xs && xs[x]) ? xs[x] : null, o)
 }
+
+export const capitalize = ([o, ...r]: string) => o.toUpperCase() + r.join('')
+export const toCamelCase = (str: string) => {
+  const [a, ...rest] = str.replace('_', '-').split('-')
+  return [a, ...rest.map(capitalize)].join('')
+}
+
+export const isNodeEnvProduction = () => process.env.NODE_ENV === 'production'

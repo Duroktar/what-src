@@ -176,8 +176,8 @@ which works on multiple platforms, is well maintained, and highly configurable.
 The `@what-src/babel-plugin` tags any html elements it comes across in your code
 with a key to a cache line containing the necessary data, which can then be sent
 to the server whenever a "valid" click event is detected (ie: with the hotkey
-pressed). The cache key for each element is stored in its `data--what-src`
-attribute and is unique across all nodes.
+pressed). The cache key for each element is stored in a `data-what-src` attribute
+and is guaranteed to be unique across all nodes.
 
 The actual click events are detected using a global listener on the
 `window.document` object which then sends a native xhr request to the server

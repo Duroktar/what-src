@@ -34,9 +34,9 @@ type WhatSrcPluginOptions = {
 #### - serverUrl: [string]
   - The full URL of the running @what-src/express server (default: `http://localhost:8018/__what_src`)
 #### - dataTag: [string]
-  - The name of the data tag used on elements (default: `data--what-src`)
+  - A [valid](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#HTML_syntax) data attribute for tagging elements (default: `data-what-src`)
 #### - globalCacheKey: [string]
-  - The global cache key name the click callback is keyed to (default: `__what-src-global-callback-key`)
+  - The global cache key the click callback is keyed to (default: `__what-src-global-callback-key`)
 #### - stopPropagation: [boolean]
   - Sets the stopPropagation property of the click event (default: `true`)
 #### - preventDefault: [boolean]
