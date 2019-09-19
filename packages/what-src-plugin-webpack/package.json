@@ -1,6 +1,6 @@
 {
 	"name": "@what-src/webpack-plugin",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"author": "Scott Doucet <duroktar@gmail.com>",
 	"license": "MIT",
 	"repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-plugin-webpack",
@@ -20,7 +20,7 @@
 		"node": ">=6.9.0"
 	},
 	"dependencies": {
-		"@what-src/express": "^1.0.2",
+		"@what-src/express": "^1.0.3",
 		"chalk": "^2.4.2",
 		"tapable": "^1.1.3",
 		"webpack": "^4.40.2",
