@@ -192,8 +192,9 @@ the day job and this is the result.
 
 ### Are there any examples?
 
-Check out the
-[@what-src/testing-basic](/packages/what-src-example-basic).
+Check out the [what-src-example-basic](/packages/what-src-example-basic) and
+[what-src-example-typescript](/packages/what-src-example-typescript) packages
+for some working examples.
 
 ### Want to report a bug or request a feature?
 
