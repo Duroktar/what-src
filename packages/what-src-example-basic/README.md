@@ -1,7 +1,7 @@
 # Project Template
 
 A project template with ES6 support via [Webpack 4](https://webpack.js.org/) and [Typescript](https://typescript.com)
-that includes hot-reloading for development and production-ready builds.
+that includes hot-reloading for development and production-ready builds and @what-src/plugin for code navigation.
 
 Loading images via JavaScript module `import` is also supported.
 
@@ -16,6 +16,8 @@ Loading images via JavaScript module `import` is also supported.
 | `npm install` | Install project dependencies |
 | `npm start` | Build project and open web server running project |
 | `npm run build` | Builds code bundle with production settings (minification, uglification, etc..) |
+| `npm run lint` | Runs eslint over the code and reports errors |
+| `npm run lint:fix` | Runs eslint over the code and attempts to fix any errors found |
 
 ## Writing Code
 

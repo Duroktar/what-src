@@ -1,0 +1,44 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "standard",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [],
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"],
+    "key-spacing": ["error", {
+      "mode": "minimum"
+    }],
+    "space-before-function-paren": ["error", "never"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"  // React version. "detect" automatically picks the version you have installed.
+                           // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
+                           // default to latest and warns if missing
+                           // It will default to "detect" in the future
+    }
+  },
+  "overrides": [{
+    "files": ["**/*.ts", "**/*.tsx"],
+    "rules": {
+    }
+  }]
+}
