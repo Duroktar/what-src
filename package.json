@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "prepublish": "./scripts/clone-license.sh && npm run build:clean",
+    "postpublish": "lerna run clean:dist",
     "build": "lerna run build:dist && lerna run build:plugin",
     "build:clean": "lerna run clean:dist && npm run build",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./packages",
