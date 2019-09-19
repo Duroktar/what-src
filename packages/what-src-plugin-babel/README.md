@@ -3,7 +3,7 @@
 
 > what-src babel-plugin.
 
-Check out the [packages folder](/packages) for more information.
+Check out the [packages folder](https://github.com/duroktar/what-src/tree/master/packages) for more information.
 
 ## Usage
 
