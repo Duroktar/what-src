@@ -1,3 +1,5 @@
+import { EditorType } from '@what-src/express'
+
 export interface Logger {
   error(message?: any): void;
   warn(message?: any): void;
@@ -6,9 +8,10 @@ export interface Logger {
 
 export interface Options {
   logger?: Logger;
-  silent?: boolean;
-  productionMode?: boolean;
-  endpoint?: string;
-  port?: number;
-  shh?: boolean;
+  editor?: EditorType;
+  productionMode: boolean;
+  host: string;
+  port: number;
+  endpoint: string;
+  shh: boolean;
 }

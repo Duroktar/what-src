@@ -11,6 +11,7 @@ import {
 } from './hooks'
 import { createLogger } from './logger'
 import { Options, Logger } from './types'
+import { defaultOptions } from './options'
 
 const PLUGIN_NAME = 'what-src-server-plugin'
 
@@ -21,42 +22,30 @@ class WhatSrcServerWebpackPlugin {
     return getWhatSrcWebpackPluginHooks(compiler)
   }
 
-  public readonly options: Partial<Options>
+  public readonly options: Options
 
   private compiler: any = undefined;
   private doneCallback: () => void = () => {};
   private isRunning: boolean = false;
   private logger: Logger;
-  private productionMode: boolean;
   private service?: childProcess.ChildProcess;
-  private silent: boolean;
-  private WHAT_SRC_DAEMON_ENDPOINT: string;
-  private WHAT_SRC_DAEMON_PORT: number;
-  private WHAT_SRC_DAEMON_SHH: boolean;
 
   constructor(options?: Partial<Options>) {
     options = options || ({} as Options)
-    this.options = { ...options }
+    this.options = { ...defaultOptions, ...options }
 
     this.logger = options.logger || createLogger()
-    this.silent = options.silent === true // default false
-    this.productionMode = options.productionMode === true // default false
 
-    this.WHAT_SRC_DAEMON_ENDPOINT = options.endpoint || '__what_src'
-    this.WHAT_SRC_DAEMON_PORT = options.port || 8018
-    this.WHAT_SRC_DAEMON_SHH = options.shh === true
-
-    // don't run in production unless 'productionMode' is set
-    if (process.env.NODE_ENV === 'production' && !this.productionMode) {
-      console.log(
-        '@what-src/webpack-plugin - running in production mode is disabled. ' +
+    if (this.showProductionWarning) {
+      this.logger.info(
+        '\n@what-src/webpack-plugin - running in production mode is disabled. ' +
         'To enable set the \'productionMode\' configuration option to true.'
       )
     };
   }
 
   public apply(compiler: any) {
-    if (process.env.NODE_ENV === 'production' && !this.productionMode) {
+    if (process.env.NODE_ENV === 'production' && !this.options.productionMode) {
       return
     }
 
@@ -185,9 +174,11 @@ class WhatSrcServerWebpackPlugin {
     const env: { [key: string]: string | undefined } = {
       ...process.env,
       CONTEXT: this.compiler.options.context,
-      WHAT_SRC_DAEMON_ENDPOINT: this.WHAT_SRC_DAEMON_ENDPOINT,
-      WHAT_SRC_DAEMON_PORT: JSON.stringify(this.WHAT_SRC_DAEMON_PORT),
-      WHAT_SRC_DAEMON_SHH: JSON.stringify(this.WHAT_SRC_DAEMON_SHH),
+      WHAT_SRC_DAEMON_HOST: JSON.stringify(this.options.host),
+      WHAT_SRC_DAEMON_PORT: JSON.stringify(this.options.port),
+      WHAT_SRC_DAEMON_ENDPOINT: JSON.stringify(this.options.endpoint),
+      WHAT_SRC_DAEMON_EDITOR: JSON.stringify(this.options.editor),
+      WHAT_SRC_DAEMON_SHH: JSON.stringify(this.options.shh),
     }
 
     this.service = childProcess.fork(
@@ -219,13 +210,13 @@ class WhatSrcServerWebpackPlugin {
       )
     }
 
-    if (!this.silent && this.logger) {
+    if (this.logger && !this.options.shh) {
       this.logger.info(
         'server is running at ' +
         chalk.cyanBright.bold(
-          'http://localhost:' +
-            this.WHAT_SRC_DAEMON_PORT + '/' +
-            this.WHAT_SRC_DAEMON_ENDPOINT
+          this.options.host + ':' +
+            this.options.port + '/' +
+            this.options.endpoint
         )
       )
     }
@@ -243,7 +234,7 @@ class WhatSrcServerWebpackPlugin {
       this.service.kill()
       this.service = undefined
     } catch (e) {
-      if (this.logger && !this.silent) {
+      if (this.logger && !this.options.shh) {
         this.logger.error(e)
       }
     }
@@ -254,13 +245,22 @@ class WhatSrcServerWebpackPlugin {
       return
     }
     // probably out of memory :/
-    if (!this.silent && this.logger) {
+    if (this.logger && !this.options.shh) {
       this.logger.error(
         chalk.red(
-          'what-src-server aborted - probably out of memory..'
+          '@what-src/express aborted - probably out of memory..'
         )
       )
     }
+  }
+
+  private get mode() {
+    return process.env.NODE_ENV
+  }
+
+  private get showProductionWarning() {
+    const { productionMode, shh } = this.options
+    return (this.mode === 'production' && !productionMode) && !shh
   }
 }
 
