@@ -8,14 +8,14 @@ const { WhatSrcServerWebpackPlugin } = require('@what-src/plugin')
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
-  entry: './src/index.jsx',
+  entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(jsx?|tsx?)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
@@ -32,7 +32,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', 'jsx', 'ts', 'tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   plugins: [
     new HtmlWebpackPlugin({

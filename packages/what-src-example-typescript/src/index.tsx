@@ -1,7 +1,7 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 
-import Button from './Button.js'
+import Button from './Button'
 
 class App extends React.Component {
   render() {
