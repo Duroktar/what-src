@@ -21,7 +21,7 @@ app.use(cors({ origin: '*' }))
 
 app.post('/' + endpoint, require('@what-src/express-middleware'))
 
-app.listen(port, () => {
+app.listen({ port, host }, () => {
   if (!shh) {
     console.log(
       chalk.gray('[@what-src/express]'),

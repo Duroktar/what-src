@@ -7,4 +7,5 @@ export const defaultOptions: Options = {
   port: 8018,
   endpoint: '__what_src',
   shh: false,
+  https: false,
 }

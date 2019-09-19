@@ -213,11 +213,12 @@ class WhatSrcServerWebpackPlugin {
 
     if (this.logger && !this.options.shh) {
       this.logger.info(
-        'server is running at ' +
+        'Listening on ' +
         chalk.cyanBright.bold(
+          this.httpProtocol + '://' +
           this.options.host + ':' +
-            this.options.port + '/' +
-            this.options.endpoint
+          this.options.port + '/' +
+          this.options.endpoint
         )
       )
     }
@@ -257,6 +258,10 @@ class WhatSrcServerWebpackPlugin {
 
   private get mode() {
     return process.env.NODE_ENV
+  }
+
+  private get httpProtocol() {
+    return this.options.https ? 'https' : 'http'
   }
 
   private get showProductionWarning() {

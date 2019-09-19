@@ -7,6 +7,7 @@ export interface Logger {
 }
 
 export interface Options {
+  https?: boolean;
   logger?: Logger;
   editor?: EditorType;
   productionMode: boolean;
