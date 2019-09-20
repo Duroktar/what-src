@@ -21,6 +21,7 @@ options are defined by the type
 ```ts
 type WhatSrcPluginOptions = {
   productionMode?: boolean;
+  useRemote?: boolean;
   serverUrl?: string;
   dataTag?: string;
   globalCacheKey?: string;
@@ -31,6 +32,10 @@ type WhatSrcPluginOptions = {
 
 #### - productionMode: [boolean]
   - Set 'true' to enable running what-src in production mode (default: `false`)
+#### - useRemote: [boolean]
+  - Set 'true' to enable remote mode which creates links to the source code on github (default: `false`)
+> Note: This requires your code to be in a .git versioned directory based on the
+current branch at the time the code is compiled by babel .
 #### - serverUrl: [string]
   - The full URL of the running @what-src/express server (default: `http://localhost:8018/__what_src`)
 #### - dataTag: [string]

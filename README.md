@@ -12,7 +12,9 @@
 `@what-src/plugin` is a tool for developers that puts the code for every element
 on the page, a single click away.
 
-[Check out the demo](https://github.com/Duroktar/what-src-logo/tree/master/demo)
+> Check out [the live demo](https://duroktar.github.io/what-src/) or [the
+> video](https://github.com/Duroktar/what-src-logo/tree/master/demo) (PS: don't
+> forget about the [hotkey](#system-hotkey)). Have fun!
 
 ## Intro
 
@@ -54,7 +56,9 @@ Via .babelrc or babel-loader.
 }
 ```
 
-***Now pick from one of the following steps***
+***Now pick from one of the following to enable file opening on your local
+editor.*** *(Alternatively, check out the [remotes](#remotes) section for
+opening files on github in the browser).*
 
 ### Webpack-Dev-Server (Option 1: easiest)
 
@@ -152,6 +156,14 @@ app.listen(port, () => {
 
 - Windows: <kbd>WinKey</kbd> + Left Click
 - MacOS: <kbd>⌘ Command</kbd> + Left Click
+
+### Remotes
+
+Making clicks navigate to source code hosted on GitHub is possible by enabling
+the [useRemote setting](/packages/what-src-plugin-babel/README.md#options) in
+the [babel-plugin](/packages/what-src-plugin-babel/README.md). Have a look at
+the [demo](https://duroktar.github.io/what-src/) for an example of this and
+click around into the source code hosted on GitHub.
 
 ### Other options
 
