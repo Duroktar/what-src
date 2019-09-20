@@ -12,6 +12,7 @@
 	"scripts": {
 		"clean:dist": "rimraf ./dist",
 		"build": "tsc -p tsconfig.json",
+		"build:watch": "tsc -p tsconfig.json --watch",
 		"build:dist": "npm run build"
 	},
 	"publishConfig": {

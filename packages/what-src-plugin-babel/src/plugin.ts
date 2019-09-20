@@ -1,7 +1,9 @@
-import { parseDataTag, isFragment, parseJsxMetaData, getAllPluginOptions, clickHandlerBuilder } from './helpers'
+import { parseDataTag, isFragment, parseJsxMetaData, getAllPluginOptions, clickHandlerBuilder, getRemoteFilenameIfSet } from './helpers'
 import { isNullOrUndefined, isNodeEnvProduction } from './utils'
+import { gitRemoteFileUrlFactory } from './git'
 import * as T from './types'
 
+const gitUrlResolver = gitRemoteFileUrlFactory()
 let nextId = 1
 let disabled = false
 
@@ -21,7 +23,7 @@ export const babelPlugin = ({ types: t }: T.BabelPluginContext): T.BabelPlugin =
   },
   post(state): void {
     if (!disabled) {
-      const options = getAllPluginOptions(state)
+      const options = getAllPluginOptions(this.opts)
 
       const ast = clickHandlerBuilder({
         globalCacheKey: t.stringLiteral(options.globalCacheKey),
@@ -30,6 +32,7 @@ export const babelPlugin = ({ types: t }: T.BabelPluginContext): T.BabelPlugin =
         dataTag: t.stringLiteral(parseDataTag(options.dataTag)),
         stopPropagation: t.booleanLiteral(options.stopPropagation),
         preventDefault: t.booleanLiteral(options.preventDefault),
+        useRemote: t.booleanLiteral(options.useRemote),
       })
 
       state.path.node.body.push(ast)
@@ -41,9 +44,10 @@ export const babelPlugin = ({ types: t }: T.BabelPluginContext): T.BabelPlugin =
         if (disabled || isFragment(path.node.openingElement)) return
         if (isNullOrUndefined(path.node.openingElement.loc)) return
 
-        const options = getAllPluginOptions(state)
+        const options = getAllPluginOptions(state.opts)
 
-        const metaData = parseJsxMetaData(path, state)
+        const filename = getRemoteFilenameIfSet(state.filename, options, gitUrlResolver)
+        const metaData = parseJsxMetaData(path, filename)
 
         const attr = t.jsxAttribute(
           t.jsxIdentifier(options.dataTag),
@@ -52,7 +56,7 @@ export const babelPlugin = ({ types: t }: T.BabelPluginContext): T.BabelPlugin =
 
         path.node.openingElement.attributes.push(attr)
 
-        this.cache[nextId] = metaData
+        this.cache[nextId] = JSON.stringify(metaData)
 
         nextId++
       },

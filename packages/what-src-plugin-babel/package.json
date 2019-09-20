@@ -12,6 +12,7 @@
 	"scripts": {
 		"clean:dist": "rimraf ./dist",
 		"build": "tsc -p tsconfig.json",
+		"build:watch": "tsc -p tsconfig.json --watch",
 		"build:dist": "npm run build"
 	},
 	"publishConfig": {
@@ -26,12 +27,14 @@
 		"@babel/helper-plugin-utils": "^7.0.0",
 		"@babel/parser": "^7.6.0",
 		"@babel/template": "^7.6.0",
-		"@babel/traverse": "^7.6.0"
+		"@babel/traverse": "^7.6.0",
+		"cross-spawn": "^7.0.0"
 	},
 	"devDependencies": {
 		"@types/babel__generator": "^7.0.2",
 		"@types/babel__template": "^7.0.2",
 		"@types/babel__traverse": "^7.0.7",
+		"@types/cross-spawn": "^6.0.0",
 		"@types/node": "^12.7.5"
 	}
 }

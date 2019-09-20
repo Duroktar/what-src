@@ -7,4 +7,5 @@ export const defaultOptions: Required<T.WhatSrcPluginOptions> = {
   stopPropagation: true,
   preventDefault: true,
   globalCacheKey: '__what-src-global-callback-key',
+  useRemote: false,
 }

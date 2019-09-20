@@ -16,6 +16,7 @@ export type WhatSrcPluginOptions = {
   stopPropagation?: boolean;
   preventDefault?: boolean;
   globalCacheKey?: string;
+  useRemote?: boolean;
 };
 
 export type VisitorState = {

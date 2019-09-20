@@ -217,8 +217,7 @@ class WhatSrcServerWebpackPlugin {
         chalk.cyanBright.bold(
           this.httpProtocol + '://' +
           this.options.host + ':' +
-          this.options.port + '/' +
-          this.options.endpoint
+          this.options.port + '/'
         )
       )
     }

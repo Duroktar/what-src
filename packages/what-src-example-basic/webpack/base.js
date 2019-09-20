@@ -20,7 +20,12 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: [['module:@what-src/plugin', { productionMode: true }]],
+            plugins: [
+              ['module:@what-src/plugin',
+              {
+                productionMode: true,
+                useRemote: true
+              }]],
           },
         },
       },
