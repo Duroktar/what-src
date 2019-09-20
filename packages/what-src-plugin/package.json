@@ -1,6 +1,6 @@
 {
   "name": "@what-src/plugin",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "what-src plugin bundle.",
   "author": "Scott Doucet <duroktar@gmail.com>",
   "license": "MIT",
@@ -12,7 +12,7 @@
   "scripts": {
     "clean:dist": "rimraf ./dist",
     "build": "tsc -p tsconfig.json",
-		"build:watch": "tsc -p tsconfig.json --watch",
+    "build:watch": "tsc -p tsconfig.json --watch",
     "build:plugin": "npm run build"
   },
   "publishConfig": {
@@ -22,8 +22,8 @@
     "node": ">=6.9.0"
   },
   "dependencies": {
-    "@what-src/babel-plugin": "^1.0.5",
-    "@what-src/webpack-plugin": "^1.0.4"
+    "@what-src/babel-plugin": "^1.0.6",
+    "@what-src/webpack-plugin": "^1.0.6"
   },
   "devDependencies": {
     "@types/node": "^12.7.5"
