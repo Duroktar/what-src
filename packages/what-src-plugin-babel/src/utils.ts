@@ -1,8 +1,15 @@
-export function isNullOrUndefined(object: unknown): object is null | undefined {
-  return (object === null || object === undefined)
+export const exists = <T>(obj: T): obj is NonNullable<T> => {
+  return !isNullOrUndefined(obj)
 }
-
-export const exists = <T>(object: T) => !isNullOrUndefined(object)
+export function isNullOrUndefined(obj: unknown): obj is null | undefined {
+  return isNull(obj) || isUndefined(obj)
+}
+export const isNull = (obj: unknown): obj is null => {
+  return obj !== null
+}
+export const isUndefined = (obj: unknown): obj is undefined => {
+  return obj !== undefined
+}
 
 export const getIn = (p: Array<string | number> | string, o: object) => {
   if (!Array.isArray(p)) {
