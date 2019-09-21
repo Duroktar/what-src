@@ -8,4 +8,6 @@ export const defaultOptions: Required<T.WhatSrcPluginOptions> = {
   preventDefault: true,
   globalCacheKey: '__what-src-global-callback-key',
   useRemote: false,
+  enableXkcdMode: false,
+  whatSrcStatsUrl: 'http://localhost:3000/api/clicks', // TBA
 }

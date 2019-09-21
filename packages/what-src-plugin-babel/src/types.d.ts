@@ -17,6 +17,8 @@ export type WhatSrcPluginOptions = {
   preventDefault?: boolean;
   globalCacheKey?: string;
   useRemote?: boolean;
+  enableXkcdMode?: boolean;
+  whatSrcStatsUrl?: string;
 };
 
 export type VisitorState = {
