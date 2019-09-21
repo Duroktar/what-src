@@ -98,6 +98,8 @@ export const generateClickHandlerAst = (
     stopPropagation: t.booleanLiteral(options.stopPropagation),
     preventDefault: t.booleanLiteral(options.preventDefault),
     useRemote: t.booleanLiteral(options.useRemote),
+    enableXkcdMode: t.booleanLiteral(options.enableXkcdMode),
+    whatSrcStatsUrl: t.stringLiteral(options.whatSrcStatsUrl),
   })
 }
 
@@ -113,12 +115,18 @@ const clickHandlerBuilder = template.statement(`
         if (%%useRemote%%) {
           const {remoteUrl} = JSON.parse(dataset)
           console.log('Opening', remoteUrl, 'in browser tab')
-          return window.open(remoteUrl, '_blank')
+          window.open(remoteUrl, '_blank')
+        } else {
+          const xhr = new XMLHttpRequest()
+          xhr.open('POST', %%serverUrl%%, true)
+          xhr.setRequestHeader('Content-type', 'application/json')
+          xhr.send(dataset)
         }
-        const xhr = new XMLHttpRequest()
-        xhr.open('POST', %%serverUrl%%, true)
-        xhr.setRequestHeader('Content-type', 'application/json')
-        xhr.send(dataset)
+        if (%%enableXkcdMode%%) {
+          const xhr = new XMLHttpRequest()
+          xhr.open('POST', %%whatSrcStatsUrl%%, true)
+          xhr.send()
+        }
       }
     }
     window.document.removeEventListener('click', window[%%globalCacheKey%%])

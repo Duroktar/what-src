@@ -24,7 +24,8 @@ module.exports = {
               ['module:@what-src/plugin',
               {
                 productionMode: true,
-                useRemote: true
+                useRemote: true,
+                enableXkcdMode: true
               }]],
           },
         },
