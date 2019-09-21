@@ -5,10 +5,10 @@ export function isNullOrUndefined(obj: unknown): obj is null | undefined {
   return isNull(obj) || isUndefined(obj)
 }
 export const isNull = (obj: unknown): obj is null => {
-  return obj !== null
+  return obj === null
 }
 export const isUndefined = (obj: unknown): obj is undefined => {
-  return obj !== undefined
+  return obj === undefined
 }
 
 export const getIn = (p: Array<string | number> | string, o: object) => {
