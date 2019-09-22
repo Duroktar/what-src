@@ -9,5 +9,5 @@ export const defaultOptions: Required<T.WhatSrcPluginOptions> = {
   globalCacheKey: '__what-src-global-callback-key',
   useRemote: false,
   enableXkcdMode: false,
-  whatSrcStatsUrl: 'http://localhost:3000/api/clicks', // TBA
+  whatSrcStatsUrl: 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/triggers_stitchapp-hnsgo/service/click-service/incoming_webhook/track-click',
 }

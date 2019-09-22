@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import * as ReactCountUp from 'react-countup'
+import { retryOperation, withOnOff } from '@what-src/utils'
 import humanizeDuration from 'humanize-duration'
 import { BackgroundType } from './components/backgrounds'
-import { ONE_SECOND, endpoint, FIVE_SECONDS } from '../constants'
+import { fetchClicks, streamUpdates } from '../stitch'
+import { FIVE_SECONDS } from '../constants'
+const { useCountUp } = ReactCountUp as any // type hack
 
 export const useComponentState = () => {
   const [durationText, setDurationText] = useState<string | null>(null)
@@ -11,40 +14,47 @@ export const useComponentState = () => {
   const [tick, setTick] = useState(0)
   const [nice, setNice] = useState(false)
   const [loading, setLoading] = useState(false)
-  const { countUp, update } = (ReactCountUp as any).useCountUp({ start: 0, end: 0, duration: 5 })
+  const { countUp, update } = useCountUp({ start: 0, end: 0, duration: 5 })
 
   const handleRefresh = React.useCallback(() => setTick(tick + 1), [])
 
   useEffect(() => {
-    async function getCount() {
-      let nextUpdate = ONE_SECOND
-      setLoading(true)
-      try {
-        const res = await (await fetch(endpoint)).json()
-        if (res.ok) {
-          nextUpdate = FIVE_SECONDS
-          update(res.seconds)
-          setDurationText(res.durationText)
-          setError(null)
-          if (!nice) {
-            setTimeout(() => setNice(true), FIVE_SECONDS + 460)
+    let disposable = () => {}
+    (function connect() {
+      withOnOff(setLoading, async() => {
+        try {
+          type ApiResponse = { total: number }
+          const res: ApiResponse = await retryOperation(fetchClicks, 5000, 25)
+          if (res.total) {
+            update(res.total)
+            setDurationText(humanizeDuration(res.total * 1000))
+            setError(null)
+            if (!nice) {
+              setTimeout(() => {
+                streamUpdates(stream => {
+                  update(stream.total)
+                }).then(listener => {
+                  disposable = listener
+                })
+                setNice(true)
+              }, FIVE_SECONDS + 460)
+            }
+          } else {
+            setError('Something is wrong..')
+            setTimeout(() => { connect() }, 1000)
           }
-        } else {
-          setError(res.errorMessage)
+        } catch (err) {
+          if (err.message !== 'internal server error') setError(err.message)
+          else setError('Error connecting to server. Waiting awhile before trying again.')
+          setTimeout(() => { connect() }, 30000)
         }
-      } catch (e) {
-        if (e.message !== 'internal server error') setError(e.message)
-        else setError('Connecting..')
-      } finally {
-        setLoading(false)
-        setTimeout(() => setTick(tick + 1), nextUpdate)
-      }
-    }
-    getCount().catch(e => setError(e.message))
-  }, [tick])
+      })
+    })()
+    return () => disposable()
+  }, [])
 
   const humanized = React.useMemo(() =>
-    humanizeDuration((countUp as any) * 1000), [countUp])
+    humanizeDuration(countUp * 1000), [countUp])
 
   const humanTime = React.useMemo(() => {
     return !nice ? durationText : humanized
