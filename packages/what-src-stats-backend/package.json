@@ -1,11 +1,11 @@
 {
   "name": "what-src-stats-backend",
   "private": true,
-  "version": "1.0.7",
-	"description": "what-src-stats serverless backend",
-	"author": "Scott Doucet <duroktar@gmail.com>",
-	"license": "MIT",
-	"repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-stats-backend",
+  "version": "1.0.8",
+  "description": "what-src-stats serverless backend",
+  "author": "Scott Doucet <duroktar@gmail.com>",
+  "license": "MIT",
+  "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-stats-backend",
   "main": "src/index.js",
   "scripts": {
     "clean:dist": "rimraf ./dist",

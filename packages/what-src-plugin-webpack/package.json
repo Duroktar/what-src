@@ -1,6 +1,6 @@
 {
 	"name": "@what-src/webpack-plugin",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "what-src webpack-plugin.",
 	"author": "Scott Doucet <duroktar@gmail.com>",
 	"license": "MIT",
