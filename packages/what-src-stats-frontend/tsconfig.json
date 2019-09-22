@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "./dist",
     "jsx": "react",
+    "noUnusedLocals": false,
     "resolveJsonModule": true
   }
 }
