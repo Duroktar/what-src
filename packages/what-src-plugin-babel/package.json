@@ -1,6 +1,6 @@
 {
 	"name": "@what-src/babel-plugin",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "what-src babel-plugin.",
 	"author": "Scott Doucet <duroktar@gmail.com>",
 	"license": "MIT",
@@ -36,6 +36,6 @@
 		"@types/babel__traverse": "^7.0.7",
 		"@types/cross-spawn": "^6.0.0",
 		"@types/node": "^12.7.5",
-		"@what-src/utils": "^1.0.8"
+		"@what-src/utils": "^1.0.9"
 	}
 }
