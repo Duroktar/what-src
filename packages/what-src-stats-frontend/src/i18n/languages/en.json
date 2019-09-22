@@ -1,0 +1,13 @@
+{
+    "@what-src/plugin": "@what-src/plugin",
+    "what-src": "what-src",
+    "Has saved approximately": "Has saved approximately",
+    "of time.": "of time.",
+    "About": "About",
+    "seconds": "seconds",
+    "Nice.": "Nice.",
+    "Refresh": "Refresh",
+    "locale": "Language:",
+    "createdBy": "Created by ",
+    "INFO-TXT": "what-src is active on this page as well. So hold down the metakey and click anywhere on the page to see the source on GitHub."
+}

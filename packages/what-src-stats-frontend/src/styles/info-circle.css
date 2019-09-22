@@ -1,0 +1,14 @@
+.info-circle {
+  color: #0099CC;
+  font-size: 4em;
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  transform: scale(3);
+}
+
+.info-circle:before {
+  content: "\f05a";
+}

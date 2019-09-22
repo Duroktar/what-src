@@ -1,0 +1,15 @@
+{
+    "extends": "../../tsconfig.json",
+    "include": [
+      "**/*.ts",
+      "**/*.tsx"
+    ],
+    "compilerOptions": {
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "outDir": "./dist",
+        /* Redirect output structure to the directory. */
+        "jsx": "react",
+        "resolveJsonModule": true
+    }
+}

@@ -1,9 +1,27 @@
-node_modules/
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 
-build/
-.vscode/
+# dependencies
+node_modules
 
+# testing
+coverage
+
+# production
+build
+public
+dist
+.next
+
+# misc
 .DS_Store
-
+.env
+.vscode
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 /packages/*/LICENSE
 /packages/*/dist/
+
+# Environment Variables
+.env
+.env.build

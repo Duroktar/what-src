@@ -1,0 +1,32 @@
+{
+  "name": "what-src-stats-backend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "An example project for @what-src/plugin using react and typescript.",
+  "main": "src/index.js",
+  "author": "Scott Doucet <duroktar@gmail.com>",
+  "license": "MIT",
+  "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
+  "scripts": {
+    "dev": "next",
+    "start:dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@now/node": "^1.0.0",
+    "dotenv": "^8.1.0",
+    "micro-cors": "^0.1.1",
+    "mongodb": "^3.3.2",
+    "next": "^9.0.6"
+  },
+  "devDependencies": {
+    "@types/humanize-duration": "^3.18.0",
+    "@types/micro-cors": "^0.1.0",
+    "@types/mongodb": "^3.3.2",
+    "@types/node": "^12.7.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "typescript": "^3.6.3"
+  }
+}

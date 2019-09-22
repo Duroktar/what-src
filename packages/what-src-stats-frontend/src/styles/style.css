@@ -1,0 +1,33 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Permanent Marker', Arial, Helvetica, sans-serif
+}
+
+body,
+#root {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+#root {
+    height: 100%;
+}
+#refresh-btn {
+  position: absolute;
+  left: 1em;
+}
+#info-bubble {
+  position: absolute;
+  right: 2em;
+  cursor: help;
+}
+
+.__react_component_tooltip {
+  max-width: 350px;
+}
+
+footer {
+  flex-shrink: 0;
+}

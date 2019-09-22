@@ -1,0 +1,87 @@
+.fullscreen,
+.background {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.app {
+  z-index: 9999;
+}
+
+.row {
+  max-width: 880px;
+  margin: 20px auto 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.logo {
+  margin: 0 auto -60px;
+}
+
+.count {
+  max-width: calc(100% - 32px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.count>div:first-of-type {
+  margin-bottom: 12px;
+}
+
+.count p {
+  text-align: center;
+}
+
+.count span {
+  width: 290px;
+  height: 50em;
+  text-align: center;
+}
+
+.footer {
+  width: 100%;
+  flex-shrink: 0;
+  cursor: pointer;
+  color: #067df7;
+  text-decoration: none;
+  font-size: 13px;
+  display: flex;
+  position: absolute;
+  bottom: 3em;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes Loading {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+.count .loading {
+  max-width: 100%;
+  border-radius: 4px;
+  display: inline-block;
+  background: linear-gradient(270deg, #D1D1D1, #EAEAEA);
+  background-size: 200% 200%;
+  animation: Loading 2s ease infinite;
+}
