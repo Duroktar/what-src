@@ -2,11 +2,11 @@
   "name": "what-src-stats-backend",
   "private": true,
   "version": "1.0.7",
-  "description": "An example project for @what-src/plugin using react and typescript.",
+	"description": "what-src-stats serverless backend",
+	"author": "Scott Doucet <duroktar@gmail.com>",
+	"license": "MIT",
+	"repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-stats-backend",
   "main": "src/index.js",
-  "author": "Scott Doucet <duroktar@gmail.com>",
-  "license": "MIT",
-  "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "scripts": {
     "clean:dist": "rimraf ./dist",
     "build:stats": "npm run build",
@@ -15,6 +15,12 @@
     "dev:stats": "next",
     "build": "next build",
     "start": "next start"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=6.9.0"
   },
   "dependencies": {
     "@now/node": "^1.0.0",

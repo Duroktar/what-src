@@ -5,6 +5,7 @@
   "description": "An example project for @what-src/plugin using react and typescript.",
   "main": "src/index.js",
   "author": "Scott Doucet <duroktar@gmail.com>",
+  "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-example-typescript",
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "scripts": {
