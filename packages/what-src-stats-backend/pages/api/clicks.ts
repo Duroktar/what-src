@@ -5,6 +5,7 @@ import { client } from '../../lib/mongodb'
 
 const cors = Cors({
   allowMethods: ['GET', 'POST'],
+  origin: 'https://duroktar.github.io',
 })
 
 const lostSecAvg = 10

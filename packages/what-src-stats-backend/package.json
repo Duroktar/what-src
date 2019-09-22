@@ -13,6 +13,7 @@
     "dev": "next",
     "start:dev": "next",
     "dev:stats": "next",
+    "deploy": "now",
     "build": "next build",
     "start": "next start"
   },
