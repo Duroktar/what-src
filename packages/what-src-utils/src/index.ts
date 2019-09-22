@@ -80,3 +80,51 @@ export const toCamelCase = (str: string) => {
  *
  */
 export const isNodeEnvProduction = () => process.env.NODE_ENV === 'production'
+
+/**
+ * awaitable sleep function
+ *
+ * @param {number} ms
+ */
+// eslint-disable-next-line promise/param-names
+export const wait = (ms: number) => new Promise(r => setTimeout(r, ms))
+
+/**
+ * retry an operation until success w/ configurable rolllback and failure modes
+ *
+ * @param {Function} operation
+ * @param {number} delay
+ * @param {number} times
+ */
+export const retryOperation = (
+  operation: any,
+  delay: number,
+  times: number
+) =>
+  new Promise<any>((resolve, reject) => {
+    return operation()
+      .then(resolve)
+      .catch((reason) => {
+        if (times - 1 > 0) {
+          return wait(delay)
+            .then(retryOperation.bind(null, operation, delay, times - 1))
+            .then(resolve)
+            .catch(reject)
+        }
+        return reject(reason)
+      })
+  })
+
+/**
+ * kinda like a with statement where the context is run inside a toggle state
+ *
+ * @param {(s: boolean) => void} toggle
+ * @param {() => Promise<any>} body
+ * @returns
+ */
+export const withOnOff = async(toggle: (s: boolean) => void, body: () => Promise<any>) => {
+  toggle(true)
+  await body()
+  toggle(false)
+  return true
+}
