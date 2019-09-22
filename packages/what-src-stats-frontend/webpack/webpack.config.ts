@@ -49,7 +49,11 @@ const config: webpack.Configuration & Configuration = {
             ],
             plugins: [
               '@babel/plugin-proposal-class-properties',
-              'module:@what-src/plugin',
+              ['module:@what-src/plugin', {
+                productionMode: true,
+                useRemote: true,
+                enableXkcdMode: true,
+              }],
             ],
           },
         },
