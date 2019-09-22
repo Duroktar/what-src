@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useCountUp } from 'react-countup'
+import * as ReactCountUp from 'react-countup'
 import humanizeDuration from 'humanize-duration'
 import { BackgroundType } from './components/backgrounds'
 import { ONE_SECOND, endpoint, FIVE_SECONDS } from '../constants'
@@ -11,7 +11,7 @@ export const useComponentState = () => {
   const [tick, setTick] = useState(0)
   const [nice, setNice] = useState(false)
   const [loading, setLoading] = useState(false)
-  const { countUp, update } = useCountUp({ start: 0, end: 0, duration: 5 })
+  const { countUp, update } = (ReactCountUp as any).useCountUp({ start: 0, end: 0, duration: 5 })
 
   const handleRefresh = React.useCallback(() => setTick(tick + 1), [])
 

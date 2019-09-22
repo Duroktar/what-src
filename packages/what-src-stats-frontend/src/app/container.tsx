@@ -41,7 +41,7 @@ export class AppContainer extends React.PureComponent<ContainerProps, State> {
   public setTheme = (theme: string | null) => {
     if (this.isValidTheme(theme)) {
       this.props.setTheme(theme)
-      return this.persistTheme(theme)
+      this.persistTheme(theme)
     }
   }
 

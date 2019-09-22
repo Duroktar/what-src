@@ -1,3 +1,4 @@
+import { config as dotenvConfig } from 'dotenv'
 import path from 'path'
 import webpack from 'webpack'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
@@ -6,6 +7,7 @@ import CopyPlugin from 'copy-webpack-plugin'
 import { Configuration } from 'webpack-dev-server'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import { WhatSrcServerWebpackPlugin } from '@what-src/plugin'
+dotenvConfig()
 
 const config: webpack.Configuration & Configuration = {
   mode: 'development',
@@ -26,6 +28,8 @@ const config: webpack.Configuration & Configuration = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        WEBSITE_URL: JSON.stringify(process.env.WEBSITE_URL),
+        CLICK_API_URL: JSON.stringify(process.env.CLICK_API_URL),
       },
     }),
     new WhatSrcServerWebpackPlugin(),
@@ -54,18 +58,6 @@ const config: webpack.Configuration & Configuration = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
-      {
-        test: /\.(gif|png|jpe?g|svg)$/i,
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              disable: true, // webpack@2.x and newer
-            },
-          },
-        ],
-      },
     ],
   },
   resolve: {
@@ -77,7 +69,10 @@ const config: webpack.Configuration & Configuration = {
     contentBase: path.join(__dirname, '..', 'public'),
     compress: true,
     port: 9000,
-    writeToDisk: true,
+    overlay: true,
+    after: () => {
+      require('../scripts/print-console-logo')
+    },
   },
 }
 
