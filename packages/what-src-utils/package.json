@@ -1,0 +1,17 @@
+{
+  "name": "@what-src/utils",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+		"clean:dist": "rimraf ./dist",
+    "build": "cross-env NODE_ENV=production tsc -p .",
+    "build:dist": "npm run build"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@types/node": "12.7.5",
+    "typescript": "3.6.3"
+  }
+}

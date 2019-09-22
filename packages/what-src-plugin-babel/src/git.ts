@@ -1,6 +1,6 @@
 import spawn from 'cross-spawn'
 import { SpawnSyncReturns } from 'child_process'
-import { exists } from './utils'
+import { exists } from '@what-src/utils'
 
 export const outputOrThrow = <T>(result: SpawnSyncReturns<T>) => {
   if (exists(result.error)) {

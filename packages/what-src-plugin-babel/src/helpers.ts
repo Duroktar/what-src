@@ -1,8 +1,8 @@
 import template from '@babel/template'
 import { JSXOpeningElement, JSXElement } from '@babel/types'
 import { NodePath } from '@babel/traverse'
+import { toCamelCase, getIn, isNullOrUndefined } from '@what-src/utils'
 import { defaultOptions } from './options'
-import { toCamelCase, getIn, isNullOrUndefined } from './utils'
 import * as GIT from './git'
 import * as T from './types'
 
