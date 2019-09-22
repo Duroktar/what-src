@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Image } from 'rebass'
-import logo from '../../assets/GitHub_Logo.png'
+const url = 'https://github.githubassets.com/' +
+            'images/modules/logos_page/GitHub-Logo.png'
 
 const css = {
   width: '125px',
@@ -8,7 +9,7 @@ const css = {
 
 export const GitHub = React.memo(() => {
   return (
-    <Image style={css} src={logo} />
+    <Image style={css} src={url} />
   )
 })
 GitHub.displayName = 'GitHub'
