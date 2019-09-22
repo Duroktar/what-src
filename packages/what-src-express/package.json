@@ -1,6 +1,6 @@
 {
   "name": "@what-src/express",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "description": "what-src express server.",
   "author": "Scott Doucet <duroktar@gmail.com>",
   "license": "MIT",
@@ -20,7 +20,7 @@
   },
   "types": "index.d.ts",
   "dependencies": {
-    "@what-src/express-middleware": "^1.0.4",
+    "@what-src/express-middleware": "^1.0.7",
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
     "cors": "^2.8.5",

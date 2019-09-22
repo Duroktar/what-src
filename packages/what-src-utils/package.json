@@ -1,14 +1,12 @@
 {
   "name": "@what-src/utils",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-		"clean:dist": "rimraf ./dist",
+    "clean:dist": "rimraf ./dist",
     "build": "cross-env NODE_ENV=production tsc -p .",
     "build:dist": "npm run build"
-  },
-  "dependencies": {
   },
   "devDependencies": {
     "@types/node": "12.7.5",

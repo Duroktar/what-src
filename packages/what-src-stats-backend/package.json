@@ -1,14 +1,14 @@
 {
   "name": "what-src-stats-backend",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.7",
   "description": "An example project for @what-src/plugin using react and typescript.",
   "main": "src/index.js",
   "author": "Scott Doucet <duroktar@gmail.com>",
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "scripts": {
-		"clean:dist": "rimraf ./dist",
+    "clean:dist": "rimraf ./dist",
     "build:stats": "npm run build",
     "dev": "next",
     "start:dev": "next",
