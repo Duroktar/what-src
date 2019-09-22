@@ -5,7 +5,6 @@
   "scripts": {
     "dev:stats": "lerna run dev:stats --stream",
     "prepublish": "./scripts/clone-license.sh",
-    "postpublish": "npm run clean:all",
     "clean:all": "lerna run clean:dist",
     "copy:www": "./scripts/cp-www-to-gh-pages.sh",
     "build": "lerna run build:dist && lerna run build:plugin && lerna run build:stats",
