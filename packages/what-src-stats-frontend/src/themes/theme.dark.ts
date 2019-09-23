@@ -1,14 +1,11 @@
 // dark theme preset
 
-// rgb(108, 32, 245)   <-- purple
-// FF3864    orangish
-// TODO: See vvvv
 // https://github.com/rebassjs/rebass/blob/master/packages/docs/src/components/demo-provider.js
 export const theme = {
   colors: {
     text: '#fff',
     background: '#cf18f1',
-    primary: '#2DE2E6', // blue
+    primary: '#131111',
     secondary: '#FF3864',
     tertiary: '#FF6C11',
     muted: '#25282c',
