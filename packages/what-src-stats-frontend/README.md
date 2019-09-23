@@ -4,7 +4,7 @@ Powered by Typescript. Using React, @emotion and @rebass w/ i18next translations
 
 <p align="center">
   <a href="https://duroktar.github.io/what-src/">
-    <img alt="what-src" src="https://raw.githubusercontent.com/Duroktar/what-src-logo/master/screenshots/what-src-stats-screenshot.png" width="546"></img>
+    <img alt="what-src" src="https://raw.githubusercontent.com/Duroktar/what-src-logo/master/screenshots/what-src-stats-screenshot.png" width="760"></img>
   </a>
 </p>
 
