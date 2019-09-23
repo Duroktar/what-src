@@ -15,12 +15,14 @@ export default merge(base, {
     maxAssetSize: 900000,
   },
   optimization: {
+    minimize: true,
     minimizer: [
       new TerserPlugin({
         terserOptions: {
           output: {
             comments: false,
           },
+          compress: true,
         },
       }),
     ],

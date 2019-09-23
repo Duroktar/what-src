@@ -7,6 +7,7 @@ import CopyPlugin from 'copy-webpack-plugin'
 import { Configuration } from 'webpack-dev-server'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import { WhatSrcServerWebpackPlugin } from '@what-src/plugin'
+
 dotenvConfig()
 
 const config: webpack.Configuration & Configuration = {
@@ -29,7 +30,6 @@ const config: webpack.Configuration & Configuration = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         WEBSITE_URL: JSON.stringify(process.env.WEBSITE_URL),
-        CLICK_API_URL: JSON.stringify(process.env.CLICK_API_URL),
       },
     }),
     new WhatSrcServerWebpackPlugin(),

@@ -8,7 +8,7 @@
     "logo": "./scripts/print-console-logo.sh",
     "clean:all": "lerna run clean:dist",
     "copy:www": "./scripts/copy-website-to-docs.sh",
-    "build": "npm run logo && lerna run build:dist && lerna run build:plugin && lerna run build:stats",
+    "build": "npm run logo && lerna run build:dist && lerna run build:plugin && lerna run build:stats && npm run copy:www",
     "build:clean": "lerna run clean:dist && npm run build",
     "build:docs": "npm run logo && lerna run build:stats && npm run copy:www",
     "build:utils": "npm run logo && lerna run build:utils",
