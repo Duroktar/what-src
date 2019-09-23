@@ -49,3 +49,7 @@ type Options = {
   - The url mount path of the @what-src/middleware (default: `__what_src`)
 #### - shh: [boolean]
   - Turns off logging (default: `false`)
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)

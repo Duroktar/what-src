@@ -1,5 +1,5 @@
 {
-  "name": "what-src-stats-frontend",
+  "name": "@what-src/stats-frontend",
   "private": true,
   "version": "1.0.10",
   "description": "what-src-stats frontend client.",

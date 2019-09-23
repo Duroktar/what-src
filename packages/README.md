@@ -10,6 +10,9 @@
 - [Examples](#examples)
   - [Basic Example (React)](/packages/what-src-example-basic)
   - [TS Example (React)](/packages/what-src-example-typescript)
+- [Other](#other)
+  - [Stats Web App](/packages/what-src-stats-frontend)
+  - [Common Utilities](/packages/what-src-utils)
 
 ### Plugins
 
@@ -25,6 +28,13 @@
 |--------|-------|------------|------------|
 | [`@what-src/express`](/packages/what-src-express) | [![npm](https://img.shields.io/npm/v/@what-src/express.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/express) | [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-express)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express) | [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-express)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express&type=dev) |
 | [`@what-src/express-middleware`](/packages/what-src-express-middleware) | [![npm](https://img.shields.io/npm/v/@what-src/express-middleware.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/express-middleware) | [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-express-middleware)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express-middleware) | [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-express-middleware)](https://david-dm.org/duroktar/what-src?path=packages/what-src-express-middleware&type=dev) |
+
+### Other
+
+| Package | Version | Dependencies | DevDependencies |
+|--------|-------|------------|------------|
+| [`@what-src/utils`](/packages/what-src-utils) | [![npm](https://img.shields.io/npm/v/@what-src/utils.svg?maxAge=3600)](https://www.npmjs.com/package/@what-src/utils) | [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-utils)](https://david-dm.org/duroktar/what-src?path=packages/what-src-utils) | [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-utils)](https://david-dm.org/duroktar/what-src?path=packages/what-src-utils&type=dev) |
+| [`@what-src/stats-frontend`](/packages/what-src-stats-frontend) | __private__ | [![Dependency Status](https://david-dm.org/duroktar/what-src.svg?path=packages/what-src-utils)](https://david-dm.org/duroktar/what-src?path=packages/what-src-utils) | [![devDependency Status](https://david-dm.org/duroktar/what-src/dev-status.svg?path=packages/what-src-utils)](https://david-dm.org/duroktar/what-src?path=packages/what-src-utils&type=dev) |
 
 ## Examples
 

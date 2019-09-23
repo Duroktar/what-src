@@ -1,20 +1,20 @@
 <p align="center">
-  <a href="https://github.com/duroktar/what-src">
+  <a href="https://duroktar.github.io/what-src/">
     <img alt="what-src" src="https://raw.githubusercontent.com/duroktar/what-src-logo/master/what-src.png" width="546">
   </a>
 </p>
 <p align="center">
-  <a href="https://www.npmjs.com/package/@what-src/plugin"><img alt="npm Downloads" src="https://img.shields.io/npm/dm/@what-src/plugin.svg?maxAge=43200"></a>
-  <a href="https://david-dm.org/duroktar/what-src?type=dev" title="devDependencies status"><img src="https://david-dm.org/duroktar/what-src/dev-status.svg"/></a>
+  <a href="https://www.npmjs.com/package/@what-src/plugin"><img alt="project version" src="https://img.shields.io/npm/v/@what-src/plugin.svg?maxAge=3600"></a>
   <a href="https://lerna.js.org/"><img alt="Managed By Lerna" src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg"></a>
+  <a href="https://david-dm.org/duroktar/what-src?type=dev" title="devDependencies status"><img src="https://david-dm.org/duroktar/what-src/dev-status.svg"/></a>
+  <a href="https://www.npmjs.com/package/@what-src/plugin"><img alt="npm Downloads" src="https://img.shields.io/npm/dm/@what-src/plugin.svg?maxAge=43200"></a>
 </p>
 
 `@what-src/plugin` is a tool for developers that puts the code for every element
 on the page, a single click away.
 
 > Check out [the live demo](https://duroktar.github.io/what-src/) or [the
-> video](https://github.com/Duroktar/what-src-logo/tree/master/demo) (PS: don't
-> forget about the [hotkey](#system-hotkey)). Have fun!
+> video](https://github.com/Duroktar/what-src-logo/tree/master/demo). There's also a [website](https://duroktar.github.io/what-src/) where you can see the clicks of users live ([opt-in]()). Have fun!
 
 ## Intro
 
@@ -41,7 +41,7 @@ First install the plugin from npm.
 npm install @what-src/plugin --save-dev
 ```
 
-> what-src respects your systems $EDITOR environment variable (default: "vscode")
+> `@what-src/plugin` respects your systems `$EDITOR` environment variable (default: "vscode")
 > Read [here](https://github.com/sindresorhus/env-editor) for more info.
 
 ### babel (required)
