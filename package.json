@@ -4,11 +4,13 @@
   "license": "MIT",
   "scripts": {
     "dev:stats": "lerna run dev:stats --stream",
-    "prepublish": "./scripts/clone-license.sh",
+    "prepublish": "npm run logo && ./scripts/clone-license.sh",
+    "logo": "./scripts/print-console-logo.sh",
     "clean:all": "lerna run clean:dist",
-    "copy:www": "./scripts/cp-www-to-gh-pages.sh",
-    "build": "lerna run build:dist && lerna run build:plugin && lerna run build:stats",
+    "copy:www": "./scripts/copy-website-to-docs.sh",
+    "build": "npm run logo && lerna run build:dist && lerna run build:plugin && lerna run build:stats",
     "build:clean": "lerna run clean:dist && npm run build",
+    "build:docs": "npm run logo && npm run copy:www",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./packages",
     "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix ./packages",
     "lint:fix-dry-run": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix-dry-run ./packages"
