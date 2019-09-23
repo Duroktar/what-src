@@ -49,12 +49,14 @@ export const isUndefined = (obj: unknown): obj is undefined => {
  * @param {object} o
  * @returns
  */
-export const getIn = (p: Array<string | number> | string, o: object) => {
+export const getIn = (p: Array<string | number> | string, o: object, d?: any) => {
   if (!Array.isArray(p)) {
     p = p.split('.')
   }
-  return p.reduce((xs, x) =>
+  const res = p.reduce((xs, x) =>
     (xs && xs[x]) ? xs[x] : null, o)
+  if (isNullOrUndefined(res)) return d
+  else return res
 }
 
 /**
@@ -99,7 +101,7 @@ export const wait = (ms: number) => new Promise(r => setTimeout(r, ms))
 export const retryOperation = (
   operation: any,
   delay: number,
-  times: number
+  times: number,
 ) =>
   new Promise<any>((resolve, reject) => {
     return operation()
@@ -127,4 +129,20 @@ export const withOnOff = async(toggle: (s: boolean) => void, body: () => Promise
   await body()
   toggle(false)
   return true
+}
+
+/**
+ * returns a function equivalent to the passed one that logs a custom msg before
+ * being applied
+ *
+ * @param {*} cb
+ * @param {string} msg
+ * @returns
+ */
+export const withPreLog = (cb: any, msg: string) => {
+  return (...args: any[]) => {
+    console.log(msg)
+    // eslint-disable-next-line standard/no-callback-literal
+    return cb(...args)
+  }
 }

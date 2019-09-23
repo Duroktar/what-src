@@ -12,6 +12,7 @@
   "scripts": {
     "clean:dist": "rimraf ./dist",
     "build": "cross-env NODE_ENV=production tsc -p .",
+    "build:utils": "npm run build",
     "build:dist": "npm run build"
   },
   "publishConfig": {
