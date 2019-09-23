@@ -54,6 +54,7 @@ type ContainerProps = {
   component: typeof App;
   setTheme: (theme: 'light' | 'dark') => void;
   theme: 'light' | 'dark';
+  authenticated: boolean;
 };
 
 type State = {
