@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useTranslation } from 'react-i18next'
 import { withTheme } from 'emotion-theming'
 import { Text } from 'rebass'
 import { When } from 'react-if'
@@ -18,8 +17,7 @@ type AppProps = {
 
 export const App =
 React.memo(withTheme((props: AppProps) => {
-  const { error, ...state } = useComponentState()
-  const { t } = useTranslation()
+  const { t, error, ...state } = useComponentState()
   return (
     <BackGroundComponent background={state.background}>
       <div className="app fullscreen">

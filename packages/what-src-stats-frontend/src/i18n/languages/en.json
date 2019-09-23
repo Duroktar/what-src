@@ -9,5 +9,8 @@
     "Refresh": "Refresh",
     "locale": "Language:",
     "createdBy": "Created by ",
-    "INFO-TXT": "what-src is active on this page as well. So hold down the metakey and click anywhere on the page to see the source on GitHub."
+    "INFO-TXT": "what-src is active on this page as well. So hold down the metakey and click anywhere on the page to see the source on GitHub.",
+    "Stream subscription error": "Stream subscription error",
+    "Something went wrong..": "Something went wrong..",
+    "Internal server error": "Internal server error"
 }

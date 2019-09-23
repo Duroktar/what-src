@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import * as ReactCountUp from 'react-countup'
-import { retryOperation, withOnOff } from '@what-src/utils'
+import { useTranslation } from 'react-i18next'
+import { getIn, retryOperation, withOnOff } from '@what-src/utils'
 import humanizeDuration from 'humanize-duration'
 import { BackgroundType } from './components/backgrounds'
 import { fetchClicks, streamUpdates } from '../stitch'
@@ -15,12 +16,13 @@ export const useComponentState = () => {
   const [nice, setNice] = useState(false)
   const [loading, setLoading] = useState(false)
   const { countUp, update } = useCountUp({ start: 0, end: 0, duration: 5 })
-
   const handleRefresh = React.useCallback(() => setTick(tick + 1), [])
+  const { t } = useTranslation()
 
   useEffect(() => {
     let disposable = () => {}
     (function connect() {
+      disposable()
       withOnOff(setLoading, async() => {
         try {
           type ApiResponse = { total: number }
@@ -35,22 +37,28 @@ export const useComponentState = () => {
                   update(stream.total)
                 }).then(listener => {
                   disposable = listener
+                }).catch(err => {
+                  setError(getIn('message', err, t('Stream subscription error')))
+                  setTimeout(() => { connect() }, 5000)
                 })
                 setNice(true)
               }, FIVE_SECONDS + 460)
             }
           } else {
-            setError('Something is wrong..')
+            setError(t('Something went wrong..'))
             setTimeout(() => { connect() }, 1000)
           }
         } catch (err) {
-          if (err.message !== 'internal server error') setError(err.message)
-          else setError('Error connecting to server. Waiting awhile before trying again.')
+          setError(getIn('message', err, t('Internal server error')))
           setTimeout(() => { connect() }, 30000)
+          console.error(err)
         }
       })
     })()
-    return () => disposable()
+    return () => {
+      console.log('disposing!')
+      disposable()
+    }
   }, [])
 
   const humanized = React.useMemo(() =>
@@ -65,6 +73,7 @@ export const useComponentState = () => {
   }, [nice])
 
   return {
+    t,
     durationText,
     error,
     background,
