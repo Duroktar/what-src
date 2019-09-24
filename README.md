@@ -221,6 +221,10 @@ packages](packages/README.md) and takes inspiration from the
 [@babel/babel](https://github.com/babel/babel) project on
 [Github](https://github.com).
 
+### Contributing
+
+- [Commit message Guidlines](CONTRIBUTING.md#-commit-message-guidelines)
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
