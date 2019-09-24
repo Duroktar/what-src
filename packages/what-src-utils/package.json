@@ -22,8 +22,8 @@
     "node": ">=6.9.0"
   },
   "devDependencies": {
-    "@types/node": "12.7.5",
-    "typescript": "3.6.3"
+    "@types/node": "^12.7.5",
+    "typescript": "^3.6.3"
   },
   "gitHead": "22bd6f12b75fd178fd613d28dd607c0a18fa2a66"
 }

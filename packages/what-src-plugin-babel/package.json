@@ -22,12 +22,12 @@
 		"node": ">=6.9.0"
 	},
 	"dependencies": {
-		"@babel/cli": "^7.6.0",
-		"@babel/generator": "^7.6.0",
+		"@babel/cli": "^7.6.2",
+		"@babel/generator": "^7.6.2",
 		"@babel/helper-plugin-utils": "^7.0.0",
-		"@babel/parser": "^7.6.0",
+		"@babel/parser": "^7.6.2",
 		"@babel/template": "^7.6.0",
-		"@babel/traverse": "^7.6.0",
+		"@babel/traverse": "^7.6.2",
 		"cross-spawn": "^7.0.0"
 	},
 	"devDependencies": {
