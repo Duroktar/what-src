@@ -1,0 +1,11 @@
+.toast {
+    display: flex;
+    justify-content: center;
+}
+
+.toast>img {
+    width: 700px;
+    transition-property: margin-top;
+    transition-duration: 1.0s;
+    transition-timing-function: cubic-bezier(.08, .56, .29, .99);
+}

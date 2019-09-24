@@ -1,18 +1,25 @@
 html,
 body {
-    height: 100%;
     margin: 0;
     font-family: 'Permanent Marker', Arial, Helvetica, sans-serif
 }
 
 body,
 #root {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
-#root {
-    height: 100%;
+#arrow {
+  position: absolute;
+  width: 100%;
+  top: 130px;
+  z-index: 9999;
+  pointer-events: none;
+}
+#toast {
+  position: absolute;
 }
 #refresh-btn {
   position: absolute;
@@ -24,10 +31,10 @@ body,
   cursor: help;
 }
 
-.__react_component_tooltip {
-  max-width: 350px;
-}
-
 footer {
   flex-shrink: 0;
+}
+
+.__react_component_tooltip {
+  max-width: 350px;
 }

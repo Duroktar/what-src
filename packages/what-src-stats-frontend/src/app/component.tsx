@@ -4,10 +4,14 @@ import { Text } from 'rebass'
 import { When } from 'react-if'
 import Head from './components/head'
 import Nav from './components/nav'
+import { Arrow } from './components/arrow'
 import { Info } from './components/info'
+import { Loading } from './components/loading'
 import { Logo } from './components/logo'
+import { Toast } from './components/toast'
 import { BackGroundComponent } from './components/backgrounds'
 import { useComponentState } from './hooks'
+import { IMG_CONFIG_BASIC, IMG_BASE_URL } from '../constants'
 
 type AppProps = {
   setTheme: (theme: string) => void
@@ -52,9 +56,15 @@ React.memo(withTheme((props: AppProps) => {
               <span className="error">{error}</span>
             </When>
             <When condition={state.loading}>
-              <span className="loading"></span>
+              <span className="loading">
+                <Loading />
+              </span>
             </When>
           </span>
+        </div>
+        <div className="example">
+          <div id='arrow'><Arrow down={!state.toast} /></div>
+          <Toast id="toast" onClick={state.toggleToast} src={IMG_BASE_URL + IMG_CONFIG_BASIC} />
         </div>
         <div className='footer'>
           <div id="refresh-btn" onClick={state.handleRefresh} className={!error ? 'hidden' : undefined}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import * as ReactCountUp from 'react-countup'
 import { useTranslation } from 'react-i18next'
-import { getIn, retryOperation, withOnOff } from '@what-src/utils'
+import { getIn, retryOperation, withOnOff, exists } from '@what-src/utils'
 import humanizeDuration from 'humanize-duration'
 import { BackgroundType } from './components/backgrounds'
 import { fetchClicks, streamUpdates } from '../stitch'
@@ -14,6 +14,7 @@ export const useComponentState = () => {
   const [background, setBackground] = useState<BackgroundType>('Cloudy Day')
   const [tick, setTick] = useState(0)
   const [nice, setNice] = useState(false)
+  const [toast, setToast] = useState(false)
   const [loading, setLoading] = useState(false)
   const { countUp, update } = useCountUp({ start: 0, end: 0, duration: 5 })
   const handleRefresh = React.useCallback(() => setTick(tick + 1), [])
@@ -72,6 +73,12 @@ export const useComponentState = () => {
     return { visibility: !nice ? 'hidden' : 'visible' }
   }, [nice])
 
+  const toggleToast = React.useCallback((e: React.MouseEvent) => {
+    const el = e.currentTarget.parentElement
+    if (exists(el)) (el.classList.toggle('open', !toast))
+    setToast(!toast)
+  }, [toast])
+
   return {
     t,
     durationText,
@@ -87,5 +94,7 @@ export const useComponentState = () => {
     humanTime,
     niceStyle,
     loading,
+    toggleToast,
+    toast,
   }
 }
