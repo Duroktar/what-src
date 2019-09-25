@@ -1,4 +1,3 @@
-import path from 'path'
 import webpack from 'webpack'
 import DotEnv from 'dotenv-webpack'
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
@@ -8,11 +7,9 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import { WhatSrcServerWebpackPlugin } from '@what-src/plugin'
 
 const config: webpack.Configuration & Configuration = {
-  mode: 'development',
   entry: './src/main.tsx',
-  output: {
-    path: path.resolve(__dirname, '..', 'public'),
-    filename: '[name].bundle.js',
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
   },
   module: {
     rules: [
@@ -58,21 +55,6 @@ const config: webpack.Configuration & Configuration = {
       DEBUG: false,
     }),
   ],
-  resolve: {
-    // Add `.ts` and `.tsx` as a resolvable extension.
-    extensions: ['.ts', '.tsx', '.js'],
-  },
-  devServer: {
-    contentBase: path.join(__dirname, '..', 'public'),
-    compress: true,
-    port: 9000,
-    overlay: true,
-    open: true,
-    after: () => {
-      require('../scripts/print-console-logo')
-    },
-  },
-  devtool: 'eval-source-map',
 }
 
 export default config

@@ -10,8 +10,8 @@
     "build:stats": "npm run build",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod.ts",
     "start:prod": "npm run start",
-    "start:dev": "cross-env NODE_ENV=development webpack-dev-server --quiet --config ./webpack/webpack.config.ts",
-    "dev:stats": "cross-env NODE_ENV=development webpack-dev-server --quiet --config ./webpack/webpack.config.ts",
+    "start:dev": "cross-env NODE_ENV=development webpack-dev-server --quiet --config ./webpack/webpack.dev.ts",
+    "dev:stats": "npm run start:dev",
     "start": "npm run build && npm run serve",
     "serve": "./scripts/print-console-logo && serve -l 9000 public"
   },
