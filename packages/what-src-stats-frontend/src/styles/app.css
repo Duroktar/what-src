@@ -25,10 +25,15 @@
 }
 
 .example {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 580px;
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+.example > #arrow {
+  margin-left: -30px!important;
 }
 
 .row {
