@@ -7,7 +7,7 @@ export default merge(base, {
   mode: 'production',
   output: {
     path: path.join(__dirname, '..', 'public'),
-    filename: 'bundle.min.js',
+    filename: '[name].[chunkhash].bundle.min.js',
   },
   devtool: false,
   performance: {
@@ -15,6 +15,18 @@ export default merge(base, {
     maxAssetSize: 900000,
   },
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+    runtimeChunk: {
+      name: 'manifest',
+    },
     minimize: true,
     minimizer: [
       new TerserPlugin({
