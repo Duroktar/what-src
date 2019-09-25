@@ -1,20 +1,20 @@
 {
 	"name": "@what-src/stats-frontend",
 	"private": true,
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"description": "what-src-stats frontend client.",
 	"author": "Scott Doucet <duroktar@gmail.com>",
 	"license": "MIT",
-  "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-stats-frontend",
-  "scripts": {
-    "build:stats": "npm run build",
-    "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod.ts",
-    "start:prod": "npm run start",
-    "start:dev": "cross-env NODE_ENV=development webpack-dev-server --quiet --config ./webpack/webpack.dev.ts",
-    "dev:stats": "npm run start:dev",
-    "start": "npm run build && npm run serve",
-    "serve": "./scripts/print-console-logo && serve -l 9000 public"
-  },
+	"repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-stats-frontend",
+	"scripts": {
+		"build:stats": "npm run build",
+		"build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod.ts",
+		"start:prod": "npm run start",
+		"start:dev": "cross-env NODE_ENV=development webpack-dev-server --quiet --config ./webpack/webpack.dev.ts",
+		"dev:stats": "npm run start:dev",
+		"start": "npm run build && npm run serve",
+		"serve": "./scripts/print-console-logo && serve -l 9000 public"
+	},
 	"publishConfig": {
 		"access": "public"
 	},
@@ -43,8 +43,8 @@
 		"@types/terser-webpack-plugin": "^1.2.1",
 		"@types/webpack-dev-server": "^3.1.7",
 		"@types/webpack-merge": "^4.1.5",
-		"@what-src/plugin": "^1.0.10",
-		"@what-src/utils": "^1.0.10",
+		"@what-src/plugin": "^1.0.11",
+		"@what-src/utils": "^1.0.11",
 		"babel-loader": "^8.0.6",
 		"clean-webpack-plugin": "^3.0.0",
 		"core-js": "^3.2.1",

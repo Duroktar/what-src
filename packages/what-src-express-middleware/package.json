@@ -1,6 +1,6 @@
 {
   "name": "@what-src/express-middleware",
-  "version": "1.0.7",
+  "version": "1.0.11",
   "description": "what-src express middleware.",
   "author": "Scott Doucet <duroktar@gmail.com>",
   "license": "MIT",
