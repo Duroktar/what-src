@@ -28,9 +28,9 @@ React.memo(withTheme((props: AppProps) => {
         <Head title="Home" />
         <Nav />
         <div className="msg container">
-          <span className="row logo">
+          <h1 className="row logo">
             <Logo />
-          </span>
+          </h1>
           <When condition={!!state.durationText}>
             <span className="row count">
               <Text fontSize={27} color='primary'>
@@ -64,15 +64,31 @@ React.memo(withTheme((props: AppProps) => {
         </div>
         <div className="example">
           <div id='arrow'><Arrow down={!state.toast} /></div>
-          <Toast id="toast" onClick={state.toggleToast} src={IMG_BASE_URL + IMG_CONFIG_BASIC} />
+          <Toast
+            id="toast"
+            onClick={state.toggleToast}
+            src={IMG_BASE_URL + IMG_CONFIG_BASIC}
+          />
         </div>
         <div className='footer'>
-          <div id="refresh-btn" onClick={state.handleRefresh} className={!error ? 'hidden' : undefined}>
+          <div
+            id="refresh-btn"
+            role="button"
+            tabIndex={0}
+            onClick={state.handleRefresh}
+            className={!error ? 'hidden' : undefined}
+          >
             {t('Refresh')}
           </div>
-          <div id="info-bubble" onClick={state.handleRefresh}>
+          <button
+            id="info-bubble"
+            role="button"
+            name="information"
+            tabIndex={-1}
+            onClick={state.handleRefresh}
+          >
             <Info txt={t('INFO-TXT')} />
-          </div>
+          </button>
         </div>
       </div>
     </BackGroundComponent>

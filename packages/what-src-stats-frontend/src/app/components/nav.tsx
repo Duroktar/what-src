@@ -14,16 +14,24 @@ const links = [
   } as typeof link & { key: string; component: React.ComponentType }
 })
 
-const Nav = () => (
+const Nav = React.memo(() => (
   <nav className="navigation">
     <ul>
-      {links.map(({ key, href, label, component: Component }) => (
-        <li key={key}>
-          {<Link id={'nav-' + label.toLowerCase()} href={href}>{Component ? <Component /> : label}</Link>}
+      {links.map(item => (
+        <li key={item.key}>
+          {<NavItem {...item} />}
         </li>
       ))}
     </ul>
   </nav>
-)
+))
+
+type PropTypes = { component: React.ComponentType, label: string, href: string }
+
+const NavItem = React.memo(({ component: Component, label, href }: PropTypes) => (
+  <Link id={'nav-' + label.toLowerCase()} href={href} aria-label={`link to ${label} page`}>
+    {Component ? <Component /> : label}
+  </Link>
+))
 
 export default Nav

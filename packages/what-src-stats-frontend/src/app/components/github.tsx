@@ -7,9 +7,11 @@ const css = {
   width: '125px',
 }
 
-export const GitHub = React.memo(() => {
+export const GitHub = React.memo(({ children }) => {
   return (
-    <Image style={css} src={url} />
+    <Image alt="github image" style={css} src={url}>
+      {children}
+    </Image>
   )
 })
 GitHub.displayName = 'GitHub'

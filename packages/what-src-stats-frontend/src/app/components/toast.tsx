@@ -7,6 +7,6 @@ type Props = React.DetailedHTMLProps<
 
 export const Toast = React.memo((props: Props) => (
   <div className="toast">
-    <img {...props}></img>
+    <img alt="toast" {...props}></img>
   </div>
 ))

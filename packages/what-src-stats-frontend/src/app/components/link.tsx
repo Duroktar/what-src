@@ -5,11 +5,11 @@ type Props = React.DetailedHTMLProps<
   HTMLAnchorElement
 >
 
-export const Link = React.memo((props: Props) => (
+export const Link = React.memo(({ children, ...props }: Props) => (
   <a
     {...props}
     target="_blank"
     rel="noopener noreferrer"
-  />
+  >{children}</a>
 ))
 Link.displayName = 'Link'
