@@ -70,7 +70,7 @@ person reading the changelog generated from commit messages.
 
 The following is the list of supported scopes:
 
-* **plugin**
+* **bundle**
 * **babel-plugin**
 * **webpack-plugin**
 * **stats-frontend**
@@ -115,5 +115,5 @@ A detailed explanation can be found in this [document][commit-message-format].
 
 # Inspiration
 
-This guide was heavily inspired by the on found at
-[Angular](https://github.com/angular/angular/blob/master/CONTRIBUTING.md)
+This guide was heavily inspired by the one found in the
+[Angular](https://github.com/angular/angular/blob/master/CONTRIBUTING.md) project.
