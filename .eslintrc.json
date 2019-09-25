@@ -6,7 +6,8 @@
   },
   "extends": [
     "standard",
-    "plugin:@typescript-eslint/eslint-recommended"
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:jsx-a11y/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -21,14 +22,16 @@
     }
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "jsx-a11y"
   ],
   "rules": {
     "comma-dangle": ["error", "always-multiline"],
     "key-spacing": ["error", {
       "mode": "minimum"
     }],
-    "space-before-function-paren": ["error", "never"]
+    "space-before-function-paren": ["error", "never"],
+    "jsx-a11y/click-events-have-key-events": ["error", "never"]
   },
   "overrides": [{
     "files": ["**/*.ts", "**/*.tsx"],

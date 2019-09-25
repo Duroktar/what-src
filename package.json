@@ -14,6 +14,8 @@
     "build:docs": "npm run logo && lerna run build:stats && npm run clean:docs && npm run copy:www",
     "build:utils": "npm run logo && lerna run build:utils",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./packages",
+    "lint:www": "./node_modules/.bin/eslint --ext .ts,.tsx ./packages/what-src-stats-frontend/src",
+    "lint:www:fix": "npm run lint:www --fix",
     "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix ./packages",
     "lint:fix-dry-run": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix-dry-run ./packages"
   },
@@ -28,6 +30,7 @@
     "eslint": "^6.4.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.14.3",
