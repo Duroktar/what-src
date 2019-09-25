@@ -6,11 +6,12 @@
     "dev:stats": "lerna run dev:stats --stream",
     "prepublish": "npm run logo && ./scripts/clone-license.sh",
     "logo": "./scripts/print-console-logo.sh",
-    "clean:all": "lerna run clean:dist",
+    "clean:dist": "lerna run clean:dist",
+    "clean:docs": "rimraf ./docs",
     "copy:www": "./scripts/copy-website-to-docs.sh",
     "build": "npm run logo && lerna run build:dist && lerna run build:plugin && lerna run build:stats && npm run copy:www",
     "build:clean": "lerna run clean:dist && npm run build",
-    "build:docs": "npm run logo && lerna run build:stats && npm run copy:www",
+    "build:docs": "npm run logo && lerna run build:stats && npm run clean:docs && npm run copy:www",
     "build:utils": "npm run logo && lerna run build:utils",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./packages",
     "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix ./packages",
@@ -32,6 +33,7 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-standard": "^4.0.1",
     "lerna": "^3.16.4",
+    "rimraf": "^3.0.0",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.3"
   }
