@@ -83,7 +83,7 @@ React.memo(withTheme((props: AppProps) => {
           <button
             id="info-bubble"
             role="button"
-            name="information"
+            aria-label={t('INFO-TXT')}
             tabIndex={-1}
             onClick={state.handleRefresh}
           >
