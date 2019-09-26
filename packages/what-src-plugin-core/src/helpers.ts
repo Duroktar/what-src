@@ -75,7 +75,6 @@ export const parseDataTag = (spinalName: string) => {
   return toCamelCase(spinalName.slice('data-'.length))
 }
 
-
 /**
  * generate the ast for the main clickhandler
  *
@@ -116,7 +115,7 @@ export const generateClickHandlerRawString = (
                 xhr.open('POST', "${o.serverUrl}", true);
                 xhr.setRequestHeader('Content-type', 'application/json');
                 xhr.send(JSON.stringify({ ...dataset, basedir: cache.__basedir }));
-              `
+              `,
             })}
             ${λIf(o.enableXkcdMode, `
                 const xhr = new XMLHttpRequest();

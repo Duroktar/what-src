@@ -1,7 +1,7 @@
 import { isNullOrUndefined, isNodeEnvProduction, getIn } from '@what-src/utils'
 import * as H from '@what-src/plugin-core'
-import template from "@babel/template";
-import { join, resolve } from "path";
+import template from '@babel/template'
+import { join, resolve } from 'path'
 import * as T from './types'
 
 let disabled = false
@@ -10,7 +10,7 @@ let cacheFile: string = ''
 let importName: string = ''
 const buildRequire = template(`
   var %%importName%% = require(%%cacheFilePath%%);
-`);
+`)
 
 export const babelPlugin = ({ types: t, ...rest }: T.BabelPluginContext): T.BabelPlugin => ({
   pre(): void {
@@ -30,8 +30,7 @@ export const babelPlugin = ({ types: t, ...rest }: T.BabelPluginContext): T.Babe
     cacheFile = options.importFrom || 'what-src-cache.jss'
     importName = options.importName || '__WhatSrcGlobalVariable'
 
-    if (!resolver)
-      resolver = H.getResolver({options: this.options, basedir: '', cache: this.cache})
+    if (!resolver) { resolver = H.getResolver({ options: this.options, basedir: '', cache: this.cache }) }
   },
   visitor: {
     Program: {
@@ -42,12 +41,12 @@ export const babelPlugin = ({ types: t, ...rest }: T.BabelPluginContext): T.Babe
           const ast = buildRequire({
             importName: t.identifier(importName),
             cacheFilePath: t.stringLiteral(cacheFilePath),
-          }) as any;
+          })
 
           resolver.emit(cacheFilePath)
-          path.node.body = [ast, ...path.node.body]
+          path.node.body = [ast as any, ...path.node.body]
         }
-      }
+      },
     },
     JSXElement: {
       enter(path, state): void {

@@ -1,13 +1,13 @@
-import ts from "typescript";
-import path from "path";
-import * as H from "@what-src/plugin-core";
+import ts from 'typescript'
+import path from 'path'
+import * as H from '@what-src/plugin-core'
 
 type UserOptions = { importName: string; importFrom: string };
 
 export function createTransformer(opts: UserOptions = {} as any) {
-  let basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript-loader/src/'
-  const options = H.getAllPluginOptions({});
-  const resolver = H.getResolver({ options, basedir, cache: {} });
+  const basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript-loader/src/'
+  const options = H.getAllPluginOptions({})
+  const resolver = H.getResolver({ options, basedir, cache: { __basedir: '' } })
   const cacheFile = opts.importFrom || 'what-src-cache'
   const importName = opts.importName || '__WhatSrcGlobalVariable'
 
@@ -17,9 +17,7 @@ export function createTransformer(opts: UserOptions = {} as any) {
 
     // !!! Each file
     return sf => {
-
       const visitor: ts.Visitor = node => {
-
         if (ts.isSourceFile(node)) {
           // <3 <3 <3 https://github.com/Microsoft/TypeScript/issues/18369#issuecomment-330133796
 
@@ -28,11 +26,11 @@ export function createTransformer(opts: UserOptions = {} as any) {
             const file = (node as ts.Node) as ts.SourceFile
             node = ts.updateSourceFileNode(file, [
               ts.createVariableStatement(
-                /*modifiers*/ undefined,
+                /* modifiers */ undefined,
                 ts.createVariableDeclarationList([
                   ts.createVariableDeclaration(
                     importName,
-                    /*type*/ undefined,
+                    /* type */ undefined,
                     ts.createPropertyAccess(
                       ts.createCall(
                         ts.createIdentifier('require'),
@@ -44,7 +42,7 @@ export function createTransformer(opts: UserOptions = {} as any) {
                   ),
                 ])
               ),
-              ...file.statements
+              ...file.statements,
             ])
           }
 
@@ -58,7 +56,7 @@ export function createTransformer(opts: UserOptions = {} as any) {
                 ts.createImportClause(ts.createIdentifier(importName), undefined),
                 ts.createLiteral(cacheFilePath)
               ),
-              ...file.statements
+              ...file.statements,
             ])
           }
         }
@@ -67,35 +65,35 @@ export function createTransformer(opts: UserOptions = {} as any) {
           if (ts.isJsxOpeningElement(node.openingElement)) {
             const { character: col, line } = sf.getLineAndCharacterOfPosition(
               node.openingElement.getStart()
-            );
+            )
 
-            const nextId = resolver.resolve({ col, line: line + 1, basedir }, sf.fileName);
+            const nextId = resolver.resolve({ col, line: line + 1, basedir }, sf.fileName)
 
             const attrs = ts.updateJsxAttributes(node.openingElement.attributes, [
               ts.createJsxAttribute(
                 ts.createIdentifier(options.dataTag),
-                ts.createStringLiteral(nextId as any)
+                ts.createStringLiteral(nextId)
               )])
-              node.openingElement.attributes = attrs
+            node.openingElement.attributes = attrs
           }
         }
 
         ts.forEachChild(node, n => {
-          if (!n.parent) n.parent = node;
-        });
+          if (!n.parent) n.parent = node
+        })
 
-        return ts.visitEachChild(node, visitor, context);
-      };
+        return ts.visitEachChild(node, visitor, context)
+      }
 
-      const last = ts.visitNode(sf, visitor);
+      const last = ts.visitNode(sf, visitor)
 
       resolver.emit(cacheFilePath)
 
       return last
-    };
-  };
+    }
+  }
 
-  return transformer;
+  return transformer
 }
 
-export default createTransformer;
+export default createTransformer

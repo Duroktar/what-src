@@ -3,17 +3,17 @@ import ts from 'typescript'
 
 type SourceLocationStart = {col: number; basedir: string; line: number}
 
-export const getResolver = ({options: opts, basedir, cache = {}}) => {
+export const getResolver = ({ options: opts, basedir, cache = { __basedir: '' } }) => {
   const options = H.getAllPluginOptions(opts)
   let nextId = 1
-  cache["__basedir"] = basedir
+  cache.__basedir = basedir
   return {
     emit(location: string) {
-      const source = H.generateClickHandlerRawString(options, cache);
+      const source = H.generateClickHandlerRawString(options, cache)
 
-      let result = ts.transpileModule(source, {
-        compilerOptions: { module: ts.ModuleKind.CommonJS }
-      });
+      const result = ts.transpileModule(source, {
+        compilerOptions: { module: ts.ModuleKind.CommonJS },
+      })
 
       const host = ts.createCompilerHost(options)
       host.writeFile(location, result.outputText, false)
@@ -30,7 +30,6 @@ export const getResolver = ({options: opts, basedir, cache = {}}) => {
     },
     getCache() {
       return cache
-    }
+    },
   }
 }
-
