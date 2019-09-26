@@ -167,12 +167,29 @@ type λIfArgs<T> = [Otherwise<T>] | [string, string]
  */
 export const λIf = <T>(condition: any, ...args: λIfArgs<T>) => {
   if (args.length === 2) {
-    let [value, otherwise] = args
-    return (!!condition) ? value : otherwise
+    const [value, otherwise] = args
+    return (condition) ? value : otherwise
   } else if (args.length === 1) {
-    let { value, otherwise } = args[0] as Otherwise<T>
-    return (!!condition) ? value : otherwise
+    const { value, otherwise } = args[0] as Otherwise<T>
+    return (condition) ? value : otherwise
   } else {
     return undefined
+  }
+}
+
+/**
+ * functional try statement.
+ *
+ * @template T
+ * @template E
+ * @param {() => Promise<T>} func
+ * @returns {(Promise<[T, null] | [null, E]>)}
+ */
+export const λTry = async<T, E = Error>(func: () => Promise<T>): Promise<[T, null] | [null, E]> => {
+  try {
+    const result = await func()
+    return [result, null]
+  } catch (err) {
+    return [null, err]
   }
 }
