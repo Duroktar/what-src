@@ -71,6 +71,7 @@ person reading the changelog generated from commit messages.
 The following is the list of supported scopes:
 
 * **bundle**
+* **core**
 * **babel-plugin**
 * **webpack-plugin**
 * **stats-frontend**
