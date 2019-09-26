@@ -14,7 +14,7 @@ module.exports = function whatSrcMiddleware(req, res) {
     if (!shh) console.log(JSON.stringify(errorMessage))
     return res.send(errorMessage)
   }
-  if (basedir.length === 0 || filename.length === 0 || !Number.isInteger(line) || !Number.isInteger(line)) {
+  if (filename.length === 0 || !Number.isInteger(line) || !Number.isInteger(line)) {
     const errorMessage = { error: { filename, line, column, basedir }, msg: 'invalid field types' }
     if (!shh) console.error(JSON.stringify(errorMessage))
     return res.send(errorMessage)
