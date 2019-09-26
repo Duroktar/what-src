@@ -177,19 +177,21 @@ export const λIf = <T>(condition: any, ...args: λIfArgs<T>) => {
   }
 }
 
+type ResultType<T, E = Error> = {data: T; err: undefined} | {data: undefined; err: E}
+
 /**
  * functional try statement.
  *
  * @template T
  * @template E
  * @param {() => Promise<T>} func
- * @returns {(Promise<[T, null] | [null, E]>)}
  */
-export const λTry = async<T, E = Error>(func: () => Promise<T>): Promise<[T, null] | [null, E]> => {
+export const λTry = async<T>(func: (...args: any) => Promise<T>): Promise<ResultType<T>> => {
+  const result = {} as ResultType<T>
   try {
-    const result = await func()
-    return [result, null]
+    result.data = await func()
   } catch (err) {
-    return [null, err]
+    result.err = err
   }
+  return result
 }

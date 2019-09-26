@@ -9,30 +9,31 @@ const schema = object().shape({
   filename: string().required().max(512 * 2),
   line: number().required().positive().integer().max(1000 ** 2),
   column: number().required().positive().integer().max(1000 ** 2),
-  basedir: string().max(512 * 2),
+  basedir: string().max(512 * 2).default(''),
 })
 
 module.exports = async function whatSrcMiddleware(req, res) {
-  const options = { stripUnknown: true, abortEarly: false, recursive: false }
-  const [result, err] = await λTry(() => schema.validate(req.body, options))
+  const options = { stripUnknown: true, abortEarly: false }
+  const success = await λTry(() => schema.validate(req.body, options))
 
-  if (exists(err)) { return res.send(err) }
+  if (exists(success.data)) {
+    const { filename, line, column, basedir } = success.data
 
-  const { filename, line, column, basedir } = result
+    const targetFile = `${basedir}${filename}:${line}:${column}`
 
-  const targetFile = `${basedir}${filename}:${line}:${column}`
+    if (!shh) {
+      console.log(
+        chalk.cyanBright('Opening'),
+        chalk.whiteBright.bold(targetFile),
+        'in',
+        chalk.black.bgGreen(process.env.EDITOR)
+      )
+    }
 
-  if (!shh) {
-    console.log(
-      chalk.cyanBright('Opening'),
-      chalk.whiteBright.bold(targetFile),
-      'in',
-      chalk.black.bgGreen(process.env.EDITOR)
-    )
+    openEditor([targetFile])
+
+    const successMessage = `Opened "${targetFile}" in '${process.env.EDITOR}'`
+    return res.send({ original: req.body, msg: successMessage, targetFile })
   }
-
-  openEditor([targetFile])
-
-  const successMessage = `Opened "${targetFile}" in '${process.env.EDITOR}'`
-  res.send({ original: result.original, msg: successMessage, targetFile })
+  res.send(success.err)
 }
