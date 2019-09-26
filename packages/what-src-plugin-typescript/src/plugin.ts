@@ -5,7 +5,7 @@ import * as H from "@what-src/plugin-core";
 type UserOptions = { importName: string; importFrom: string };
 
 export function createTransformer(opts: UserOptions = {} as any) {
-  let basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript/src/'
+  let basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript-loader/src/'
   const options = H.getAllPluginOptions({});
   const resolver = H.getResolver({ options, basedir, cache: {} });
   const cacheFile = opts.importFrom || 'what-src-cache'
@@ -63,19 +63,21 @@ export function createTransformer(opts: UserOptions = {} as any) {
           }
         }
 
-        if (ts.isJsxOpeningElement(node)) {
-          if (ts.isJsxFragment(node)) return;
-          const { character: col, line } = sf.getLineAndCharacterOfPosition(
-            node.getStart()
-          );
-          const nextId = resolver.resolve({ col, line, basedir }, sf.fileName);
+        if (ts.isJsxElement(node) && !ts.isJsxFragment(node)) {
+          if (ts.isJsxOpeningElement(node.openingElement)) {
+            const { character: col, line } = sf.getLineAndCharacterOfPosition(
+              node.openingElement.getStart()
+            );
 
-          const attrs = ts.updateJsxAttributes(node.attributes, [
-            ts.createJsxAttribute(
-              ts.createIdentifier(options.dataTag),
-              ts.createStringLiteral(nextId as any)
-            )])
-          node.attributes = attrs
+            const nextId = resolver.resolve({ col, line: line + 1, basedir }, sf.fileName);
+
+            const attrs = ts.updateJsxAttributes(node.openingElement.attributes, [
+              ts.createJsxAttribute(
+                ts.createIdentifier(options.dataTag),
+                ts.createStringLiteral(nextId as any)
+              )])
+              node.openingElement.attributes = attrs
+          }
         }
 
         ts.forEachChild(node, n => {

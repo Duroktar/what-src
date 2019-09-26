@@ -8,7 +8,7 @@ type SourceLocationStart = {col: number; basedir: string; line: number}
 
 export const getResolver = ({options: opts, basedir, cache = {}}) => {
   const options = H.getAllPluginOptions(opts)
-  let nextId = 0
+  let nextId = 1
   cache["__basedir"] = basedir
   return {
     emit(location: string) {
@@ -24,10 +24,12 @@ export const getResolver = ({options: opts, basedir, cache = {}}) => {
     resolve(loc: SourceLocationStart, sourcefile: string) {
       const filename = H.getRemoteFilenameIfSet(sourcefile, options)
       const metaData = H.generateJsxMetaData({
-        filename: filename.replace(basedir, '')
-      , ...loc})
+        ...loc,
+        filename: filename.replace(basedir, ''),
+      })
+      const result = nextId.toString()
       cache[nextId++] = JSON.stringify(metaData)
-      return nextId.toString()
+      return result
     },
     getCache() {
       return cache
