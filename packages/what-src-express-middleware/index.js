@@ -1,27 +1,27 @@
+const { λTry, exists } = require('@what-src/utils')
+const { string, number, object } = require('yup')
 const chalk = require('chalk').default
 const openEditor = require('open-editor')
 
-const isNullOrUndefined = v => v === null || v === undefined
+const shh = JSON.parse(process.env.WHAT_SRC_MIDDLEWARE_SHH || 'false') === true
 
-module.exports = function whatSrcMiddleware(req, res) {
-  /** @type {{filename: string; line: string; column: string}} */
-  const { filename, line, column, basedir } = req.body
-  const shh = JSON.parse(process.env.WHAT_SRC_MIDDLEWARE_SHH || 'false') === true
+const schema = object().shape({
+  filename: string().required().max(512 * 2),
+  line: number().required().positive().integer().max(1000 ** 2),
+  column: number().required().positive().integer().max(1000 ** 2),
+  basedir: string().max(512 * 2),
+})
 
-  // validation. failure in any case short-circuits the entire operation
-  if (~[filename, line, column, basedir].findIndex(isNullOrUndefined)) {
-    const errorMessage = { error: { filename, line, column, basedir }, msg: 'missing fields' }
-    if (!shh) console.log(JSON.stringify(errorMessage))
-    return res.send(errorMessage)
-  }
-  if (filename.length === 0 || !Number.isInteger(line) || !Number.isInteger(line)) {
-    const errorMessage = { error: { filename, line, column, basedir }, msg: 'invalid field types' }
-    if (!shh) console.error(JSON.stringify(errorMessage))
-    return res.send(errorMessage)
-  }
+module.exports = async function whatSrcMiddleware(req, res) {
+  const options = { stripUnknown: true, abortEarly: false, recursive: false }
+  const [result, err] = await λTry(() => schema.validate(req.body, options))
 
-  // validation passed so we'll log the request and open the file
+  if (exists(err)) { return res.send(err) }
+
+  const { filename, line, column, basedir } = result
+
   const targetFile = `${basedir}${filename}:${line}:${column}`
+
   if (!shh) {
     console.log(
       chalk.cyanBright('Opening'),
@@ -34,5 +34,5 @@ module.exports = function whatSrcMiddleware(req, res) {
   openEditor([targetFile])
 
   const successMessage = `Opened "${targetFile}" in '${process.env.EDITOR}'`
-  res.send({ success: { filename, line, column, basedir }, msg: successMessage, value: targetFile })
+  res.send({ original: result.original, msg: successMessage, targetFile })
 }
