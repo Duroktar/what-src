@@ -5,8 +5,9 @@ import * as H from "@what-src/plugin-core";
 type UserOptions = { importName: string; importFrom: string };
 
 export function createTransformer(opts: UserOptions = {} as any) {
+  let basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript/src/'
   const options = H.getAllPluginOptions({});
-  const resolver = H.getResolver({ options, cache: {} });
+  const resolver = H.getResolver({ options, basedir, cache: {} });
   const cacheFile = opts.importFrom || 'what-src-cache'
   const importName = opts.importName || '__WhatSrcGlobalVariable'
 
@@ -67,7 +68,7 @@ export function createTransformer(opts: UserOptions = {} as any) {
           const { character: col, line } = sf.getLineAndCharacterOfPosition(
             node.getStart()
           );
-          const nextId = resolver.resolve({ col, line }, sf.fileName);
+          const nextId = resolver.resolve({ col, line, basedir }, sf.fileName);
 
           const attrs = ts.updateJsxAttributes(node.attributes, [
             ts.createJsxAttribute(

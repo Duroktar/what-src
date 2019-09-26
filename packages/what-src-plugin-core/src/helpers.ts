@@ -103,22 +103,21 @@ export const generateClickHandlerRawString = (
         const cache = (${JSON.stringify(cache, null, 3)})
         window["${o.globalCacheKey}"] = function (e) {
           if (e.metaKey) {
-            const dataset = cache[e.path[0].dataset["${o.dataTag}"]]
+            const dataset = JSON.parse(cache[e.path[0].dataset["${o.dataTag}"]])
             ${λIf(o.stopPropagation, `if (${o.stopPropagation}) e.stopPropagation()`, '')}
             ${λIf(o.preventDefault, `if (${o.preventDefault}) e.preventDefault()`, '')}
             if (typeof dataset === 'undefined') return
             ${λIf(o.useRemote, {
               value: `
                 (() => {
-                  const {remoteUrl} = JSON.parse(dataset)
-                  window.open(remoteUrl, '_blank')
+                  window.open(dataset.remoteUrl, '_blank')
                 })()`,
               otherwise: `
                 (() => {
                   const xhr = new XMLHttpRequest()
                   xhr.open('POST', "${o.serverUrl}", true)
                   xhr.setRequestHeader('Content-type', 'application/json')
-                  xhr.send(dataset)
+                  xhr.send(JSON.stringify({ ...dataset, basedir: cache.__basedir }))
                 })()`
             })}
             ${λIf(o.enableXkcdMode, `

@@ -22,7 +22,9 @@
     "node": ">=6.9.0"
   },
   "dependencies": {
+    "@what-src/plugin-core": "^1.0.11",
     "@what-src/babel-plugin": "^1.0.11",
+    "@what-src/typescript-plugin": "^1.0.11",
     "@what-src/webpack-plugin": "^1.0.11"
   },
   "devDependencies": {
