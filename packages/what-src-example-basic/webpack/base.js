@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const webpack = require('webpack')
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { WhatSrcServerWebpackPlugin } = require('@what-src/plugin')
 
@@ -35,6 +36,13 @@ module.exports = {
   resolve: {
     // TODO: Add `.ts` and `.tsx` as a resolvable extension.
     extensions: ['.js', 'jsx'],
+  },
+  devServer: {
+    contentBase: path.join(__dirname, '..', 'public'),
+    compress: true,
+    port: 9000,
+    writeToDisk: true,
+    overlay: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

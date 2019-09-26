@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
-const path = require('path')
 const webpack = require('webpack')
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const { WhatSrcServerWebpackPlugin } = require('@what-src/plugin')
