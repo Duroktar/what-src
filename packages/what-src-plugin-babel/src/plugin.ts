@@ -1,15 +1,22 @@
-import { isNullOrUndefined, isNodeEnvProduction } from '@what-src/utils'
-import * as H from './helpers'
+import { isNullOrUndefined, isNodeEnvProduction, getIn } from '@what-src/utils'
+import * as H from '@what-src/plugin-core'
+import template from "@babel/template";
+import { join, resolve } from "path";
 import * as T from './types'
 
-let nextId = 1
 let disabled = false
+let resolver: ReturnType<typeof H.getResolver> = null as any
+let cacheFile: string = ''
+let importName: string = ''
+const buildRequire = template(`
+  var %%importName%% = require(%%cacheFilePath%%);
+`);
 
-export const babelPlugin = ({ types: t }: T.BabelPluginContext): T.BabelPlugin => ({
+export const babelPlugin = ({ types: t, ...rest }: T.BabelPluginContext): T.BabelPlugin => ({
   pre(): void {
-    const opts = H.getAllPluginOptions(this.opts)
+    const options = H.getAllPluginOptions(this.opts)
 
-    if (!disabled && (isNodeEnvProduction() && !opts.productionMode)) {
+    if (!disabled && (isNodeEnvProduction() && !options.productionMode)) {
       console.log(
         '@what-src/babel-plugin - running in production mode is disabled. ' +
         'To enable set the "productionMode" configuration option to true.',
@@ -18,32 +25,44 @@ export const babelPlugin = ({ types: t }: T.BabelPluginContext): T.BabelPlugin =
     };
 
     this.cache = {}
-  },
-  post(state): void {
-    if (!disabled) {
-      const options = H.getAllPluginOptions(this.opts)
-      const ast = H.generateClickHandlerAst(t, options, this.cache)
+    this.options = options
 
-      state.path.node.body.push(ast)
-    }
+    cacheFile = options.importFrom || 'what-src-cache.jss'
+    importName = options.importName || '__WhatSrcGlobalVariable'
+
+    if (!resolver)
+      resolver = H.getResolver({options: this.options, basedir: '', cache: this.cache})
   },
   visitor: {
+    Program: {
+      exit(path) {
+        if (!disabled) {
+          const cacheFilePath = join(resolve(''), 'dist', cacheFile)
+
+          const ast = buildRequire({
+            importName: t.identifier(importName),
+            cacheFilePath: t.stringLiteral(cacheFilePath),
+          }) as any;
+
+          resolver.emit(cacheFilePath)
+          path.node.body = [ast, ...path.node.body]
+        }
+      }
+    },
     JSXElement: {
       enter(path, state): void {
         if (disabled || H.isFragment(path.node.openingElement)) return
         if (isNullOrUndefined(path.node.openingElement.loc)) return
 
-        const options = H.getAllPluginOptions(state.opts)
-        const filename = H.getRemoteFilenameIfSet(state.filename, options)
-        const metaData = H.generateJsxMetaData(path, filename)
+        const options = H.getAllPluginOptions(state.options)
+        const { column: col, line } = getIn('node.openingElement.loc.start', path)
 
-        const attr = H.generateAttribute(t, options, nextId.toString())
+        const nextId = resolver.resolve({ col, line, basedir: '' }, state.filename)
 
-        path.node.openingElement.attributes.push(attr)
-
-        this.cache[nextId] = JSON.stringify(metaData)
-
-        nextId++
+        path.node.openingElement.attributes.push(t.jsxAttribute(
+          t.jsxIdentifier(options.dataTag),
+          t.stringLiteral(nextId)
+        ))
       },
     },
   },

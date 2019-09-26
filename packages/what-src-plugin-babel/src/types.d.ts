@@ -23,7 +23,7 @@ export type WhatSrcPluginOptions = {
 
 export type VisitorState = {
   filename: string;
-  opts: WhatSrcPluginOptions;
+  options: WhatSrcPluginOptions;
   cache: { [k: string]: string };
   path: traverse.NodePath<JSXElement>;
 };

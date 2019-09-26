@@ -100,32 +100,29 @@ export const generateClickHandlerRawString = (
   }) => `
     const __whatSrcCallback01101011 = (() => {
       try {
-        const cache = (${JSON.stringify(cache, null, 3)})
+        const cache = (${JSON.stringify(cache, null, 3)});
         window["${o.globalCacheKey}"] = function (e) {
           if (e.metaKey) {
-            const dataset = JSON.parse(cache[e.path[0].dataset["${o.dataTag}"]])
-            ${λIf(o.stopPropagation, `if (${o.stopPropagation}) e.stopPropagation()`, '')}
-            ${λIf(o.preventDefault, `if (${o.preventDefault}) e.preventDefault()`, '')}
-            if (typeof dataset === 'undefined') return
+            const tag = cache[e.path[0].dataset["${o.dataTag}"]];
+            if (tag === undefined) throw new Error('Scott.. Ite derped again.');
+            const dataset = JSON.parse(tag);
+            ${λIf(o.stopPropagation, 'e.stopPropagation();', '')}
+            ${λIf(o.preventDefault, 'e.preventDefault();', '')}
+            if (typeof dataset === 'undefined') return;
             ${λIf(o.useRemote, {
-              value: `
-                (() => {
-                  window.open(dataset.remoteUrl, '_blank')
-                })()`,
+              value: 'window.open(dataset.remoteUrl, "_blank");',
               otherwise: `
-                (() => {
-                  const xhr = new XMLHttpRequest()
-                  xhr.open('POST', "${o.serverUrl}", true)
-                  xhr.setRequestHeader('Content-type', 'application/json')
-                  xhr.send(JSON.stringify({ ...dataset, basedir: cache.__basedir }))
-                })()`
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', "${o.serverUrl}", true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.send(JSON.stringify({ ...dataset, basedir: cache.__basedir }));
+              `
             })}
             ${λIf(o.enableXkcdMode, `
-              (() => {
-                const xhr = new XMLHttpRequest()
-                xhr.open('POST', "${o.whatSrcStatsUrl}", true)
-                xhr.send()
-              })();`, '')}
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', "${o.whatSrcStatsUrl}", true);
+                xhr.send();
+              `, '')}
           }
         }
         window.document.removeEventListener('click', window["${o.globalCacheKey}"])

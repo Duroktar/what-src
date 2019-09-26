@@ -1,8 +1,5 @@
-// import {isNullOrUndefined} from '@what-src/utils'
 import * as H from './helpers'
 import ts from 'typescript'
-
-// const t = {} as any // TODO: import * as types from '@babel/types'
 
 type SourceLocationStart = {col: number; basedir: string; line: number}
 
@@ -19,7 +16,7 @@ export const getResolver = ({options: opts, basedir, cache = {}}) => {
       });
 
       const host = ts.createCompilerHost(options)
-      host.writeFile(location + '.js', result.outputText, false)
+      host.writeFile(location, result.outputText, false)
     },
     resolve(loc: SourceLocationStart, sourcefile: string) {
       const filename = H.getRemoteFilenameIfSet(sourcefile, options)
