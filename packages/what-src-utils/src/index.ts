@@ -146,3 +146,33 @@ export const withPreLog = (cb: any, msg: string) => {
     return cb(...args)
   }
 }
+
+type Otherwise<T> = { value: T, otherwise?: T }
+type λIfArgs<T> = [Otherwise<T>] | [string, string]
+
+/**
+ * functional style if statement. returns value if value is truthy, otherwise
+ * the default provided value or undefined if not provided
+ *
+ * > Note -
+ * >
+ * >*condition is automatically cooerced with the dbl-pound operator*
+ * >
+ * >ex: `if (!!condition) ... else ..`
+ *
+ * @template T
+ * @param {*} condition
+ * @param {λIfArgs<T>} {value, otherwise}
+ * @returns
+ */
+export const λIf = <T>(condition: any, ...args: λIfArgs<T>) => {
+  if (args.length === 2) {
+    let [value, otherwise] = args
+    return (!!condition) ? value : otherwise
+  } else if (args.length === 1) {
+    let { value, otherwise } = args[0] as Otherwise<T>
+    return (!!condition) ? value : otherwise
+  } else {
+    return undefined
+  }
+}
