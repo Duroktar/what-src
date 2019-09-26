@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
@@ -39,6 +37,7 @@ module.exports = {
     contentBase: path.join(__dirname, '..', 'public'),
     compress: true,
     port: 9000,
+    open: true,
     writeToDisk: true,
     overlay: true,
   },
