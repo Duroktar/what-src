@@ -1,0 +1,35 @@
+{
+  "name": "@what-src/typescript-plugin",
+  "version": "1.0.11",
+  "description": "what-src typescript compiler plugin.",
+  "author": "Scott Doucet <duroktar@gmail.com>",
+  "license": "MIT",
+  "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-plugin",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean:dist": "rimraf ./dist",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "build:plugin": "npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=6.9.0"
+  },
+  "dependencies": {
+    "@what-src/plugin-core": "^1.0.0",
+    "@what-src/utils": "^1.0.11"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.7",
+    "babylon": "^6.18.0",
+    "recast": "^0.18.2",
+    "typescript": "^3.6.3"
+  },
+  "gitHead": "22bd6f12b75fd178fd613d28dd607c0a18fa2a66"
+}
