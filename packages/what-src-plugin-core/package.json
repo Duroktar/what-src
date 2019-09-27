@@ -12,7 +12,7 @@
 	"scripts": {
 		"clean:dist": "rimraf ./dist",
 		"build": "tsc -p tsconfig.json",
-		"build:watch": "tsc -p tsconfig.json --watch",
+    "build:watch": "tsc -p tsconfig.json --watch",
 		"build:core": "npm run build",
 		"build:dist": "npm run build"
 	},
@@ -34,7 +34,7 @@
 		"@types/babel__template": "^7.0.2",
 		"@types/babel__traverse": "^7.0.7",
 		"@types/cross-spawn": "^6.0.0",
-		"@types/node": "^12.7.7",
+		"@types/node": "^12.7.8",
 		"@what-src/utils": "^1.0.11"
 	}
 }

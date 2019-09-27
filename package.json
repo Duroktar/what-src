@@ -3,24 +3,25 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev:stats": "lerna run dev:stats --stream",
-    "prepublish": "npm run logo && ./scripts/clone-license.sh",
-    "logo": "./scripts/print-console-logo.sh",
-    "clean:dist": "lerna run clean:dist",
-    "clean:docs": "rimraf ./docs",
-    "copy:www": "./scripts/copy-website-to-docs.sh",
-    "prebuild": "lerna run logo",
-    "build": "lerna run build:dist && lerna run build:plugin",
     "build:clean": "lerna run clean:dist && npm run build",
     "build:core": "npm run logo && lerna run build:core",
-    "build:docs": "npm run logo && lerna run build:stats && npm run clean:docs && npm run copy:www",
+    "build:docs": "typedoc",
+    "build:gh-pages": "npm run logo && npm run clean:gh-pages && npm run build:docs && lerna run build:stats && npm run copy:stats",
+    "build:stats": "npm run logo & lerna run build:stats",
     "build:utils": "npm run logo && lerna run build:utils",
-    "build:watch": "npm run logo && lerna run build:watch --stream",
-    "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./packages",
-    "lint:www": "./node_modules/.bin/eslint --ext .ts,.tsx ./packages/what-src-stats-frontend/src",
-    "lint:www:fix": "npm run lint:www --fix",
+    "build:watch": "npm run logo && lerna run build:watch --parallel --stream -- --pretty",
+    "build": "lerna run build:dist && lerna run build:plugin",
+    "clean:dist": "lerna run clean:dist",
+    "clean:gh-pages": "rimraf ./docs",
+    "copy:stats": "./scripts/copy-website-to-docs.sh",
+    "dev:stats": "lerna run dev:stats --stream",
+    "lint:fix-dry-run": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix-dry-run ./packages",
     "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix ./packages",
-    "lint:fix-dry-run": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix-dry-run ./packages"
+    "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./packages",
+    "logo": "./scripts/print-console-logo.sh",
+    "prebuild": "lerna run logo",
+    "prepublish": "npm run logo && ./scripts/clone-license.sh",
+		"serve:gh-pages": "npm run logo && serve -l 9000 ./docs"
   },
   "engines": {
     "node": ">= 6.9.0 < 13.0.0",
@@ -28,6 +29,7 @@
     "yarn": ">=0.27.5 || >=1.0.0-20170811"
   },
   "devDependencies": {
+    "@strictsoftware/typedoc-plugin-monorepo": "^0.2.1",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",
     "eslint": "^6.4.0",
@@ -38,9 +40,12 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-standard": "^4.0.1",
+    "handlebars": "^4.3.2",
     "lerna": "^3.16.4",
     "rimraf": "^3.0.0",
+    "serve": "^11.2.0",
     "ts-node": "^8.4.1",
+    "typedoc": "^0.15.0",
     "typescript": "^3.6.3"
   }
 }

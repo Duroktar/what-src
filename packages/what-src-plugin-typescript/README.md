@@ -1,51 +1,49 @@
 
-# @what-src/plugin
+# @what-src/typescript-plugin
 
-> what-src plugin bundle.
+> what-src typescript [compiler plugin](https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API).
 
-Check out the [packages folder](https://github.com/duroktar/what-src/tree/master/packages) for more information.
+Check out the [packages folder](https://github.com/duroktar/what-src/tree/master/packages)
+for more information.
 
 ## Usage
 
-First install the plugin from npm.
+First install the package from npm.
 
 ```sh
-npm install @what-src/plugin --save-dev
+npm install @what-src/typescript-plugin --save-dev
 ```
 
-> what-src respects your systems $EDITOR environment variable (default: "vscode")
-> Read [here](https://github.com/sindresorhus/env-editor) for more info.
+### via Webpack (recommended)
 
-### babel (required)
-
-Via .babelrc or babel-loader.
-```json
-{
-  "plugins": [
-    "module:@what-src/plugin",
-    ...
-  ]
-}
-```
-
-### Webpack-Dev-Server
+Via webpack.config.ts (or .json, .js, ...).
 
 ```ts
-$ webpack.config.js
+import devserver from 'webpack-dev-server'
+import webpack from 'webpack'
+import { whatSrcServerTsLoaderPlugin } from '@what-src/plugin'
+import { WhatSrcServerWebpackPlugin } from '@what-src/plugin'
 
-
-const { WhatSrcServerWebpackPlugin } = require('@what-src/plugin') // <- import plugin
-
-...
-module.exports = {
-  mode: 'development',
-  entry: './src/index.jsx',
-  output: {
-    filename: 'bundle.js',
+const config: webpack.Configuration & devserver.Configuration = {
+  mode: process.env.NODE_ENV,
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              getCustomTransformers: () => ({
+                before: [whatSrcServerTsLoaderPlugin()],
+              }),
+            },
+          },
+        ],
+      },
+    ],
   },
-  ...
-plugins: [new WhatSrcServerWebpackPlugin()] // <- add plugin
-...
+  plugins: [new WhatSrcServerWebpackPlugin()],
 }
 ```
 
@@ -65,7 +63,15 @@ $ package.json
 npm run develop
 ```
 
-> NOTE: The server runs on port 8018 by default.
+### Planned Support
+
+- [ttypescript](https://github.com/cevek/ttypescript)
+- [custom compiler](https://levelup.gitconnected.com/writing-typescript-custom-ast-transformer-part-1-7585d6916819)
+
+## Example
+
+**Check out the [example project](https://github.com/duroktar/what-src/tree/master/packages/what-src-example-typescript)
+for a more in depth setup.**
 
 ## License
 

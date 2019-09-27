@@ -9,3 +9,4 @@ scripts
 package.json
 lerna.json
 tsconfig.json
+assets

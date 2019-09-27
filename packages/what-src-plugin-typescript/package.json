@@ -26,10 +26,9 @@
     "@what-src/utils": "^1.0.11"
   },
   "devDependencies": {
-    "@types/node": "^12.7.7",
+    "@types/node": "^12.7.8",
     "babylon": "^6.18.0",
     "recast": "^0.18.2",
     "typescript": "^3.6.3"
-  },
-  "gitHead": "22bd6f12b75fd178fd613d28dd607c0a18fa2a66"
+  }
 }

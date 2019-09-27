@@ -1,6 +1,6 @@
-# Project Template
+# Project Example (babel-loader version)
 
-A project template with ES6 support via [Webpack 4](https://webpack.js.org/) and [Typescript](https://typescript.com)
+A project example with ES6 support via [Webpack 4](https://webpack.js.org/) and [Typescript](https://typescript.com)
 that includes hot-reloading for development and production-ready builds and @what-src/plugin for code navigation.
 
 Loading images via JavaScript module `import` is also supported.

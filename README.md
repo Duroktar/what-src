@@ -223,6 +223,9 @@ packages](packages/README.md) and takes inspiration from the
 
 ### Contributing
 
+All PRs will be considered! Be sure to read the guidelines section linked
+below to ensure a smooth process. 
+
 - [Commit message Guidlines](CONTRIBUTING.md#-commit-message-guidelines)
 
 ## License
