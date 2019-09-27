@@ -11,4 +11,5 @@ export const defaultOptions: Required<T.WhatSrcPluginOptions> = {
   serverUrl: 'http://localhost:8018/__what_src',
   stopPropagation: true,
   useRemote: false,
+  blacklistedTags: ['Helmet', 'head'],
 }

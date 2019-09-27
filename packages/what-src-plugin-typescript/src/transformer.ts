@@ -16,6 +16,9 @@ export class WhatSrcTsTransformer {
   public resolver: WS.IResolver
   public cacheFile: string
   public importName: string
+  public context!: ts.TransformationContext
+  public sf!: ts.SourceFile
+  private blockedTagSet!: Set<string>
 
   /**
    * Constructs a TS compiler API transformer
@@ -29,6 +32,7 @@ export class WhatSrcTsTransformer {
     this.resolver = WS.getResolver(this)
     this.cacheFile = defaultOptions.importFrom || 'what-src-cache'
     this.importName = defaultOptions.importName || '__WhatSrcGlobalVariable'
+    this.blockedTagSet = new Set(this.options.blacklistedTags)
   }
 
   /**
@@ -40,33 +44,22 @@ export class WhatSrcTsTransformer {
   public transformer: ts.TransformerFactory<ts.SourceFile> = context => {
     const { outDir } = context.getCompilerOptions()
     const cacheFilePath = path.join(outDir || '', this.cacheFile)
-
     return this.createSourceFileHandler(cacheFilePath, context)
   }
 
   /**
-   * creates a SourceFileHandler that emits the cache file as a post hook
+   * creates a SourceFileHandler that visits the ast then emits the cache file
    *
    * @private
    * @memberof WhatSrcTsTransformer
    */
   private createSourceFileHandler = (cacheFilePath: string, context: ts.TransformationContext) => {
-    return (sf: ts.SourceFile) => {
-      const last = ts.visitNode(sf, this.createVisitor(context, sf))
+    return (sourceFile: ts.SourceFile) => {
+      this.context = context
+      this.sf = sourceFile
+      const node = ts.visitNode(sourceFile, this.visitor)
       this.resolver.emit(cacheFilePath)
-      return last
-    }
-  }
-
-  /**
-   * creates a visitor node for a given TransformationContext and SourceFile
-   *
-   * @private
-   * @memberof WhatSrcTsTransformer
-   */
-  private createVisitor = (context: ts.TransformationContext, sf: ts.SourceFile) => {
-    return (node: ts.Node): ts.VisitResult<ts.Node> => {
-      return this.visitor(node, context, sf)
+      return node
     }
   }
 
@@ -77,8 +70,8 @@ export class WhatSrcTsTransformer {
    * @private
    * @memberof WhatSrcTsTransformer
    */
-  private visitor = (node: ts.Node, context: ts.TransformationContext, sf: ts.SourceFile): ts.VisitResult<ts.Node> => {
-    const { module, outDir } = context.getCompilerOptions()
+  private visitor = (node: ts.Node): ts.VisitResult<ts.Node> => {
+    const { module, outDir } = this.context.getCompilerOptions()
     const cacheFilePath = path.join(outDir || '', this.cacheFile)
 
     if (ts.isSourceFile(node)) {
@@ -98,7 +91,7 @@ export class WhatSrcTsTransformer {
     }
 
     if (ts.isJsxElement(node) && !ts.isJsxFragment(node)) {
-      this.createAndUpdateJsxAttribute(sf, node)
+      this.createAndUpdateJsxAttribute(node)
     }
 
     // not sure if this is needed or not, to be honest :/
@@ -106,7 +99,7 @@ export class WhatSrcTsTransformer {
       if (!n.parent) n.parent = node
     })
 
-    return ts.visitEachChild(node, this.createVisitor(context, sf), context)
+    return ts.visitEachChild(node, this.visitor, this.context)
   }
 
   /**
@@ -119,7 +112,13 @@ export class WhatSrcTsTransformer {
     node = ts.updateSourceFileNode(file, [
       ts.createImportDeclaration(
         /* decorators */ undefined,
-        /* modifiers */ undefined, ts.createImportClause(ts.createIdentifier(this.importName), undefined), ts.createLiteral(cacheFilePath)),
+        /* modifiers */ undefined,
+        ts.createImportClause(
+          ts.createIdentifier(this.importName),
+          undefined
+        ),
+        ts.createLiteral(cacheFilePath)
+      ),
       ...file.statements,
     ])
     return node
@@ -134,9 +133,17 @@ export class WhatSrcTsTransformer {
   private createCommonJSImport = (node: ts.Node, file: ts.SourceFile, cacheFilePath: string) => {
     node = ts.updateSourceFileNode(file, [
       ts.createVariableStatement(
-        /* modifiers */ undefined, ts.createVariableDeclarationList([
+        /* modifiers */ undefined,
+        ts.createVariableDeclarationList([
           ts.createVariableDeclaration(this.importName,
-            /* type */ undefined, ts.createPropertyAccess(ts.createCall(ts.createIdentifier('require'), [], [ts.createLiteral(cacheFilePath)]), ts.createIdentifier('default'))),
+            /* type */ undefined,
+            ts.createPropertyAccess(
+              ts.createCall(
+                ts.createIdentifier('require'),
+                [],
+                [ts.createLiteral(cacheFilePath)]
+              ),
+              ts.createIdentifier('default'))),
         ])),
       ...file.statements,
     ])
@@ -150,13 +157,13 @@ export class WhatSrcTsTransformer {
    * @private
    * @memberof WhatSrcTsTransformer
    */
-  private createAndUpdateJsxAttribute = (sf: ts.SourceFile, node: ts.JsxElement) => {
+  private createAndUpdateJsxAttribute = (node: ts.JsxElement) => {
     if (ts.isJsxOpeningElement(node.openingElement)) {
       const start = node.openingElement.getStart()
-      const { character, line } = sf.getLineAndCharacterOfPosition(start)
-      if (this.openingElementTagName(node)! in this.options) {
+      const { character, line } = this.sf.getLineAndCharacterOfPosition(start)
+      if (!(this.openingElementTagName(node)! /* not */ in this.blockedTagSet)) {
         const location = this.createLocation(character, line)
-        const nextId = this.resolver.resolve(location, sf.fileName)
+        const nextId = this.resolver.resolve(location, this.sf.fileName)
         const attributes = node.openingElement.attributes
         const attrs = ts.updateJsxAttributes(attributes, [
           ts.createJsxAttribute(

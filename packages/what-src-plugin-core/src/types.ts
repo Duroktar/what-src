@@ -29,6 +29,7 @@ export type WhatSrcPluginOptions = {
   serverUrl?: string;
   stopPropagation?: boolean;
   useRemote?: boolean;
+  blacklistedTags?: string[];
 };
 
 export type VisitorState = {
