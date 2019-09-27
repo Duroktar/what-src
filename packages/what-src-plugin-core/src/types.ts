@@ -7,7 +7,10 @@ export type BabelPlugin = {
   post?: (s: VisitorState) => void;
 
 };
-export type BabelPluginContext = { types: typeof types };
+export type BabelNodeTypes = typeof types
+export type BabelPluginContext = { types: BabelNodeTypes };
+
+export type WhatSrcOptions = Required<WhatSrcPluginOptions>
 
 export type WhatSrcPluginOptions = {
   serverUrl?: string;
@@ -19,11 +22,19 @@ export type WhatSrcPluginOptions = {
   useRemote?: boolean;
   enableXkcdMode?: boolean;
   whatSrcStatsUrl?: string;
+  importFrom?: string;
+  importName?: string;
 };
 
 export type VisitorState = {
   filename: string;
-  options: WhatSrcPluginOptions;
+  opts: WhatSrcPluginOptions;
   cache: { [k: string]: string };
-  path: traverse.NodePath<JSXElement>;
+  path: traverse.NodePath<types.JSXElement>;
 };
+
+export type GenerateJsxMetaDataArgs = {
+  filename: string,
+  line: number,
+  col: number,
+}
