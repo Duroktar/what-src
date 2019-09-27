@@ -32,7 +32,7 @@ export const isNull = (obj: unknown): obj is null => {
 }
 
 /**
- *object is unddefined type-guard
+ *object is undefined type-guard
  *
  * @param {unknown} obj
  * @returns {obj is undefined}
@@ -120,6 +120,19 @@ export const retryOperation = (
 /**
  * kinda like a with statement where the context is run inside a toggle state
  *
+ * Example:
+ * ```ts
+ *    let toggleState = false
+ *    const setToggleState = (nextToggleState: boolean) => {
+ *      toggleState = nextToggleState
+ *    }
+ *    withOnOff(setToggleState, async() => {
+ *      assert(toggleState === true)
+ *      console.log('setToggleState is called with true before running code block')
+ *    })
+*     assert(toggleState === false)
+*     console.log('and called with false after the block of code finishes')
+ * ```
  * @param {(s: boolean) => void} toggle
  * @param {() => Promise<any>} body
  * @returns
@@ -132,8 +145,8 @@ export const withOnOff = async(toggle: (s: boolean) => void, body: () => Promise
 }
 
 /**
- * returns a function equivalent to the passed one that logs a custom msg before
- * being applied
+ * returns a function equivalent to the one passed that also logs a custom msg
+ * before being applied
  *
  * @param {*} cb
  * @param {string} msg
@@ -182,11 +195,23 @@ type ResultType<T, E = Error> = {data: T; err: undefined} | {data: undefined; er
 /**
  * functional try statement.
  *
+ *
+ * Example:
+ * ```ts
+ *    const result = await λTry(() => schema.validate(req.body, options))
+ *
+ *    if (exists(result.err)) {
+ *      console.error(result.err)
+ *    }
+ *
+ *    assert(typeof result.data === typeof req.body)
+ *    console.log('It works!')
+ * ```
  * @template T
  * @template E
  * @param {() => Promise<T>} func
  */
-export const λTry = async<T>(func: (...args: any) => Promise<T>): Promise<ResultType<T>> => {
+export const λTry = async<T>(func: () => Promise<T>): Promise<ResultType<T>> => {
   const result = {} as ResultType<T>
   try {
     result.data = await func()
