@@ -160,8 +160,8 @@ export const withPreLog = (cb: any, msg: string) => {
   }
 }
 
-type Otherwise<T> = { value: T, otherwise?: T }
-type λIfArgs<T> = [Otherwise<T>] | [string, string]
+type Otherwise<T> = { value: T, otherwise: T } | { return: T, otherwise: T, }
+type λIfArgs<T> = [Otherwise<T>] | [T, T]
 
 /**
  * functional style if statement. returns value if value is truthy, otherwise
@@ -175,18 +175,18 @@ type λIfArgs<T> = [Otherwise<T>] | [string, string]
  *
  * @template T
  * @param {*} condition
- * @param {λIfArgs<T>} {value, otherwise}
+ * @param {λIfArgs<T>} {otherwise, ...{value? | return?}}
  * @returns
  */
-export const λIf = <T>(condition: any, ...args: λIfArgs<T>) => {
+export const λIf = <T>(condition: any, ...args: λIfArgs<T>): T => {
   if (args.length === 2) {
     const [value, otherwise] = args
     return (condition) ? value : otherwise
   } else if (args.length === 1) {
-    const { value, otherwise } = args[0] as Otherwise<T>
-    return (condition) ? value : otherwise
+    const { value, otherwise, return: ret } = args[0] as any
+    return (condition) ? value || ret : otherwise
   } else {
-    return undefined
+    throw new Error('Called λIf with too many arguments.')
   }
 }
 
