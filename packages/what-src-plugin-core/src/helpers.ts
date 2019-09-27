@@ -9,12 +9,12 @@ import * as T from './types'
  *
  * @param {T.WhatSrcPluginOptions} options
  * @param {*} [defaults=defaultOptions]
- * @returns {Required<T.WhatSrcPluginOptions>}
+ * @returns {T.WhatSrcPluginOptions}
  */
 export const getAllPluginOptions = (
   options: T.WhatSrcPluginOptions,
   defaults = defaultOptions,
-): Required<T.WhatSrcPluginOptions> => {
+): T.WhatSrcOptions => {
   return { ...defaults, ...options }
 }
 
@@ -43,12 +43,12 @@ export const gitUrlResolver = (() => {
  * set
  *
  * @param {string} filename
- * @param {Required<T.WhatSrcPluginOptions>} options
+ * @param {T.WhatSrcOptions} options
  * @param {(str: string) => string} resolver
  */
 export const getRemoteFilenameIfSet = (
   filename: string,
-  options: Required<T.WhatSrcPluginOptions>,
+  options: T.WhatSrcOptions,
 ) => options.useRemote ? gitUrlResolver(filename) : filename
 
 /**
@@ -84,12 +84,12 @@ export const parseDataTag = (spinalName: string) => {
 /**
  * generate the ast for the main clickhandler
  *
- * @param {Required<T.WhatSrcPluginOptions>} options
+ * @param {T.WhatSrcOptions} options
  * @param {({ [key: string]: string | undefined })} cache
  * @returns
  */
 export const generateClickHandlerRawString = (
-  options: Required<T.WhatSrcPluginOptions>,
+  options: T.WhatSrcOptions,
   cache: { [key: string]: string | undefined }
 ) => {
   return ((o = {
@@ -124,28 +124,22 @@ export const generateClickHandlerRawString = (
               `,
             })}
             ${λIf(o.enableXkcdMode, `
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', "${o.whatSrcStatsUrl}", true);
-                xhr.send();
-              `, '')}
+              const xhr = new XMLHttpRequest();
+              xhr.open('POST', "${o.whatSrcStatsUrl}", true);
+              xhr.send();
+            `, '')}
           }
         }
         window.document.removeEventListener('click', window["${o.globalCacheKey}"])
         window.document.addEventListener('click', window["${o.globalCacheKey}"])
         return true
-      } catch (e) {
+      } catch {
         return false
       }
     })();
 
     export default __whatSrcCallback01101011
   `)()
-}
-
-type generateJsxMetaDataArgs = {
-  filename: string,
-  line: number,
-  col: number,
 }
 
 /**
@@ -158,7 +152,7 @@ type generateJsxMetaDataArgs = {
  * }
  * @returns
  */
-export const generateJsxMetaData = (meta: generateJsxMetaDataArgs) => {
+export const generateJsxMetaData = (meta: T.GenerateJsxMetaDataArgs) => {
   const { col, filename, line } = meta
   const metaData = {
     filename: filename,

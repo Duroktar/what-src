@@ -1,68 +1,89 @@
-import { isNullOrUndefined, isNodeEnvProduction, getIn } from '@what-src/utils'
-import * as H from '@what-src/plugin-core'
+import { JSXElement } from '@babel/types'
 import template from '@babel/template'
+import * as traverse from '@babel/traverse'
+import * as WS from '@what-src/plugin-core'
+import { isNullOrUndefined, isNodeEnvProduction, getIn } from '@what-src/utils'
 import { join, resolve } from 'path'
-import * as T from './types'
 
-let disabled = false
-let resolver: ReturnType<typeof H.getResolver> = null as any
-let cacheFile: string = ''
-let importName: string = ''
+const importFrom: string = ''
+const importName: string = ''
+
 const buildRequire = template(`
   var %%importName%% = require(%%cacheFilePath%%);
 `)
 
-export const babelPlugin = ({ types: t, ...rest }: T.BabelPluginContext): T.BabelPlugin => ({
-  pre(): void {
-    const options = H.getAllPluginOptions(this.opts)
+class BabelPluginService {
+  public options: WS.WhatSrcOptions
+  public resolver: ReturnType<typeof WS.getResolver>
 
-    if (!disabled && (isNodeEnvProduction() && !options.productionMode)) {
+  constructor(
+    public defaultOpts: WS.WhatSrcPluginOptions,
+    public basedir = '',
+    public cache = { __basedir: '' },
+    public disabled = false,
+  ) {
+    this.options = WS.getAllPluginOptions(defaultOpts)
+
+    if (this.shouldPrintProductionWarning) {
       console.log(
         '@what-src/babel-plugin - running in production mode is disabled. ' +
         'To enable set the "productionMode" configuration option to true.',
       )
-      disabled = true
+      this.disabled = true
     };
 
-    this.cache = {}
-    this.options = options
+    this.resolver = WS.getResolver(this)
+  }
 
-    cacheFile = options.importFrom || 'what-src-cache.jss'
-    importName = options.importName || '__WhatSrcGlobalVariable'
+  private visitor = (t: WS.BabelNodeTypes): traverse.Visitor<WS.VisitorState> => {
+    return {
+      Program: {
+        exit: (path) => {
+          if (!this.disabled) {
+            const cacheFilePath = join(resolve(''), 'dist', importFrom)
 
-    if (!resolver) { resolver = H.getResolver({ options: this.options, basedir: '', cache: this.cache }) }
-  },
-  visitor: {
-    Program: {
-      exit(path) {
-        if (!disabled) {
-          const cacheFilePath = join(resolve(''), 'dist', cacheFile)
+            const ast = buildRequire({
+              importName: t.identifier(importName),
+              cacheFilePath: t.stringLiteral(cacheFilePath),
+            })
 
-          const ast = buildRequire({
-            importName: t.identifier(importName),
-            cacheFilePath: t.stringLiteral(cacheFilePath),
-          })
-
-          resolver.emit(cacheFilePath)
-          path.node.body = [ast as any, ...path.node.body]
-        }
+            this.resolver.emit(cacheFilePath)
+            path.node.body = [ast as any, ...path.node.body]
+          }
+        },
       },
-    },
-    JSXElement: {
-      enter(path, state): void {
-        if (disabled || H.isFragment(path.node.openingElement)) return
-        if (isNullOrUndefined(path.node.openingElement.loc)) return
+      JSXElement: {
+        enter: (path, state): void => {
+          if (this.disabled || WS.isFragment(path.node.openingElement)) return
+          if (isNullOrUndefined(path.node.openingElement.loc)) return
 
-        const options = H.getAllPluginOptions(state.options)
-        const { column: col, line } = getIn('node.openingElement.loc.start', path)
+          const { column: col, line } = this.getOpeningElementStartLocation(path)
 
-        const nextId = resolver.resolve({ col, line, basedir: '' }, state.filename)
+          const payload = { col, line, basedir: '' }
+          const nextId = this.resolver.resolve(payload, state.filename)
 
-        path.node.openingElement.attributes.push(t.jsxAttribute(
-          t.jsxIdentifier(options.dataTag),
-          t.stringLiteral(nextId)
-        ))
+          path.node.openingElement.attributes.push(t.jsxAttribute(
+            t.jsxIdentifier(this.options.dataTag),
+            t.stringLiteral(nextId)
+          ))
+        },
       },
-    },
-  },
-})
+    }
+  }
+
+  public getOpeningElementStartLocation(path: traverse.NodePath<JSXElement>) {
+    return getIn('node.openingElement.loc.start', path)
+  }
+
+  public getPlugin = (t: WS.BabelNodeTypes): WS.BabelPlugin => {
+    return { visitor: this.visitor(t) /*, pre: this.pre(t) */ }
+  }
+
+  public get shouldPrintProductionWarning() {
+    return !this.disabled && (isNodeEnvProduction() && !this.options.productionMode)
+  }
+}
+
+export const babelPlugin = ({ types: t }: WS.BabelPluginContext) => {
+  return new BabelPluginService({}).getPlugin(t)
+}
