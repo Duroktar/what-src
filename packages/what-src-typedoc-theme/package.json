@@ -1,0 +1,17 @@
+{
+  "name": "@what-src/typedoc-theme",
+  "description": "Customized default typedoc theme for what-src api documentation.",
+  "version": "0.0.10",
+  "license": "MIT",
+  "author": {
+    "name": "Duroktar"
+  },
+  "main": "dist/plugin.js",
+  "files": [
+    "LICENSE",
+    "dist"
+  ],
+  "engines": {
+    "node": ">= 8"
+  }
+}

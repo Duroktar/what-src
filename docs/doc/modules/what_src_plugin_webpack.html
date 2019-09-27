@@ -1,0 +1,645 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>what-src-plugin-webpack | @what-src/plugin</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/doc/assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="/doc/assets/js/search.js" data-base="/doc/./">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="/doc/index.html" class="title">@what-src/plugin</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="/doc/globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="/doc/modules/what_src_plugin_webpack.html">what-src-plugin-webpack</a>
+				</li>
+			</ul>
+			<h1>Package what-src-plugin-webpack</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<h1 id="what-srcwebpack-plugin">@what-src/webpack-plugin</h1>
+					<blockquote>
+						<p>what-src webpack-plugin.</p>
+					</blockquote>
+					<p>Check out the <a href="https://github.com/duroktar/what-src/tree/master/packages">packages folder</a> for more information.</p>
+					<h2 id="usage">Usage</h2>
+					<p>Via .webpack.config.js</p>
+					<pre><code class="language-ts"><span class="hljs-keyword">const</span> { WhatSrcServerWebpackPlugin } = require(<span class="hljs-string">'@what-src/plugin'</span>) <span class="hljs-comment">// &lt;- import plugin</span>
+
+<p>...
+<span class="hljs-keyword">module</span>.<span class="hljs-keyword">exports</span> = {
+  mode: <span class="hljs-string">&#39;development&#39;</span>,
+  entry: <span class="hljs-string">&#39;./src/index.jsx&#39;</span>,
+  output: {
+    filename: <span class="hljs-string">&#39;bundle.js&#39;</span>,
+  },
+  ...
+plugins: [<span class="hljs-keyword">new</span> WhatSrcServerWebpackPlugin(options)] <span class="hljs-comment">// &lt;- add plugin</span>
+...
+}</code></pre></p>
+					<h3 id="options">options</h3>
+					<p>options are defined by the type</p>
+					<pre><code class="language-ts">type Options = {
+  productionMode?: <span class="hljs-keyword">boolean</span>;
+  host?: string;
+  port?: number;
+  endpoint?: string;
+  shh?: <span class="hljs-keyword">boolean</span>;
+};</code></pre>
+					<h4 id="--productionmode-boolean">- productionMode: [boolean]</h4>
+					<ul>
+						<li>Enable running what-src in production mode (default: <code>false</code>)<h4 id="--host-string">- host: [string]</h4>
+						</li>
+						<li>The host to serve on (default: <code>localhost</code>)<h4 id="--port-number">- port: [number]</h4>
+						</li>
+						<li>The port to serve on (default: <code>8018</code>)<h4 id="--endpoint-string">- endpoint: [string]</h4>
+						</li>
+						<li>The url mount path of the @what-src/middleware (default: <code>__what_src</code>)<h4 id="--shh-boolean">- shh: [boolean]</h4>
+						</li>
+						<li>Turns off logging (default: <code>false</code>)</li>
+					</ul>
+					<h2 id="license">License</h2>
+					<p><a href="https://opensource.org/licenses/MIT">MIT</a></p>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="/doc/classes/what_src_plugin_webpack.whatsrcserverwebpackplugin.html" class="tsd-kind-icon">What<wbr>Src<wbr>Server<wbr>Webpack<wbr>Plugin</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_webpack.html#loggeroptions" class="tsd-kind-icon">Logger<wbr>Options</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_webpack.html#whatsrchookmap" class="tsd-kind-icon">What<wbr>Src<wbr>Hook<wbr>Map</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_webpack.html#whatsrchooks" class="tsd-kind-icon">What<wbr>Src<wbr>Hooks</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_webpack.html#whatsrclegacyhookmap" class="tsd-kind-icon">What<wbr>Src<wbr>Legacy<wbr>Hook<wbr>Map</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_webpack.html#plugin_name" class="tsd-kind-icon">PLUGIN_<wbr>NAME</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_webpack.html#compilerhookmap" class="tsd-kind-icon">compiler<wbr>Hook<wbr>Map</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_webpack.html#createlogger" class="tsd-kind-icon">create<wbr>Logger</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_webpack.html#createwhatsrcwebpackpluginhooks" class="tsd-kind-icon">create<wbr>What<wbr>Src<wbr>Webpack<wbr>Plugin<wbr>Hooks</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_webpack.html#getwhatsrcwebpackpluginhooks" class="tsd-kind-icon">get<wbr>What<wbr>Src<wbr>Webpack<wbr>Plugin<wbr>Hooks</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Object literals</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-object-literal tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_webpack.html#defaultoptions" class="tsd-kind-icon">default<wbr>Options</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_webpack.html#legacyhookmap" class="tsd-kind-icon">legacy<wbr>Hook<wbr>Map</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="loggeroptions" class="tsd-anchor"></a>
+					<h3>Logger<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">Logger<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/logger.ts#L1">what-src-plugin-webpack/src/logger.ts:1</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> log<wbr>Level<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> log<wbr>Time<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> no<wbr>Info<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> quiet<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="whatsrchookmap" class="tsd-anchor"></a>
+					<h3>What<wbr>Src<wbr>Hook<wbr>Map</h3>
+					<div class="tsd-signature tsd-kind-icon">What<wbr>Src<wbr>Hook<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><a href="/doc/modules/what_src_plugin_webpack.html#whatsrchooks" class="tsd-signature-type">WhatSrcHooks</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SyncHook</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AsyncSeriesHook</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L13">what-src-plugin-webpack/src/hooks.ts:13</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="whatsrchooks" class="tsd-anchor"></a>
+					<h3>What<wbr>Src<wbr>Hooks</h3>
+					<div class="tsd-signature tsd-kind-icon">What<wbr>Src<wbr>Hooks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"serviceBeforeStart"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"cancel"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"serviceStartError"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"waiting"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"serviceStart"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"receive"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"emit"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"done"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L4">what-src-plugin-webpack/src/hooks.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="whatsrclegacyhookmap" class="tsd-anchor"></a>
+					<h3>What<wbr>Src<wbr>Legacy<wbr>Hook<wbr>Map</h3>
+					<div class="tsd-signature tsd-kind-icon">What<wbr>Src<wbr>Legacy<wbr>Hook<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><a href="/doc/modules/what_src_plugin_webpack.html#whatsrchooks" class="tsd-signature-type">WhatSrcHooks</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L17">what-src-plugin-webpack/src/hooks.ts:17</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="plugin_name" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> PLUGIN_<wbr>NAME</h3>
+					<div class="tsd-signature tsd-kind-icon">PLUGIN_<wbr>NAME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"what-src-server-plugin"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;what-src-server-plugin&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/plugin.ts#L16">what-src-plugin-webpack/src/plugin.ts:16</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="compilerhookmap" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> compiler<wbr>Hook<wbr>Map</h3>
+					<div class="tsd-signature tsd-kind-icon">compiler<wbr>Hook<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WeakMap</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Compiler</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new WeakMap&lt;webpack.Compiler, WhatSrcHookMap&gt;()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L19">what-src-plugin-webpack/src/hooks.ts:19</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="createlogger" class="tsd-anchor"></a>
+					<h3>create<wbr>Logger</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Logger<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="/doc/modules/what_src_plugin_webpack.html#loggeroptions" class="tsd-signature-type">LoggerOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/logger.ts#L9">what-src-plugin-webpack/src/logger.ts:9</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="/doc/modules/what_src_plugin_webpack.html#loggeroptions" class="tsd-signature-type">LoggerOptions</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="createwhatsrcwebpackpluginhooks" class="tsd-anchor"></a>
+					<h3>create<wbr>What<wbr>Src<wbr>Webpack<wbr>Plugin<wbr>Hooks</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>What<wbr>Src<wbr>Webpack<wbr>Plugin<wbr>Hooks<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="/doc/modules/what_src_plugin_webpack.html#whatsrchookmap" class="tsd-signature-type">WhatSrcHookMap</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L32">what-src-plugin-webpack/src/hooks.ts:32</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="/doc/modules/what_src_plugin_webpack.html#whatsrchookmap" class="tsd-signature-type">WhatSrcHookMap</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="getwhatsrcwebpackpluginhooks" class="tsd-anchor"></a>
+					<h3>get<wbr>What<wbr>Src<wbr>Webpack<wbr>Plugin<wbr>Hooks</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>What<wbr>Src<wbr>Webpack<wbr>Plugin<wbr>Hooks<span class="tsd-signature-symbol">(</span>compiler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Compiler</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L51">what-src-plugin-webpack/src/hooks.ts:51</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>compiler: <span class="tsd-signature-type">Compiler</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<ul class="tsd-parameters">
+							</ul>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Object literals</h2>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-external-module">
+					<a name="defaultoptions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> default<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/options.ts#L3">what-src-plugin-webpack/src/options.ts:3</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="defaultoptions.editor" class="tsd-anchor"></a>
+						<h3>editor</h3>
+						<div class="tsd-signature tsd-kind-icon">editor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"vscode"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;vscode&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/options.ts#L5">what-src-plugin-webpack/src/options.ts:5</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="defaultoptions.endpoint" class="tsd-anchor"></a>
+						<h3>endpoint</h3>
+						<div class="tsd-signature tsd-kind-icon">endpoint<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;__what_src&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/options.ts#L8">what-src-plugin-webpack/src/options.ts:8</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="defaultoptions.host" class="tsd-anchor"></a>
+						<h3>host</h3>
+						<div class="tsd-signature tsd-kind-icon">host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;localhost&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/options.ts#L6">what-src-plugin-webpack/src/options.ts:6</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="defaultoptions.https" class="tsd-anchor"></a>
+						<h3>https</h3>
+						<div class="tsd-signature tsd-kind-icon">https<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/options.ts#L10">what-src-plugin-webpack/src/options.ts:10</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="defaultoptions.port" class="tsd-anchor"></a>
+						<h3>port</h3>
+						<div class="tsd-signature tsd-kind-icon">port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;8018</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/options.ts#L7">what-src-plugin-webpack/src/options.ts:7</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="defaultoptions.productionmode" class="tsd-anchor"></a>
+						<h3>production<wbr>Mode</h3>
+						<div class="tsd-signature tsd-kind-icon">production<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/options.ts#L4">what-src-plugin-webpack/src/options.ts:4</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="defaultoptions.shh" class="tsd-anchor"></a>
+						<h3>shh</h3>
+						<div class="tsd-signature tsd-kind-icon">shh<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/options.ts#L9">what-src-plugin-webpack/src/options.ts:9</a></li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-external-module">
+					<a name="legacyhookmap" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> legacy<wbr>Hook<wbr>Map</h3>
+					<div class="tsd-signature tsd-kind-icon">legacy<wbr>Hook<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L21">what-src-plugin-webpack/src/hooks.ts:21</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="legacyhookmap.cancel" class="tsd-anchor"></a>
+						<h3>cancel</h3>
+						<div class="tsd-signature tsd-kind-icon">cancel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;what-src-cancel&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L23">what-src-plugin-webpack/src/hooks.ts:23</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="legacyhookmap.done" class="tsd-anchor"></a>
+						<h3>done</h3>
+						<div class="tsd-signature tsd-kind-icon">done<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;what-src-done&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L29">what-src-plugin-webpack/src/hooks.ts:29</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="legacyhookmap.emit" class="tsd-anchor"></a>
+						<h3>emit</h3>
+						<div class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;what-src-emit&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L28">what-src-plugin-webpack/src/hooks.ts:28</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="legacyhookmap.receive" class="tsd-anchor"></a>
+						<h3>receive</h3>
+						<div class="tsd-signature tsd-kind-icon">receive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;what-src-receive&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L27">what-src-plugin-webpack/src/hooks.ts:27</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="legacyhookmap.servicebeforestart" class="tsd-anchor"></a>
+						<h3>service<wbr>Before<wbr>Start</h3>
+						<div class="tsd-signature tsd-kind-icon">service<wbr>Before<wbr>Start<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;what-src-service-before-start&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L22">what-src-plugin-webpack/src/hooks.ts:22</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="legacyhookmap.servicestart" class="tsd-anchor"></a>
+						<h3>service<wbr>Start</h3>
+						<div class="tsd-signature tsd-kind-icon">service<wbr>Start<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;what-src-service-start&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L26">what-src-plugin-webpack/src/hooks.ts:26</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="legacyhookmap.servicestarterror" class="tsd-anchor"></a>
+						<h3>service<wbr>Start<wbr>Error</h3>
+						<div class="tsd-signature tsd-kind-icon">service<wbr>Start<wbr>Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;what-src-service-start-error&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L24">what-src-plugin-webpack/src/hooks.ts:24</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="legacyhookmap.waiting" class="tsd-anchor"></a>
+						<h3>waiting</h3>
+						<div class="tsd-signature tsd-kind-icon">waiting<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;what-src-waiting&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-webpack/src/hooks.ts#L25">what-src-plugin-webpack/src/hooks.ts:25</a></li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="/doc/globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_plugin.html">what-<wbr>src-<wbr>plugin</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_plugin_babel.html">what-<wbr>src-<wbr>plugin-<wbr>babel</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_plugin_core.html">what-<wbr>src-<wbr>plugin-<wbr>core</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_plugin_typescript.html">what-<wbr>src-<wbr>plugin-<wbr>typescript</a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="/doc/modules/what_src_plugin_webpack.html">what-<wbr>src-<wbr>plugin-<wbr>webpack</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_utils.html">what-<wbr>src-<wbr>utils</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_plugin.html" class="tsd-kind-icon">what-<wbr>src-<wbr>plugin</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_plugin_babel.html" class="tsd-kind-icon">what-<wbr>src-<wbr>plugin-<wbr>babel</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_plugin_core.html" class="tsd-kind-icon">what-<wbr>src-<wbr>plugin-<wbr>core</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_plugin_typescript.html" class="tsd-kind-icon">what-<wbr>src-<wbr>plugin-<wbr>typescript</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-external-module">
+						<a href="/doc/modules/what_src_plugin_webpack.html" class="tsd-kind-icon">what-<wbr>src-<wbr>plugin-<wbr>webpack</a>
+						<ul>
+							<li class=" tsd-kind-class tsd-parent-kind-external-module">
+								<a href="/doc/classes/what_src_plugin_webpack.whatsrcserverwebpackplugin.html" class="tsd-kind-icon">What<wbr>Src<wbr>Server<wbr>Webpack<wbr>Plugin</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+								<a href="/doc/modules/what_src_plugin_webpack.html#loggeroptions" class="tsd-kind-icon">Logger<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+								<a href="/doc/modules/what_src_plugin_webpack.html#whatsrchookmap" class="tsd-kind-icon">What<wbr>Src<wbr>Hook<wbr>Map</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+								<a href="/doc/modules/what_src_plugin_webpack.html#whatsrchooks" class="tsd-kind-icon">What<wbr>Src<wbr>Hooks</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
+								<a href="/doc/modules/what_src_plugin_webpack.html#whatsrclegacyhookmap" class="tsd-kind-icon">What<wbr>Src<wbr>Legacy<wbr>Hook<wbr>Map</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+								<a href="/doc/modules/what_src_plugin_webpack.html#plugin_name" class="tsd-kind-icon">PLUGIN_<wbr>NAME</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+								<a href="/doc/modules/what_src_plugin_webpack.html#compilerhookmap" class="tsd-kind-icon">compiler<wbr>Hook<wbr>Map</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-external-module">
+								<a href="/doc/modules/what_src_plugin_webpack.html#createlogger" class="tsd-kind-icon">create<wbr>Logger</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+								<a href="/doc/modules/what_src_plugin_webpack.html#createwhatsrcwebpackpluginhooks" class="tsd-kind-icon">create<wbr>What<wbr>Src<wbr>Webpack<wbr>Plugin<wbr>Hooks</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-external-module">
+								<a href="/doc/modules/what_src_plugin_webpack.html#getwhatsrcwebpackpluginhooks" class="tsd-kind-icon">get<wbr>What<wbr>Src<wbr>Webpack<wbr>Plugin<wbr>Hooks</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-external-module">
+								<a href="/doc/modules/what_src_plugin_webpack.html#defaultoptions" class="tsd-kind-icon">default<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-external-module">
+								<a href="/doc/modules/what_src_plugin_webpack.html#legacyhookmap" class="tsd-kind-icon">legacy<wbr>Hook<wbr>Map</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_utils.html" class="tsd-kind-icon">what-<wbr>src-<wbr>utils</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="/doc/assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="/doc/assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

@@ -19,8 +19,14 @@ export const getAllPluginOptions = (
 }
 
 /**
- * utility function for resolving file urls to their git remote
+ * stateful utility function for resolving file urls to their git remote
  * counterparts.
+ *
+ * > TODO: This should be replaced with
+ * >   [hosted-git-info](https://www.npmjs.com/package/hosted-git-info).
+ *
+ * @param {string} filepath
+ * @returns {string} The resolved git url
  */
 export const gitUrlResolver = (() => {
   const remoteUrl = GIT.getGitRemoteUrl()
@@ -53,7 +59,7 @@ export const getRemoteFilenameIfSet = (
  *   branch: string;
  *   filepath: string;
  * }} opts
- * @returns
+ * @returns A valid git resource url. Throws an error otherwise.
  */
 export const generateGitFileUrl = (remoteUrl: string, opts: {
   branch: string;
