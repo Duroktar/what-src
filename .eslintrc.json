@@ -36,6 +36,7 @@
   "overrides": [{
     "files": ["**/*.ts", "**/*.tsx"],
     "rules": {
+      "no-useless-constructor": ["off"],
       "no-unused-vars": ["off"],
       "no-undef": ["off"]
     }
