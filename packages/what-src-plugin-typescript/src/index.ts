@@ -1,3 +1,3 @@
-import Module from './plugin'
+import Module from './transformer'
 
 export default Module

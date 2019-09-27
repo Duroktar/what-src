@@ -1,3 +1,4 @@
 export * from './helpers'
-export * from './visitor'
+export * from './options'
+export * from './resolver'
 export * from './types'

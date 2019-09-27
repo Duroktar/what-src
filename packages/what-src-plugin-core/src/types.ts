@@ -3,7 +3,7 @@ import * as types from '@babel/types'
 
 export interface IResolver {
   emit(location: string): void;
-  resolve(loc: GenerateJsxMetaDataArgs, sourcefile: string): string;
+  resolve(loc: SourceLocationFullStart, sourcefile: string): string;
   getCache(): CacheType;
 }
 
@@ -16,20 +16,19 @@ export type BabelPlugin = {
 export type BabelNodeTypes = typeof types
 export type BabelPluginContext = { types: BabelNodeTypes };
 
-export type WhatSrcOptions = Required<WhatSrcPluginOptions>
+export type WhatSrcConfiguration = Required<WhatSrcPluginOptions>
 
 export type WhatSrcPluginOptions = {
-  serverUrl?: string;
   dataTag?: string;
-  productionMode?: boolean;
-  stopPropagation?: boolean;
-  preventDefault?: boolean;
-  globalCacheKey?: string;
-  useRemote?: boolean;
   enableXkcdMode?: boolean;
-  whatSrcStatsUrl?: string;
+  globalCacheKey?: string;
   importFrom?: string;
   importName?: string;
+  preventDefault?: boolean;
+  productionMode?: boolean;
+  serverUrl?: string;
+  stopPropagation?: boolean;
+  useRemote?: boolean;
 };
 
 export type VisitorState = {
@@ -39,12 +38,15 @@ export type VisitorState = {
   path: traverse.NodePath<types.JSXElement>;
 };
 
-export type GenerateJsxMetaDataArgs = {
-  filename: string;
-  line: number;
+export type SourceLocationStart = {
   col: number;
   basedir: string;
+  line: number;
 }
+
+export type SourceLocationFullStart = {
+  filename: string;
+} & SourceLocationStart;
 
 /**
  * Keys are sequential numbers (cooerced to strings due to how js object keys

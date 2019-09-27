@@ -2,7 +2,7 @@ import ts from 'typescript'
 import path from 'path'
 import * as WS from '@what-src/plugin-core'
 import { getIn } from '@what-src/utils'
-import { UserOptions } from './types'
+import { WhatSrcTsTransformerOptions } from './types'
 
 /**
  * the what-src TS compiler API transformer
@@ -19,11 +19,11 @@ export class WhatSrcTsTransformer {
 
   /**
    * Constructs a TS compiler API transformer
-   * @param {UserOptions} defaultOptions
+   * @param {WhatSrcTsTransformerOptions} defaultOptions
    * @param {WS.CacheType} [cache={ __basedir: '' }]
    * @memberof WhatSrcTsTransformer
    */
-  constructor(public defaultOptions: UserOptions, public cache: WS.CacheType = { __basedir: '' }) {
+  constructor(public defaultOptions: WhatSrcTsTransformerOptions, public cache: WS.CacheType = { __basedir: '' }) {
     this.basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript-loader/src/'
     this.options = WS.getAllPluginOptions(defaultOptions)
     this.resolver = WS.getResolver(this)
@@ -144,7 +144,8 @@ export class WhatSrcTsTransformer {
   }
 
   /**
-   * Generates and attaches the next what-src attribute to the passed node
+   * - Gets the line data needed from the opening element start position.
+   * - Generates and attaches the next what-src attribute to the passed node
    *
    * @private
    * @memberof WhatSrcTsTransformer
@@ -201,10 +202,10 @@ export class WhatSrcTsTransformer {
  * creates the what-src TS compiler API transformer
  *
  * @export
- * @param {UserOptions} [opts={} as any]
+ * @param {WhatSrcTsTransformerOptions} [opts={} as any]
  * @returns
  */
-export function createTransformer(opts: UserOptions = {} as any) {
+export function createTransformer(opts: WhatSrcTsTransformerOptions = {} as any) {
   return new WhatSrcTsTransformer(opts).transformer
 }
 

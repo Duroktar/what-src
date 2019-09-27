@@ -12,8 +12,8 @@ const buildRequire = template(`
   var %%importName%% = require(%%cacheFilePath%%);
 `)
 
-class BabelPluginService {
-  public options: WS.WhatSrcOptions
+class WhatSrcBabelPlugin {
+  public options: WS.WhatSrcConfiguration
   public resolver: ReturnType<typeof WS.getResolver>
 
   constructor(
@@ -85,5 +85,5 @@ class BabelPluginService {
 }
 
 export const babelPlugin = ({ types: t }: WS.BabelPluginContext) => {
-  return new BabelPluginService({}).getPlugin(t)
+  return new WhatSrcBabelPlugin({}).getPlugin(t)
 }
