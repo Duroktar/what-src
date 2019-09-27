@@ -1,12 +1,13 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-
+import Head from './head'
 import Button from './Button'
 
 class App extends React.Component {
   render() {
     return (
       <div className="first">
+        <Head />
         <p>some p thing</p>
         <br />
         <div id="hat">
