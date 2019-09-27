@@ -1,9 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "rootDir": "./src",
     "outDir": "./dist",
     "jsx": "react",
     "noUnusedLocals": false,
     "resolveJsonModule": true
-  }
+  },
+  "references": [
+    { "path": "../what-src-plugin" },
+    { "path": "../what-src-utils" }
+  ]
 }

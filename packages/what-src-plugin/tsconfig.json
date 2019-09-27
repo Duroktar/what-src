@@ -1,6 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "composite": true,                        /* Enable project compilation */
+    "rootDir": "./src",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     "outDir": "./dist"                        /* Redirect output structure to the directory. */
-  }
+  },
+  "references": [
+    { "path": "../what-src-plugin-core" },
+    { "path": "../what-src-plugin-babel" },
+    { "path": "../what-src-plugin-typescript" },
+    { "path": "../what-src-plugin-webpack" }
+  ]
 }

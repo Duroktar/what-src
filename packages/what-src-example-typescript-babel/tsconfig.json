@@ -1,7 +1,11 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "rootDir": "./src",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     "outDir": "./dist",                       /* Redirect output structure to the directory. */
     "jsx": "react"
-  }
+  },
+  "references": [
+    { "path": "../what-src-plugin" }
+  ]
 }
