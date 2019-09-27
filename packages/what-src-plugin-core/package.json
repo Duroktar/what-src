@@ -27,8 +27,7 @@
 		"@babel/parser": "^7.6.2",
 		"@babel/template": "^7.6.0",
 		"@babel/traverse": "^7.6.2",
-		"cross-spawn": "^7.0.0",
-		"rimraf": "^3.0.0"
+		"cross-spawn": "^7.0.0"
 	},
 	"devDependencies": {
 		"@types/babel__template": "^7.0.2",
