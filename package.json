@@ -4,10 +4,11 @@
   "license": "MIT",
   "scripts": {
     "build:clean": "tsc -b --clean && npm run build",
-    "build:docs": "typedoc",
+    "build:docs": "typedoc --tsconfig ./tsconfig.base.json",
     "build:gh-pages": "npm run logo && npm run clean:gh-pages && npm run build:docs && lerna run build:stats && npm run copy:stats",
     "build:stats": "npm run logo && lerna run build:stats",
     "build:watch": "npm run logo && tsc -b -v --watch --pretty",
+    "build:force": "tsc -b -v --pretty --force",
     "build": "tsc -b -v --pretty",
     "clean": "tsc -b --clean",
     "clean:gh-pages": "rimraf ./docs",

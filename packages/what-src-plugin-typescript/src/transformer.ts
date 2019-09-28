@@ -1,8 +1,19 @@
 import ts from 'typescript'
 import path from 'path'
 import * as WS from '@what-src/plugin-core'
-import { getIn } from '@what-src/utils'
+import { getIn, withHooks } from '@what-src/utils'
 import { WhatSrcTsTransformerOptions } from './types'
+
+/**
+ * creates the what-src TS compiler API transformer
+ *
+ * @export
+ * @param {WhatSrcTsTransformerOptions} [opts={}]
+ * @returns
+ */
+export function createTransformer(opts: WhatSrcTsTransformerOptions = {}) {
+  return new WhatSrcTsTransformer(opts).transformer
+}
 
 /**
  * the what-src TS compiler API transformer
@@ -11,14 +22,15 @@ import { WhatSrcTsTransformerOptions } from './types'
  * @class WhatSrcTsTransformer
  */
 export class WhatSrcTsTransformer {
-  public basedir: string
   public options: Required<WS.WhatSrcPluginOptions>
-  public resolver: WS.IResolver
-  public cacheFile: string
+  public basedir: string
   public importName: string
+  public service: WS.WhatSrcService
   public context!: ts.TransformationContext
-  public sf!: ts.SourceFile
-  private blockedTagSet!: Set<string>
+  public sourceFile!: ts.SourceFile
+  public module?: ts.ModuleKind
+  public cacheFile!: string
+  private blockedTags!: Set<string>
 
   /**
    * Constructs a TS compiler API transformer
@@ -26,13 +38,12 @@ export class WhatSrcTsTransformer {
    * @param {WS.CacheType} [cache={ __basedir: '' }]
    * @memberof WhatSrcTsTransformer
    */
-  constructor(public defaultOptions: WhatSrcTsTransformerOptions, public cache: WS.CacheType = { __basedir: '' }) {
-    this.basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript-loader/src/'
-    this.options = WS.getAllPluginOptions(defaultOptions)
-    this.resolver = WS.getResolver(this)
-    this.cacheFile = defaultOptions.importFrom || 'what-src-cache'
-    this.importName = defaultOptions.importName || '__WhatSrcGlobalVariable'
-    this.blockedTagSet = new Set(this.options.blacklistedTags)
+  constructor(public defaultOptions: WhatSrcTsTransformerOptions, public cache: WS.SourceCache = { __basedir: '' }) {
+    this.basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript-loader/src/' // TODO
+    this.options = WS.mergePluginOptions(defaultOptions)
+    this.service = WS.getService(this)
+    this.importName = this.options.importName
+    this.blockedTags = new Set(this.options.blacklistedTags)
   }
 
   /**
@@ -42,24 +53,17 @@ export class WhatSrcTsTransformer {
    * @memberof WhatSrcTsTransformer
    */
   public transformer: ts.TransformerFactory<ts.SourceFile> = context => {
-    const { outDir } = context.getCompilerOptions()
-    const cacheFilePath = path.join(outDir || '', this.cacheFile)
-    return this.createSourceFileHandler(cacheFilePath, context)
-  }
+    const { outDir, module: mod } = context.getCompilerOptions()
+    this.context = context
+    this.module = mod
+    this.cacheFile = this.getFullCacheFilePath(outDir)
 
-  /**
-   * creates a SourceFileHandler that visits the ast then emits the cache file
-   *
-   * @private
-   * @memberof WhatSrcTsTransformer
-   */
-  private createSourceFileHandler = (cacheFilePath: string, context: ts.TransformationContext) => {
+    const entrance = () => ts.visitNode(this.sourceFile, this.visitor)
+    const afterHook = () => this.service.emit(this.cacheFile)
+
     return (sourceFile: ts.SourceFile) => {
-      this.context = context
-      this.sf = sourceFile
-      const node = ts.visitNode(sourceFile, this.visitor)
-      this.resolver.emit(cacheFilePath)
-      return node
+      this.sourceFile = sourceFile
+      return withHooks(entrance, { after: afterHook }).result
     }
   }
 
@@ -71,25 +75,22 @@ export class WhatSrcTsTransformer {
    * @memberof WhatSrcTsTransformer
    */
   private visitor = (node: ts.Node): ts.VisitResult<ts.Node> => {
-    const { module, outDir } = this.context.getCompilerOptions()
-    const cacheFilePath = path.join(outDir || '', this.cacheFile)
-
+    // inject what-src cache-file import statement
     if (ts.isSourceFile(node)) {
       // <3 <3 <3 https://github.com/Microsoft/TypeScript/issues/18369#issuecomment-330133796
 
       // const WhatSrcGlobalVariable = require('../../what-src-cache.js')  <-- example
-      if (module === ts.ModuleKind.CommonJS) {
-        const file = (node as ts.Node) as ts.SourceFile
-        node = this.createCommonJSImport(node, file, cacheFilePath)
+      if (this.module === ts.ModuleKind.CommonJS) {
+        node = this.createCommonJSImport(node, this.cacheFile)
       }
 
       // import WhatSrcGlobalVariable from '../../what-src-cache.js'   <-- example
-      if (module === ts.ModuleKind.ES2015 || module === ts.ModuleKind.ESNext) {
-        const file = (node as ts.Node) as ts.SourceFile
-        node = this.createModernJSImport(node, file, cacheFilePath)
+      if (this.module === ts.ModuleKind.ES2015 || this.module === ts.ModuleKind.ESNext) {
+        node = this.createModernJSImport(node, this.cacheFile)
       }
     }
 
+    // decorate any valid elements with a what-src tag
     if (ts.isJsxElement(node) && !ts.isJsxFragment(node)) {
       this.createAndUpdateJsxAttribute(node)
     }
@@ -108,7 +109,8 @@ export class WhatSrcTsTransformer {
    * @private
    * @memberof WhatSrcTsTransformer
    */
-  private createModernJSImport = (node: ts.Node, file: ts.SourceFile, cacheFilePath: string) => {
+  private createModernJSImport = (node: ts.Node, cacheFile: string) => {
+    const file = (node as ts.Node) as ts.SourceFile
     node = ts.updateSourceFileNode(file, [
       ts.createImportDeclaration(
         /* decorators */ undefined,
@@ -117,7 +119,7 @@ export class WhatSrcTsTransformer {
           ts.createIdentifier(this.importName),
           undefined
         ),
-        ts.createLiteral(cacheFilePath)
+        ts.createLiteral(cacheFile)
       ),
       ...file.statements,
     ])
@@ -130,7 +132,8 @@ export class WhatSrcTsTransformer {
    * @private
    * @memberof WhatSrcTsTransformer
    */
-  private createCommonJSImport = (node: ts.Node, file: ts.SourceFile, cacheFilePath: string) => {
+  private createCommonJSImport = (node: ts.Node, cacheFile: string) => {
+    const file = (node as ts.Node) as ts.SourceFile
     node = ts.updateSourceFileNode(file, [
       ts.createVariableStatement(
         /* modifiers */ undefined,
@@ -141,7 +144,7 @@ export class WhatSrcTsTransformer {
               ts.createCall(
                 ts.createIdentifier('require'),
                 [],
-                [ts.createLiteral(cacheFilePath)]
+                [ts.createLiteral(cacheFile)]
               ),
               ts.createIdentifier('default'))),
         ])),
@@ -159,24 +162,53 @@ export class WhatSrcTsTransformer {
    */
   private createAndUpdateJsxAttribute = (node: ts.JsxElement) => {
     if (ts.isJsxOpeningElement(node.openingElement)) {
-      const start = node.openingElement.getStart()
-      const { character, line } = this.sf.getLineAndCharacterOfPosition(start)
-      if (!(this.openingElementTagName(node)! /* not */ in this.blockedTagSet)) {
-        const location = this.createLocation(character, line)
-        const nextId = this.resolver.resolve(location, this.sf.fileName)
+      // skip any blacklisted nodes by tag (needed for use with `react-helmet`)
+      if (this.tagIsNotBlacklisted(node)) {
+        const start = node.openingElement.getStart()
+        const { character, line } = this.sourceFile.getLineAndCharacterOfPosition(start)
+        // gather the necessary metadata. we need a location and unique id
+        const location = this.createSourceLocation(character, line)
+        const nextId = this.service.cache(location, this.sourceFile.fileName)
+        // create the data attribute and add to existing
         const attributes = node.openingElement.attributes
-        const attrs = ts.updateJsxAttributes(attributes, [
+        const newAttributes = ts.updateJsxAttributes(attributes, [
           ts.createJsxAttribute(
             ts.createIdentifier(this.options.dataTag),
             ts.createStringLiteral(nextId)
           )])
-        node.openingElement.attributes = attrs
+        // set opening element attributes to the new list
+        node.openingElement.attributes = newAttributes
       }
     }
   }
 
   /**
-   * model for every click event
+   * ignore any explicitly blacklisted tags. the blacklist is converted to a set
+   * during class construction to be used for fast lookups
+   *
+   * @private
+   * @param {ts.JsxElement} node
+   * @returns
+   * @memberof WhatSrcTsTransformer
+   */
+  private tagIsNotBlacklisted(node: ts.JsxElement) {
+    return !this.blockedTags.has(this.getOpeningElementTagName(node))
+  }
+
+  /**
+   * get normalized full path to the cache file
+   *
+   * @private
+   * @param {(string | undefined)} outDir
+   * @returns
+   * @memberof WhatSrcTsTransformer
+   */
+  private getFullCacheFilePath(outDir: string | undefined) {
+    return path.join(outDir || '', this.options.importFrom)
+  }
+
+  /**
+   * creates source location objects
    *
    * @private
    * @param {number} character
@@ -184,36 +216,26 @@ export class WhatSrcTsTransformer {
    * @returns
    * @memberof WhatSrcTsTransformer
    */
-  private createLocation(character: number, line: number) {
+  private createSourceLocation(character: number, line: number) {
     return {
       basedir: this.basedir,
       col: character,
       line: line + 1,
-      filename: this.cacheFile,
-    }
+      filename: this.options.importFrom,
+    } as WS.SourceLocationFullStart
   }
 
   /**
-   * helper function to get the name of the openeing jsx element for the passed node
+   * helper function to get the name of the openeing jsx element for the passed
+   * node
    *
    * @export
    * @param {ts.JsxElement} node
    * @returns {(string | null)}
    */
-  private openingElementTagName(node: ts.JsxElement): string | null {
-    return getIn('openingElement.tagName.escapedText', node)
+  private getOpeningElementTagName(node: ts.JsxElement): string {
+    return getIn('openingElement.tagName.escapedText', node) || ''
   }
-}
-
-/**
- * creates the what-src TS compiler API transformer
- *
- * @export
- * @param {WhatSrcTsTransformerOptions} [opts={} as any]
- * @returns
- */
-export function createTransformer(opts: WhatSrcTsTransformerOptions = {} as any) {
-  return new WhatSrcTsTransformer(opts).transformer
 }
 
 export default createTransformer

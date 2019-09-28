@@ -1,5 +1,2 @@
 
-export type WhatSrcTsTransformerOptions = {
-  importName: string;
-  importFrom: string;
-};
+export type WhatSrcTsTransformerOptions = {};

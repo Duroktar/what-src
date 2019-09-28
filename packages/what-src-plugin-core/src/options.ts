@@ -13,3 +13,5 @@ export const defaultOptions: Required<T.WhatSrcPluginOptions> = {
   useRemote: false,
   blacklistedTags: ['Helmet', 'head'],
 }
+
+export const defaultCache = { __basedir: '' }

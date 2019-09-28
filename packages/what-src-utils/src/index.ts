@@ -220,3 +220,52 @@ export const λTry = async<T>(func: () => Promise<T>): Promise<ResultType<T>> =>
   }
   return result
 }
+
+/**
+ * wraps a call with providable hooks. the after hook is called with the result
+ * of the original call and the value returned from the first hook. the returned
+ * object contains the result of each hook and the main result.
+ *
+ * @template F
+ * @template H
+ * @param {F} callable
+ * @param {H} hooks
+ * @returns
+ */
+export const withHooks = <Func extends (...args: any) => any, Opts extends HookOptions<ReturnType<Func>>>(
+  callable: Func,
+  hooks: Partial<HookOptions<ReturnType<Func>> & Opts>,
+) => {
+  type Bef = Opts['before'] extends (...args: any) => infer R ? R : any
+  type Aft = Opts['after'] extends (...args: any) => infer R ? R : any
+  type HookResults = {
+    before: Bef
+    after: Aft
+    result: ReturnType<Func>
+  }
+
+  const rB: Bef = hooks.before && hooks.before()
+  const r = callable()
+  const rA: Aft = hooks.after && hooks.after(r)
+
+  return {
+    result: r,
+    after: rA,
+    before: rB,
+  } as HookResults
+}
+
+type HookOptions<A> = {
+  before: (...args: any) => any
+  after: (a: A) => any
+}
+
+/**
+ * helper determines if a string or array is empty
+ *
+ * @param {(string | Array<any>)} obj
+ * @returns
+ */
+export const empty = (obj: string | Array<any>) => {
+  return obj.length === 0
+}

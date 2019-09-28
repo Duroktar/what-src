@@ -32,14 +32,13 @@ module.exports = {
     ],
   },
   resolve: {
-    // TODO: Add `.ts` and `.tsx` as a resolvable extension.
     extensions: ['.js', 'jsx'],
   },
   devServer: {
     contentBase: path.join(__dirname, '..', 'public'),
     compress: true,
     port: 9000,
-    open: true,
+    // open: true,
     writeToDisk: true,
     overlay: true,
   },

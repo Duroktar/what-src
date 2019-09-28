@@ -39,14 +39,20 @@ type Options = {
 };
 ```
 
+<br />
+
 #### - productionMode: [boolean]
   - Enable running what-src in production mode (default: `false`)
+
 #### - host: [string]
   - The host to serve on (default: `localhost`)
+
 #### - port: [number]
   - The port to serve on (default: `8018`)
+
 #### - endpoint: [string]
   - The url mount path of the @what-src/middleware (default: `__what_src`)
+
 #### - shh: [boolean]
   - Turns off logging (default: `false`)
 

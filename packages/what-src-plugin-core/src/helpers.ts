@@ -11,7 +11,7 @@ import * as T from './types'
  * @param {*} [defaults=defaultOptions]
  * @returns {T.WhatSrcPluginOptions}
  */
-export const getAllPluginOptions = (
+export const mergePluginOptions = (
   options: T.WhatSrcPluginOptions,
   defaults = defaultOptions,
 ): T.WhatSrcConfiguration => {
@@ -29,10 +29,10 @@ export const getAllPluginOptions = (
  * @returns {string} The resolved git url
  */
 export const gitUrlResolver = (() => {
-  const remoteUrl = GIT.getGitRemoteUrl()
+  const remoteUrl = GIT.getGitRemoteOriginUrl()
   const branch = GIT.getGitBranchName()
   return function getRemoteFileUrl(filepath: string) {
-    const relativeFileUrl = GIT.getRelativeGitFileUrl(filepath)
+    const relativeFileUrl = GIT.getGitFileFullName(filepath)
     const options = { branch, filepath: relativeFileUrl }
     return generateGitFileUrl(remoteUrl, options)
   }
@@ -93,14 +93,8 @@ export const generateClickHandlerRawString = (
   cache: { [key: string]: string | undefined }
 ) => {
   return ((o = {
-    productionMode: options.productionMode,
-    globalCacheKey: options.globalCacheKey,
-    serverUrl: options.serverUrl,
+    ...options,
     dataTag: parseDataTag(options.dataTag),
-    stopPropagation: options.stopPropagation,
-    preventDefault: options.preventDefault,
-    useRemote: options.useRemote,
-    enableXkcdMode: options.enableXkcdMode,
     whatSrcStatsUrl: process.env.STATS_URL || 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/triggers_stitchapp-hnsgo/service/click-service/incoming_webhook/track-click',
   }) => `
     const __whatSrcCallback01101011 = (() => {
@@ -152,8 +146,8 @@ export const generateClickHandlerRawString = (
  * }
  * @returns
  */
-export const generateJsxMetaData = (meta: T.SourceLocationFullStart) => {
-  const { col, filename, line } = meta
+export const generateJsxMetaData = (location: T.SourceLocationFullStart) => {
+  const { col, filename, line } = location
   const metaData = {
     filename: filename,
     line: line,

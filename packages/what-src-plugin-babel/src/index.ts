@@ -1,3 +1,3 @@
-import { babelPlugin } from './plugin'
+import { getBabelPlugin } from './plugin'
 
-export default babelPlugin
+export default getBabelPlugin

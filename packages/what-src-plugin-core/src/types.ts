@@ -1,12 +1,6 @@
 import * as traverse from '@babel/traverse'
 import * as types from '@babel/types'
 
-export interface IResolver {
-  emit(location: string): void;
-  resolve(loc: SourceLocationFullStart, sourcefile: string): string;
-  getCache(): CacheType;
-}
-
 export type BabelPlugin = {
   visitor: traverse.Visitor<VisitorState>;
   pre?: (s: VisitorState) => void;
@@ -58,7 +52,7 @@ export type SourceLocationFullStart = {
  * the backend when a click event is dispatched.
  *
  */
-export type CacheType = {
+export type SourceCache = {
   [key: string]: string;
   __basedir: string;
 };

@@ -1,4 +1,4 @@
 export * from './helpers'
 export * from './options'
-export * from './resolver'
+export * from './service'
 export * from './types'
