@@ -1,7 +1,7 @@
 import ts from 'typescript'
 import path from 'path'
 import * as WS from '@what-src/plugin-core'
-import { getIn, withHooks } from '@what-src/utils'
+import { getIn, withHooks, isNodeEnvProduction } from '@what-src/utils'
 import { WhatSrcTsTransformerOptions } from './types'
 
 /**
@@ -22,15 +22,33 @@ export function createTransformer(opts: WhatSrcTsTransformerOptions = {}) {
  * @class WhatSrcTsTransformer
  */
 export class WhatSrcTsTransformer {
+  /**
+   * full set of what-src configuration options
+   *
+   * @type {WS.WhatSrcConfiguration}
+   * @memberof WhatSrcBabelPlugin
+   */
   public options: Required<WS.WhatSrcPluginOptions>
+  /**
+   * instance if @what-src/core `WhatSrcService`
+   *
+   * @type {WS.WhatSrcService}
+   * @memberof WhatSrcBabelPlugin
+   */
+  public service: WS.WhatSrcService
+  /**
+   * disabled flag used for bypassing the plugin
+   *
+   * @type {boolean}
+   * @memberof WhatSrcBabelPlugin
+   */
+  public disabled: boolean = false
   public basedir: string
   public importName: string
-  public service: WS.WhatSrcService
   public context!: ts.TransformationContext
   public sourceFile!: ts.SourceFile
   public module?: ts.ModuleKind
   public cacheFile!: string
-  private blockedTags!: Set<string>
 
   /**
    * Constructs a TS compiler API transformer
@@ -43,7 +61,14 @@ export class WhatSrcTsTransformer {
     this.options = WS.mergePluginOptions(defaultOptions)
     this.service = WS.getService(this)
     this.importName = this.options.importName
-    this.blockedTags = new Set(this.options.blacklistedTags)
+
+    if (this.shouldPrintProductionWarning) {
+      console.log(
+        '@what-src/typescript-plugin - running in production mode is disabled. ' +
+        'To enable set the "productionMode" configuration option to true.',
+      )
+      this.disabled = true
+    }
   }
 
   /**
@@ -59,11 +84,12 @@ export class WhatSrcTsTransformer {
     this.cacheFile = this.getFullCacheFilePath(outDir)
 
     const entrance = () => ts.visitNode(this.sourceFile, this.visitor)
-    const afterHook = () => this.service.emit(this.cacheFile)
 
     return (sourceFile: ts.SourceFile) => {
-      this.sourceFile = sourceFile
-      return withHooks(entrance, { after: afterHook }).result
+      return withHooks(entrance, {
+        before: () => { this.sourceFile = sourceFile },
+        after: () => this.service.emit(this.cacheFile),
+      }).result
     }
   }
 
@@ -163,12 +189,17 @@ export class WhatSrcTsTransformer {
   private createAndUpdateJsxAttribute = (node: ts.JsxElement) => {
     if (ts.isJsxOpeningElement(node.openingElement)) {
       // skip any blacklisted nodes by tag (needed for use with `react-helmet`)
-      if (this.tagIsNotBlacklisted(node)) {
-        const start = node.openingElement.getStart()
-        const { character, line } = this.sourceFile.getLineAndCharacterOfPosition(start)
+      if (!this.service.tagIsBlacklisted(this.getOpeningElementTagName(node))) {
         // gather the necessary metadata. we need a location and unique id
-        const location = this.createSourceLocation(character, line)
+        const start = this.getOpeningElementStartLocation(node)
+        const location = new WS.SourceLocationBuilder()
+          .withBasedir(this.basedir)
+          .withCol(start.character)
+          .withLine(start.line + 1)
+          .build()
+
         const nextId = this.service.cache(location, this.sourceFile.fileName)
+
         // create the data attribute and add to existing
         const attributes = node.openingElement.attributes
         const newAttributes = ts.updateJsxAttributes(attributes, [
@@ -176,6 +207,7 @@ export class WhatSrcTsTransformer {
             ts.createIdentifier(this.options.dataTag),
             ts.createStringLiteral(nextId)
           )])
+
         // set opening element attributes to the new list
         node.openingElement.attributes = newAttributes
       }
@@ -183,16 +215,16 @@ export class WhatSrcTsTransformer {
   }
 
   /**
-   * ignore any explicitly blacklisted tags. the blacklist is converted to a set
-   * during class construction to be used for fast lookups
+   * Node "OpeningElementStart" path selector
    *
    * @private
-   * @param {ts.JsxElement} node
-   * @returns
-   * @memberof WhatSrcTsTransformer
+   * @param {traverse.NodePath<t.JSXElement>} path
+   * @returns `{ line: number, column: number }`
+   * @memberof WhatSrcBabelPlugin
    */
-  private tagIsNotBlacklisted(node: ts.JsxElement) {
-    return !this.blockedTags.has(this.getOpeningElementTagName(node))
+  private getOpeningElementStartLocation(node: ts.JsxElement) {
+    const start = node.openingElement.getStart()
+    return this.sourceFile.getLineAndCharacterOfPosition(start)
   }
 
   /**
@@ -208,26 +240,19 @@ export class WhatSrcTsTransformer {
   }
 
   /**
-   * creates source location objects
+   * checks the NODE_ENV state against the set production MODE to determine if
+   * we should print a warning or not
    *
+   * @readonly
    * @private
-   * @param {number} character
-   * @param {number} line
-   * @returns
-   * @memberof WhatSrcTsTransformer
+   * @memberof WhatSrcBabelPlugin
    */
-  private createSourceLocation(character: number, line: number) {
-    return {
-      basedir: this.basedir,
-      col: character,
-      line: line + 1,
-      filename: this.options.importFrom,
-    } as WS.SourceLocationFullStart
+  private get shouldPrintProductionWarning() {
+    return !this.disabled && (isNodeEnvProduction() && !this.options.productionMode)
   }
 
   /**
-   * helper function to get the name of the openeing jsx element for the passed
-   * node
+   * helper function to get the name of the opening jsx element for a node
    *
    * @export
    * @param {ts.JsxElement} node

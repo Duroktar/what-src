@@ -1,11 +1,10 @@
 import * as traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import * as WS from '@what-src/plugin-core'
-import { isNullOrUndefined, isNodeEnvProduction, getIn } from '@what-src/utils'
+import { isNullOrUndefined, isNodeEnvProduction, getIn, withHooks } from '@what-src/utils'
 import { join, resolve } from 'path'
 import { buildRequire } from './templates'
-
-type BabelVisitor = { visitor: traverse.Visitor<WS.VisitorState> }
+import { BabelVisitor } from './types'
 
 /**
  * create a new what-src babel-compiler plugin.
@@ -24,36 +23,43 @@ export const getBabelPlugin = ({ types, ...rest }: WS.BabelPluginContext): Babel
  */
 class WhatSrcBabelPlugin {
   /**
-   *
+   * full set of what-src configuration options
    *
    * @type {WS.WhatSrcConfiguration}
    * @memberof WhatSrcBabelPlugin
    */
   public options: WS.WhatSrcConfiguration
-
   /**
-   *
+   * instance if @what-src/core `WhatSrcService`
    *
    * @type {WS.WhatSrcService}
    * @memberof WhatSrcBabelPlugin
    */
   public service: WS.WhatSrcService
+  /**
+   * disabled flag used for bypassing the plugin
+   *
+   * @type {boolean}
+   * @memberof WhatSrcBabelPlugin
+   */
+  public disabled: boolean = false
 
   /**
    * creates an instance of the WhatSrcBabelPlugin
-   * @param {WS.WhatSrcPluginOptions} defaultOpts
+   *
+   * @param {WS.WhatSrcPluginOptions} defaultOptions
    * @param {string} [basedir='']
    * @param {string} [cache={ __basedir: '' }]
    * @param {boolean} [disabled=false]
    * @memberof WhatSrcBabelPlugin
    */
   constructor(
-    public defaultOpts: WS.WhatSrcPluginOptions,
+    public defaultOptions: WS.WhatSrcPluginOptions,
     public basedir: string = '',
     public cache: WS.SourceCache = { __basedir: '' },
-    public disabled: boolean = false,
   ) {
-    this.options = WS.mergePluginOptions(defaultOpts)
+    this.options = WS.mergePluginOptions(defaultOptions)
+    this.service = WS.getService(this)
 
     if (this.shouldPrintProductionWarning) {
       console.log(
@@ -62,8 +68,6 @@ class WhatSrcBabelPlugin {
       )
       this.disabled = true
     };
-
-    this.service = WS.getService(this)
   }
 
   /**
@@ -78,53 +82,84 @@ class WhatSrcBabelPlugin {
           if (!this.disabled) {
             // at the very end we write out our cache file and append an import to it
             // to be used for starting the click listener in the comsumers client
-            const cacheFilePath = join(resolve(''), 'dist', this.options.importFrom)
+            const cacheFilePath = this.getFullCacheFilePath(resolve(''))
 
-            const ast = buildRequire({
+            const entrance = () => buildRequire({
               importName: t.identifier(this.options.importName),
               cacheFilePath: t.stringLiteral(cacheFilePath),
             })
 
-            this.service.emit(cacheFilePath)
-            path.node.body = [ast as any, ...path.node.body]
+            const ast = withHooks(entrance, {
+              after: () => this.service.emit(cacheFilePath),
+            }).result as t.Statement
+
+            path.node.body = [ast, ...path.node.body]
           }
         },
       },
       JSXElement: {
         enter: (path, state): void => {
-          // tag every opening jsx element that isn't a fragment, and isnot in
-          // the blacklist /// TODO: !!!
+          // visit every opening jsx element that isn't a fragment
           if (this.disabled || WS.isFragment(path.node.openingElement)) return
-          if (isNullOrUndefined(path.node.openingElement.loc)) return
 
-          const { column: col, line } = this.getOpeningElementStartLocation(path)
+          // don't visit blacklisted nodes
+          const tagname = this.getOpeningElementTagName(path.node)
+          if (
+            isNullOrUndefined(path.node.openingElement.loc) ||
+            !this.service.tagIsBlacklisted(tagname)
+          ) return
 
-          const payload = { col, line, basedir: '' }
-          const nextId = this.service.cache(payload, state.filename)
+          // gather the necessary metadata. we need a location and unique id
+          const start = this.getOpeningElementStartLocation(path)
+          const location = new WS.SourceLocationBuilder()
+            .withBasedir(this.basedir)
+            .withCol(start.column)
+            .withLine(start.line)
+            .build()
 
-          path.node.openingElement.attributes.push(t.jsxAttribute(
+          const nextId = this.service.cache(location, state.filename)
+
+          // create the data attribute
+          const newAttribute = t.jsxAttribute(
             t.jsxIdentifier(this.options.dataTag),
             t.stringLiteral(nextId)
-          ))
+          )
+
+          // push the new attribute onto the existing list
+          path.node.openingElement.attributes.push(newAttribute)
         },
       },
     }
   }
 
   /**
-   * helper function for checking an "OpeningElementStartLocation" path
+   * NodePath "OpeningElementStartLocation" path selector
    *
    * @private
    * @param {traverse.NodePath<t.JSXElement>} path
-   * @returns
+   * @returns `{ line: number, column: number }`
    * @memberof WhatSrcBabelPlugin
    */
   private getOpeningElementStartLocation(path: traverse.NodePath<t.JSXElement>) {
-    return getIn('node.openingElement.loc.start', path)
+    type SourceLocationStart = { line: number; column: number }
+    return getIn('node.openingElement.loc.start', path) as SourceLocationStart
   }
 
   /**
-   * helper function for checking the NODE_ENV state
+   * get normalized full path to the cache file
+   *
+   * @private
+   * @param {(string)} outDir
+   * @returns
+   * @memberof WhatSrcTsTransformer
+   */
+  private getFullCacheFilePath(outDir: string) {
+    return join(outDir, 'dist', this.options.importFrom)
+  }
+
+  /**
+   * checks the NODE_ENV state against the set production MODE to determine if
+   * we should print a warning or not
    *
    * @readonly
    * @private
@@ -132,5 +167,17 @@ class WhatSrcBabelPlugin {
    */
   private get shouldPrintProductionWarning() {
     return !this.disabled && (isNodeEnvProduction() && !this.options.productionMode)
+  }
+
+  /**
+   * helper function to get the name of the opening jsx element for a node
+   *
+   * @private
+   * @param {t.JSXElement} node
+   * @returns
+   * @memberof WhatSrcBabelPlugin
+   */
+  private getOpeningElementTagName(node: t.JSXElement) {
+    return (node.openingElement.name as t.JSXIdentifier).name
   }
 }

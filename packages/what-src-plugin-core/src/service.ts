@@ -36,6 +36,7 @@ export class WhatSrcService {
    * @memberof Resolver
    */
   private nextId: number = 1
+  private blockedTags!: Set<string>
 
   constructor(
     options: T.WhatSrcPluginOptions,
@@ -43,6 +44,7 @@ export class WhatSrcService {
     private _cache: T.SourceCache = defaultCache,
   ) {
     this.options = H.mergePluginOptions(options, defaultOptions)
+    this.blockedTags = new Set(this.options.blacklistedTags)
     this._cache.__basedir = basedir
   }
 
@@ -85,5 +87,18 @@ export class WhatSrcService {
    */
   public getSourceCache = () => {
     return this._cache
+  }
+
+  /**
+   * ignore any explicitly blacklisted tags. the blacklist is converted to a set
+   * during class construction to be used for fast lookups
+   *
+   * @private
+   * @param {ts.JsxElement} node
+   * @returns
+   * @memberof WhatSrcTsTransformer
+   */
+  public tagIsBlacklisted(tagname: string) {
+    return this.blockedTags.has(tagname)
   }
 }
