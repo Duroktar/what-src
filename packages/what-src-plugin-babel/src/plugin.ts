@@ -21,7 +21,7 @@ export const getBabelPlugin = ({ types, ...rest }: WS.BabelPluginContext): Babel
  *
  * @class WhatSrcBabelPlugin
  */
-class WhatSrcBabelPlugin {
+export class WhatSrcBabelPlugin {
   /**
    * full set of what-src configuration options
    *
@@ -54,7 +54,7 @@ class WhatSrcBabelPlugin {
    * @memberof WhatSrcBabelPlugin
    */
   constructor(
-    public defaultOptions: WS.WhatSrcPluginOptions,
+    public defaultOptions: WS.WhatSrcPluginOptions = {},
     public basedir: string = '',
     public cache: WS.SourceCache = { __basedir: '' }
   ) {

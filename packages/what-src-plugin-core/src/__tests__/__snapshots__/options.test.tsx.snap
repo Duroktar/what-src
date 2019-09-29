@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`what-src configuration has stable output 1`] = `
+Object {
+  "blacklistedTags": Array [
+    "Helmet",
+    "head",
+    "meta",
+    "script",
+  ],
+  "dataTag": "data-what-src",
+  "enableXkcdMode": false,
+  "globalCacheKey": "__what-src-global-callback-key",
+  "importFrom": "what-src-cache.jss",
+  "importName": "__WhatSrcGlobalVariable",
+  "preventDefault": true,
+  "productionMode": false,
+  "serverUrl": "http://localhost:8018/__what_src",
+  "stopPropagation": true,
+  "useRemote": false,
+}
+`;
