@@ -9,12 +9,12 @@ export type WhatSrcHooks =
   | 'serviceStart'
   | 'receive'
   | 'emit'
-  | 'done';
+  | 'done'
 type WhatSrcHookMap = Record<
   WhatSrcHooks,
   SyncHook | AsyncSeriesHook
->;
-type WhatSrcLegacyHookMap = Record<WhatSrcHooks, string>;
+>
+type WhatSrcLegacyHookMap = Record<WhatSrcHooks, string>
 
 const compilerHookMap = new WeakMap<webpack.Compiler, WhatSrcHookMap>()
 

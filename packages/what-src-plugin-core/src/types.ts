@@ -1,14 +1,20 @@
 import * as traverse from '@babel/traverse'
 import * as types from '@babel/types'
 
+export type ServiceOptions = {
+  options: WhatSrcPluginOptions;
+  basedir: string;
+  cache: SourceCache;
+}
+
 export type BabelPlugin = {
   visitor: traverse.Visitor<VisitorState>;
   pre?: (s: VisitorState) => void;
   post?: (s: VisitorState) => void;
 
-};
+}
 export type BabelNodeTypes = typeof types
-export type BabelPluginContext = { types: BabelNodeTypes };
+export type BabelPluginContext = { types: BabelNodeTypes }
 
 export type WhatSrcConfiguration = Required<WhatSrcPluginOptions>
 
@@ -24,14 +30,14 @@ export type WhatSrcPluginOptions = {
   stopPropagation?: boolean;
   useRemote?: boolean;
   blacklistedTags?: string[];
-};
+}
 
 export type VisitorState = {
   filename: string;
   opts: WhatSrcPluginOptions;
   cache: { [k: string]: string };
   path: traverse.NodePath<types.JSXElement>;
-};
+}
 
 export type SourceLocationStart = {
   col: number;
@@ -41,7 +47,7 @@ export type SourceLocationStart = {
 
 export type SourceLocationFullStart = {
   filename: string;
-} & SourceLocationStart;
+} & SourceLocationStart
 
 /**
  * Keys are sequential numbers (cooerced to strings due to how js object keys
@@ -55,4 +61,4 @@ export type SourceLocationFullStart = {
 export type SourceCache = {
   [key: string]: string;
   __basedir: string;
-};
+}

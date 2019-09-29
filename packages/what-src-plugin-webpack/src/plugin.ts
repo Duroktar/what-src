@@ -24,11 +24,11 @@ class WhatSrcServerWebpackPlugin {
 
   public readonly options: Options
 
-  private compiler: any = undefined;
-  private doneCallback: () => void = () => {};
-  private isRunning: boolean = false;
-  private logger: Logger;
-  private service?: childProcess.ChildProcess;
+  private compiler: any = undefined
+  private doneCallback: () => void = () => {}
+  private isRunning: boolean = false
+  private logger: Logger
+  private service?: childProcess.ChildProcess
 
   constructor(options?: Partial<Options>) {
     options = options || ({} as Options)

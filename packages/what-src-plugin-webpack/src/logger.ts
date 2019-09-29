@@ -3,7 +3,7 @@ type LoggerOptions = {
   noInfo?: boolean;
   quiet?: boolean;
   logTime?: string | number;
-};
+}
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function createLogger(options: LoggerOptions = {}) {

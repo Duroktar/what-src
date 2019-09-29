@@ -3,7 +3,7 @@ export type ReactMouseClickEvent = (
         HTMLElement,
         MouseEvent
     >
-) => void;
+) => void
 
 export type HtmlElementProps = React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLElement>,

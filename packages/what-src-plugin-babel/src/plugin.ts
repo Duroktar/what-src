@@ -56,7 +56,7 @@ class WhatSrcBabelPlugin {
   constructor(
     public defaultOptions: WS.WhatSrcPluginOptions,
     public basedir: string = '',
-    public cache: WS.SourceCache = { __basedir: '' },
+    public cache: WS.SourceCache = { __basedir: '' }
   ) {
     this.options = WS.mergePluginOptions(defaultOptions)
     this.service = WS.getService(this)
@@ -100,13 +100,13 @@ class WhatSrcBabelPlugin {
       JSXElement: {
         enter: (path, state): void => {
           // visit every opening jsx element that isn't a fragment
-          if (this.disabled || WS.isFragment(path.node.openingElement)) return
+          if (this.disabled || t.isJSXFragment(path.node.openingElement)) return
 
           // don't visit blacklisted nodes
           const tagname = this.getOpeningElementTagName(path.node)
           if (
-            isNullOrUndefined(path.node.openingElement.loc) ||
-            !this.service.tagIsBlacklisted(tagname)
+            isNullOrUndefined(path.node.openingElement.loc)
+            || !this.service.tagIsBlacklisted(tagname)
           ) return
 
           // gather the necessary metadata. we need a location and unique id

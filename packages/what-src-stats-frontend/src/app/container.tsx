@@ -3,8 +3,8 @@ import i18n from 'i18next'
 import { App } from './component'
 
 export class AppContainer extends React.PureComponent<ContainerProps, State> {
-  private STORAGE_KEY = '__bf_storage__theme';
-  public state: State = AppContainer.DEFAULT_STATE;
+  private STORAGE_KEY = '__bf_storage__theme'
+  public state: State = AppContainer.DEFAULT_STATE
 
   componentDidMount() {
     this.loadTheme().then(this.setTheme)
@@ -47,7 +47,7 @@ export class AppContainer extends React.PureComponent<ContainerProps, State> {
 
   static DEFAULT_STATE: State = {
     locale: '',
-  };
+  }
 }
 
 type ContainerProps = {
@@ -55,8 +55,8 @@ type ContainerProps = {
   setTheme: (theme: 'light' | 'dark') => void;
   theme: 'light' | 'dark';
   authenticated: boolean;
-};
+}
 
 type State = {
   locale: string;
-};
+}

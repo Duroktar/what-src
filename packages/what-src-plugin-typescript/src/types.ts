@@ -1,2 +1,2 @@
 
-export type WhatSrcTsTransformerOptions = {};
+export type WhatSrcTsTransformerOptions = {}
