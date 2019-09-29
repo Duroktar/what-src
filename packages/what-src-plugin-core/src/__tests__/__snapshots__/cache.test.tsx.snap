@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`caches source locations 1`] = `
+Object {
+  "1": "{\\"filename\\":\\"filename1.ts\\",\\"line\\":2,\\"column\\":1,\\"remoteUrl\\":\\"filename1.ts#L2\\"}",
+  "2": "{\\"filename\\":\\"filename2.ts\\",\\"line\\":7,\\"column\\":4,\\"remoteUrl\\":\\"filename2.ts#L7\\"}",
+  "3": "{\\"filename\\":\\"filename3.ts\\",\\"line\\":1,\\"column\\":8,\\"remoteUrl\\":\\"filename3.ts#L1\\"}",
+  "__basedir": "/home/user/app/packages/",
+}
+`;

@@ -44,10 +44,6 @@ export class WhatSrcTsTransformer {
    */
   public disabled: boolean = false
 
-  // TODO: pull these from Configuration
-  public basedir: string
-  public importName: string
-
   public context!: ts.TransformationContext
   public sourceFile!: ts.SourceFile
   public module?: ts.ModuleKind
@@ -59,11 +55,13 @@ export class WhatSrcTsTransformer {
    * @param {WS.CacheType} [cache={ __basedir: '' }]
    * @memberof WhatSrcTsTransformer
    */
-  constructor(public defaultOptions: WhatSrcTsTransformerOptions, public cache: WS.SourceCache = { __basedir: '' }) {
-    this.basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript-loader/src/' // TODO move to core
+  constructor(
+    public defaultOptions: WhatSrcTsTransformerOptions,
+    public basedir: string = '',
+    public cache: WS.SourceCache = { __basedir: '' }
+  ) {
     this.options = WS.mergePluginOptions(defaultOptions)
     this.service = WS.getService(this)
-    this.importName = this.options.importName
 
     if (this.shouldPrintProductionWarning) {
       console.log(
@@ -145,7 +143,7 @@ export class WhatSrcTsTransformer {
         /* decorators */ undefined,
         /* modifiers */ undefined,
         ts.createImportClause(
-          ts.createIdentifier(this.importName),
+          ts.createIdentifier(this.options.importName),
           undefined
         ),
         ts.createLiteral(cacheFile)
@@ -167,7 +165,7 @@ export class WhatSrcTsTransformer {
       ts.createVariableStatement(
         /* modifiers */ undefined,
         ts.createVariableDeclarationList([
-          ts.createVariableDeclaration(this.importName,
+          ts.createVariableDeclaration(this.options.importName,
             /* type */ undefined,
             ts.createPropertyAccess(
               ts.createCall(
@@ -196,8 +194,8 @@ export class WhatSrcTsTransformer {
         // gather the necessary metadata. we need a location and unique id
         const start = this.getOpeningElementStartLocation(node)
         const location = new WS.SourceLocationBuilder()
-          .withBasedir(this.basedir)
-          .withCol(start.character)
+          .withBasedir(this.cache.__basedir)
+          .withCol(start.character + 1)
           .withLine(start.line + 1)
           .build()
 

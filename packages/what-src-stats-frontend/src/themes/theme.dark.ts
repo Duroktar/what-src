@@ -1,6 +1,5 @@
 // dark theme preset
 
-// https://github.com/rebassjs/rebass/blob/master/packages/docs/src/components/demo-provider.js
 export const theme = {
   colors: {
     text: '#fff',

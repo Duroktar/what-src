@@ -31,7 +31,9 @@
   "jest": {
     "preset": "ts-jest",
     "globals": {
-      "ts-jest": {}
+      "ts-jest": {
+        "tsConfig": "tsconfig.base.json"
+      }
     },
     "testPathIgnorePatterns" : [
       "/node_modules/",

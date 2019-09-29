@@ -10,7 +10,7 @@
           "ESLint: Full Project Linting - [watch-mode]"
         ],
         "runOptions": {
-          "runOn": "folderOpen"
+          // "runOn": "folderOpen"
         },
         "group": {
           "kind": "build",

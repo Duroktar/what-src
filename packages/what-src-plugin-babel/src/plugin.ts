@@ -113,7 +113,7 @@ class WhatSrcBabelPlugin {
           const start = this.getOpeningElementStartLocation(path)
           const location = new WS.SourceLocationBuilder()
             .withBasedir(this.basedir)
-            .withCol(start.column)
+            .withCol(start.column + 1)
             .withLine(start.line)
             .build()
 

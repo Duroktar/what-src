@@ -2,6 +2,7 @@ import { toCamelCase, isNullOrUndefined, λIf } from '@what-src/utils'
 import { defaultOptions } from './options'
 import * as GIT from './git'
 import * as T from './types'
+import { STATS_URL } from './constants'
 
 /**
  * returns any default options merged with all passed plugin options
@@ -64,7 +65,7 @@ export const generateGitFileUrl = (remoteUrl: string, opts: {
   branch: string;
   filepath: string;
 }) => {
-  if (isNullOrUndefined(remoteUrl) || !remoteUrl.trimEnd().endsWith('.git')) {
+  if (isNullOrUndefined(remoteUrl) || !remoteUrl.trim().endsWith('.git')) {
     throw new Error(`${remoteUrl} is not a valid remote url.`)
   }
   return `${remoteUrl.slice(0, -4)}/blob/${opts.branch}/${opts.filepath}`
@@ -94,8 +95,7 @@ export const generateClickHandlerRawString = (
   return ((o = {
     ...options,
     dataTag: parseDataTag(options.dataTag),
-    // TODO: make sure process.env.STATS_URL is set and remove this hardcoded string
-    whatSrcStatsUrl: process.env.STATS_URL || 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/triggers_stitchapp-hnsgo/service/click-service/incoming_webhook/track-click',
+    whatSrcStatsUrl: process.env.STATS_URL || STATS_URL,
   }) => `
     const __whatSrcCallback01101011 = (() => {
       try {
@@ -140,9 +140,9 @@ export const generateClickHandlerRawString = (
  * generates the relevant metadata object
  *
  * @param {meta} {
+ *   col,
  *   filename,
  *   line,
- *   col,
  * }
  * @returns
  */

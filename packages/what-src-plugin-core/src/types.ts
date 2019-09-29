@@ -2,9 +2,9 @@ import * as traverse from '@babel/traverse'
 import * as types from '@babel/types'
 
 export type ServiceOptions = {
-  options: WhatSrcPluginOptions;
-  basedir: string;
-  cache: SourceCache;
+  options?: WhatSrcPluginOptions;
+  basedir?: string;
+  cache?: {};
 }
 
 export type BabelPlugin = {
@@ -41,13 +41,14 @@ export type VisitorState = {
 
 export type SourceLocationStart = {
   col: number;
-  basedir: string;
   line: number;
 }
 
 export type SourceLocationFullStart = {
   filename: string;
-} & SourceLocationStart
+  col: number;
+  line: number;
+}
 
 /**
  * Keys are sequential numbers (cooerced to strings due to how js object keys

@@ -1,7 +1,8 @@
-import * as H from './helpers'
+import * as ts from 'typescript'
+import { withHooks } from '@what-src/utils'
 import { defaultOptions, defaultCache } from './options'
+import * as H from './helpers'
 import * as T from './types'
-import ts from 'typescript'
 
 /**
  * create a new what-src service instance
@@ -9,7 +10,7 @@ import ts from 'typescript'
  * @param {"WhatSrcService"} { options, basedir, cache = defaultCache }
  * @returns new what-src service instance
  */
-export const getService = ({ options, ...args }: T.ServiceOptions) => {
+export const getService = ({ options, ...args }: T.ServiceOptions = {}) => {
   return new WhatSrcService(options, args.basedir, args.cache)
 }
 
@@ -30,16 +31,33 @@ export class WhatSrcService {
    * @memberof Resolver
    */
   private nextId: number = 1
+
+  /**
+   * list of element tag names to ignore
+   *
+   * @private
+   * @type {Set<string>}
+   * @memberof WhatSrcService
+   */
   private blockedTags!: Set<string>
 
+  /**
+   * the cache *theme song plays
+   *
+   * @private
+   * @type {T.SourceCache}
+   * @memberof WhatSrcService
+   */
+  private _cache!: T.SourceCache
+
   constructor(
-    options: T.WhatSrcPluginOptions,
-    public basedir: string,
-    private _cache: T.SourceCache = defaultCache,
+    options: T.WhatSrcPluginOptions = {},
+    basedir: string = '',
+    cache: {} = {}
   ) {
     this.options = H.mergePluginOptions(options, defaultOptions)
     this.blockedTags = new Set(this.options.blacklistedTags)
-    this._cache.__basedir = basedir
+    this._cache = { ...defaultCache, ...cache, __basedir: basedir }
   }
 
   /**
@@ -64,14 +82,13 @@ export class WhatSrcService {
    * @memberof WhatSrcService
    */
   public cache = (loc: T.SourceLocationStart, sourcefile: string) => {
-    const filename = H.getRemoteFilenameIfSet(sourcefile, this.options)
-    const metaData = H.generateJsxMetaData({
-      ...loc,
-      filename: filename.replace(this.basedir, ''),
-    })
-    const result = this.nextId.toString()
-    this._cache[this.nextId++] = JSON.stringify(metaData)
-    return result
+    const remoteFn = H.getRemoteFilenameIfSet(sourcefile, this.options)
+    const filename = remoteFn.replace(this._cache.__basedir, '')
+    const metaData = H.generateJsxMetaData({ ...loc, filename })
+
+    return withHooks(() => this.nextId.toString(), {
+      after: () => this.setCache(JSON.stringify(metaData)),
+    }).result
   }
 
   /**
@@ -94,5 +111,15 @@ export class WhatSrcService {
    */
   public tagIsBlacklisted(tagname: string) {
     return this.blockedTags.has(tagname)
+  }
+
+  /**
+   *  sets the next cache value then increments the key
+   *
+   * @private
+   * @memberof WhatSrcService
+   */
+  private setCache = (metaData: string) => {
+    this._cache[this.nextId++] = metaData
   }
 }
