@@ -5,9 +5,9 @@
     "node": true
   },
   "extends": [
-    "standard",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
+    "standard"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -31,11 +31,16 @@
       "mode": "minimum"
     }],
     "space-before-function-paren": ["error", "never"],
+    "operator-linebreak": ["error", "after", {
+      "overrides": { "||": "before", "|": "before" }
+    }],
     "jsx-a11y/click-events-have-key-events": "off"
   },
   "overrides": [{
     "files": ["**/*.ts", "**/*.tsx"],
     "rules": {
+      "semi": "off",
+      "@typescript-eslint/semi": ["warn", "never"],
       "no-useless-constructor": ["off"],
       "no-unused-vars": ["off"],
       "no-undef": ["off"]

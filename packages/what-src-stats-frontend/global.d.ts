@@ -11,7 +11,7 @@ declare namespace ReactCountUp {
     onPauseResume: () => void
     onStart: (args: { pauseResume: Function }) => void
     onEnd: (args: { pauseResume: Function }) => void
-  };
+  }
 
   type UseCountUpHookState = {
     countUp: number
@@ -19,7 +19,7 @@ declare namespace ReactCountUp {
     pauseResume: () => void
     reset: () => void
     update: (newEnd?: number) => void
-  };
+  }
 
   function useCountUp(params: Partial<UseCountUpHookProps>): UseCountUpHookState
 }

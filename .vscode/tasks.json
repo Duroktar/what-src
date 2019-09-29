@@ -4,16 +4,64 @@
     "version": "2.0.0",
     "tasks": [
       {
+        "label": "AAA: What-Src Development - [Master Task]",
+        "dependsOn": [
+          "Typescript: Full Project Compilation - [watch-mode]",
+          "ESLint: Full Project Linting - [watch-mode]",
+        ],
+        "runOptions": {
+          "runOn": "folderOpen"
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      },
+      {
         "type": "typescript",
+        "label": "Typescript: Full Project Compilation - [watch-mode]",
         "tsconfig": "tsconfig.json",
         "option": "watch",
         "problemMatcher": [
           "$tsc-watch"
         ],
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        }
+        "presentation": {
+          "reveal": "never"
+        },
+        "group": "build"
+      },
+      {
+        "type": "npm",
+        "label": "ESLint: Full Project Linting - [watch-mode]",
+        "script": "lint:watch",
+        "problemMatcher": {
+          "base": "$eslint-stylish",
+          "applyTo": "allDocuments",
+          "fileLocation": "autoDetect",
+          "owner": "eslint-watch",
+          "pattern": [
+            {
+              "regexp": "^(\\\/.*)*$",
+              "file": 1
+            },
+            {
+              "regexp": "^\\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.+?(?=  ))\\s+.*$",
+              "line": 1,
+              "column": 2,
+              "severity": 3,
+              "message": 4,
+              "loop": true
+            },
+          ],
+          "background": {
+            "activeOnStart": true
+          }
+        },
+        "presentation": {
+          "reveal": "never"
+        },
+        "isBackground": true,
+
       }
     ]
 }
