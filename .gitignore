@@ -16,6 +16,7 @@ dist
 .DS_Store
 .env
 .vscode/*
+!.vscode/launch.json
 !.vscode/tasks.json
 !.vscode/*.template.*
 npm-debug.log*

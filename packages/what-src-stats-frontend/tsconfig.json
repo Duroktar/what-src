@@ -10,5 +10,8 @@
   "references": [
     { "path": "../what-src-plugin" },
     { "path": "../what-src-utils" }
+  ],
+  "exclude": [
+    "./webpack/"
   ]
 }

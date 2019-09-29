@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Babel Plugin",
+        "program": "${workspaceFolder}/packages/what-src-plugin-babel/src/spec/index.ts",
+        "preLaunchTask": "npm: build",
+        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-babel/dist/*.js"]
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Typescript Plugin",
+        "program": "${workspaceFolder}/packages/what-src-plugin-typescript/src/spec/index.ts",
+        "preLaunchTask": "Build typescript plugin",
+        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-typescript/dist/*.js"]
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Webpack Plugin",
+        "program": "${workspaceFolder}/packages/what-src-plugin-webpack/src/spec/index.ts",
+        "preLaunchTask": "Build webpack plugin",
+        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-webpack/dist/*.js"]
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Core Module",
+        "program": "${workspaceFolder}/packages/what-src-plugin-core/src/spec/index.ts",
+        "preLaunchTask": "Build core",
+        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-core/dist/*.js"]
+      },
+    ]
+}

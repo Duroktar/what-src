@@ -7,7 +7,7 @@
         "label": "AAA: What-Src Development - [Master Task]",
         "dependsOn": [
           "Typescript: Full Project Compilation - [watch-mode]",
-          "ESLint: Full Project Linting - [watch-mode]",
+          "ESLint: Full Project Linting - [watch-mode]"
         ],
         "runOptions": {
           "runOn": "folderOpen"
@@ -41,7 +41,7 @@
           "owner": "eslint-watch",
           "pattern": [
             {
-              "regexp": "^(\\\/.*)*$",
+              "regexp": "^(\\/.*)*$",
               "file": 1
             },
             {
@@ -51,7 +51,7 @@
               "severity": 3,
               "message": 4,
               "loop": true
-            },
+            }
           ],
           "background": {
             "activeOnStart": true
@@ -60,8 +60,39 @@
         "presentation": {
           "reveal": "never"
         },
-        "isBackground": true,
-
+        "isBackground": true
+      },
+      {
+        "label": "Build babel plugin",
+        "type": "typescript",
+        "tsconfig": "./packages/what-src-plugin-babel/tsconfig.json",
+        "problemMatcher": [
+          "$tsc"
+        ],
+      },
+      {
+        "label": "Build webpack plugin",
+        "type": "typescript",
+        "tsconfig": "./packages/what-src-plugin-babel/tsconfig.json",
+        "problemMatcher": [
+          "$tsc"
+        ],
+      },
+      {
+        "label": "Build typescript plugin",
+        "type": "typescript",
+        "tsconfig": "./packages/what-src-plugin-babel/tsconfig.json",
+        "problemMatcher": [
+          "$tsc"
+        ],
+      },
+      {
+        "label": "Build core",
+        "type": "typescript",
+        "tsconfig": "./packages/what-src-plugin-babel/tsconfig.json",
+        "problemMatcher": [
+          "$tsc"
+        ],
       }
     ]
 }

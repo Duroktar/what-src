@@ -2,7 +2,7 @@
 .vscode
 node_modules
 packages/*/node_modules
-packages/*/dist
+packages/*/dist/**
 packages/what-src-example-basic
 packages/what-src-example-typescript
 scripts

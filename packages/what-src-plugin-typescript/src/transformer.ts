@@ -43,8 +43,11 @@ export class WhatSrcTsTransformer {
    * @memberof WhatSrcBabelPlugin
    */
   public disabled: boolean = false
+
+  // TODO: pull these from Configuration
   public basedir: string
   public importName: string
+
   public context!: ts.TransformationContext
   public sourceFile!: ts.SourceFile
   public module?: ts.ModuleKind
@@ -57,7 +60,7 @@ export class WhatSrcTsTransformer {
    * @memberof WhatSrcTsTransformer
    */
   constructor(public defaultOptions: WhatSrcTsTransformerOptions, public cache: WS.SourceCache = { __basedir: '' }) {
-    this.basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript-loader/src/' // TODO
+    this.basedir = '/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-example-typescript-loader/src/' // TODO move to core
     this.options = WS.mergePluginOptions(defaultOptions)
     this.service = WS.getService(this)
     this.importName = this.options.importName

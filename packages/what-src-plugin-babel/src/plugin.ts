@@ -100,13 +100,13 @@ class WhatSrcBabelPlugin {
       JSXElement: {
         enter: (path, state): void => {
           // visit every opening jsx element that isn't a fragment
-          if (this.disabled || t.isJSXFragment(path.node.openingElement)) return
+          if (this.disabled || this.isFragment(path.node.openingElement)) return
 
           // don't visit blacklisted nodes
           const tagname = this.getOpeningElementTagName(path.node)
           if (
             isNullOrUndefined(path.node.openingElement.loc)
-            || !this.service.tagIsBlacklisted(tagname)
+            || this.service.tagIsBlacklisted(tagname)
           ) return
 
           // gather the necessary metadata. we need a location and unique id
@@ -179,5 +179,15 @@ class WhatSrcBabelPlugin {
    */
   private getOpeningElementTagName(node: t.JSXElement) {
     return (node.openingElement.name as t.JSXIdentifier).name
+  }
+
+  /**
+   * used to determine if an openingElement is a React.Fragment
+   *
+   * @param {JSXOpeningElement} openingElement
+   * @returns
+   */
+  private isFragment(openingElement: t.JSXOpeningElement) {
+    return getIn('name.property.name', openingElement) === 'Fragment'
   }
 }
