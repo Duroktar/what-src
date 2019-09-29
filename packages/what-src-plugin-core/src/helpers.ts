@@ -1,5 +1,4 @@
-import { JSXOpeningElement } from '@babel/types'
-import { toCamelCase, getIn, isNullOrUndefined, λIf } from '@what-src/utils'
+import { toCamelCase, isNullOrUndefined, λIf } from '@what-src/utils'
 import { defaultOptions } from './options'
 import * as GIT from './git'
 import * as T from './types'
@@ -13,7 +12,7 @@ import * as T from './types'
  */
 export const mergePluginOptions = (
   options: T.WhatSrcPluginOptions,
-  defaults = defaultOptions,
+  defaults = defaultOptions
 ): T.WhatSrcConfiguration => {
   return { ...defaults, ...options }
 }
@@ -48,7 +47,7 @@ export const gitUrlResolver = (() => {
  */
 export const getRemoteFilenameIfSet = (
   filename: string,
-  options: T.WhatSrcConfiguration,
+  options: T.WhatSrcConfiguration
 ) => options.useRemote ? gitUrlResolver(filename) : filename
 
 /**
@@ -65,7 +64,7 @@ export const generateGitFileUrl = (remoteUrl: string, opts: {
   branch: string;
   filepath: string;
 }) => {
-  if (isNullOrUndefined(remoteUrl) || !remoteUrl.endsWith('.git')) {
+  if (isNullOrUndefined(remoteUrl) || !remoteUrl.trimEnd().endsWith('.git')) {
     throw new Error(`${remoteUrl} is not a valid remote url.`)
   }
   return `${remoteUrl.slice(0, -4)}/blob/${opts.branch}/${opts.filepath}`
@@ -95,11 +94,12 @@ export const generateClickHandlerRawString = (
   return ((o = {
     ...options,
     dataTag: parseDataTag(options.dataTag),
+    // TODO: make sure process.env.STATS_URL is set and remove this hardcoded string
     whatSrcStatsUrl: process.env.STATS_URL || 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/triggers_stitchapp-hnsgo/service/click-service/incoming_webhook/track-click',
   }) => `
     const __whatSrcCallback01101011 = (() => {
       try {
-        const cache = (${JSON.stringify(cache, null, 3)});
+        const cache = (${JSON.stringify(cache, null, 3)})
         window["${o.globalCacheKey}"] = function (e) {
           if (e.metaKey) {
             const tag = cache[e.path[0].dataset["${o.dataTag}"]];
@@ -148,23 +148,10 @@ export const generateClickHandlerRawString = (
  */
 export const generateJsxMetaData = (location: T.SourceLocationFullStart) => {
   const { col, filename, line } = location
-  const metaData = {
+  return {
     filename: filename,
     line: line,
-    column: col + 1,
-    remoteUrl: '',
+    column: col,
+    remoteUrl: `${filename}#L${line}`,
   }
-  metaData.remoteUrl =
-    `${filename}#L${metaData.line}`
-  return metaData
-}
-
-/**
- * used to determine if an openingElement is a React.Fragment
- *
- * @param {JSXOpeningElement} openingElement
- * @returns
- */
-export const isFragment = (openingElement: JSXOpeningElement) => {
-  return getIn('name.property.name', openingElement) === 'Fragment'
 }

@@ -33,8 +33,10 @@
 		"@types/cross-spawn": "^6.0.0",
 		"@types/hosted-git-info": "^2.7.0",
 		"@types/node": "^12.7.8",
+		"@types/yup": "^0.26.24",
 		"@what-src/utils": "^1.0.11",
 		"cross-spawn": "^7.0.0",
-		"hosted-git-info": "^3.0.0"
+		"hosted-git-info": "^3.0.0",
+		"yup": "^0.27.0"
 	}
 }

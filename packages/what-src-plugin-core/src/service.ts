@@ -3,19 +3,13 @@ import { defaultOptions, defaultCache } from './options'
 import * as T from './types'
 import ts from 'typescript'
 
-type ServiceOptions = {
-  options: T.WhatSrcPluginOptions;
-  basedir: string;
-  cache: T.SourceCache;
-}
-
 /**
  * create a new what-src service instance
  *
  * @param {"WhatSrcService"} { options, basedir, cache = defaultCache }
  * @returns new what-src service instance
  */
-export const getService = ({ options, ...args }: ServiceOptions) => {
+export const getService = ({ options, ...args }: T.ServiceOptions) => {
   return new WhatSrcService(options, args.basedir, args.cache)
 }
 
