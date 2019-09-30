@@ -21,7 +21,7 @@
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./packages",
     "logo": "./scripts/print-console-logo.sh",
     "prebuild": "lerna run logo",
-    "prepublish": "npm run logo && ./scripts/clone-license.sh && npm run build",
+    "prepublishOnly": "npm run logo && ./scripts/clone-license.sh && npm run build",
 		"serve:gh-pages": "npm run logo && serve -l 9000 ./docs",
     "test:update": "jest -u",
     "test:watch": "jest --watch",

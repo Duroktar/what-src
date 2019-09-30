@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "@what-src/typedoc-theme",
   "description": "Customized default typedoc theme for what-src api documentation.",
   "version": "1.1.0-alpha.0",
@@ -11,6 +12,9 @@
     "LICENSE",
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">= 8"
   }
