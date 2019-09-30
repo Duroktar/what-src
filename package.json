@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "build:clean": "tsc -b --clean && npm run build",
     "build:docs": "typedoc --tsconfig ./tsconfig.base.json",
     "build:gh-pages": "./scripts/build-gh-pages.sh",
@@ -20,6 +21,7 @@
     "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix ./packages",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./packages",
     "logo": "./scripts/print-console-logo.sh",
+    "postinstall": "npm run bootstrap",
     "prebuild": "lerna run logo",
     "prepublishOnly": "npm run logo && ./scripts/clone-license.sh && npm run build",
 		"serve:gh-pages": "npm run logo && serve -l 9000 ./docs",
