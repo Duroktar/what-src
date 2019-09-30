@@ -1,10 +1,11 @@
+// import { Pl } from '@babel/core'
 import * as traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import * as WS from '@what-src/plugin-core'
 import { isNullOrUndefined, isNodeEnvProduction, getIn, withHooks } from '@what-src/utils'
-import { join, resolve } from 'path'
+import { join } from 'path'
 import { buildRequire } from './templates'
-import { BabelVisitor } from './types'
+import { BabelVisitor, PluginState } from './types'
 
 /**
  * create a new what-src babel-compiler plugin.
@@ -12,8 +13,11 @@ import { BabelVisitor } from './types'
  * @param {WS.BabelPluginContext} { types, ...rest }
  * @returns {BabelVisitor}
  */
-export const getBabelPlugin = ({ types, ...rest }: WS.BabelPluginContext): BabelVisitor => {
-  return { visitor: new WhatSrcBabelPlugin({}).visitor() }
+export const getBabelPlugin = (
+  context: WS.BabelPluginContext,
+  config: WS.WhatSrcPluginOptions,
+): BabelVisitor => {
+  return new WhatSrcBabelPlugin(config).getPlugin()
 }
 
 /**
@@ -49,14 +53,14 @@ export class WhatSrcBabelPlugin {
    *
    * @param {WS.WhatSrcPluginOptions} defaultOptions
    * @param {string} [basedir='']
-   * @param {string} [cache={ __basedir: '' }]
+   * @param {string} [cache=WS.defaultCache]
    * @param {boolean} [disabled=false]
    * @memberof WhatSrcBabelPlugin
    */
   constructor(
     public defaultOptions: WS.WhatSrcPluginOptions = {},
     public basedir: string = '',
-    public cache: WS.SourceCache = { __basedir: '' }
+    public cache: WS.SourceCache = WS.defaultCache
   ) {
     this.options = WS.mergePluginOptions(defaultOptions)
     this.service = WS.getService(this)
@@ -71,65 +75,95 @@ export class WhatSrcBabelPlugin {
   }
 
   /**
+   *
+   *
+   * @private
+   * @memberof WhatSrcBabelPlugin
+   */
+  private PLUGIN_KEY = 'what-src-plugin'
+
+  // private CWD = ''
+
+  /**
    * typescript node ast visitor
    *
    * @memberof WhatSrcBabelPlugin
    */
-  public visitor = (): traverse.Visitor<WS.VisitorState> => {
+  public getPlugin = (): BabelVisitor => {
     return {
-      Program: {
-        exit: (path) => {
-          if (!this.disabled) {
-            // at the very end we write out our cache file and append an import to it
-            // to be used for starting the click listener in the comsumers client
-            const cacheFilePath = this.getFullCacheFilePath(resolve(''))
-
-            const entrance = () => buildRequire({
-              importName: t.identifier(this.options.importName),
-              cacheFilePath: t.stringLiteral(cacheFilePath),
-            })
-
-            const ast = withHooks(entrance, {
-              after: () => this.service.emit(cacheFilePath),
-            }).result as t.Statement
-
-            path.node.body = [ast, ...path.node.body]
-          }
-        },
+      name: this.PLUGIN_KEY,
+      pre: (state) => {
+        const plugin = this.selectPluginFromState(state)
+        this.options = WS.mergePluginOptions(plugin.options)
       },
-      JSXElement: {
-        enter: (path, state): void => {
-          // visit every opening jsx element that isn't a fragment
-          if (this.disabled || this.isFragment(path.node.openingElement)) return
+      visitor: {
+        Program: {
+          exit: (path, state) => {
+            if (!this.disabled) {
+              // at the very end we write out our cache file and append an import to it
+              // to be used for starting the click listener in the comsumers client
+              const cacheFilePath = this.getFullCacheFilePath(state.cwd)
 
-          // don't visit blacklisted nodes
-          const tagname = this.getOpeningElementTagName(path.node)
-          if (
-            isNullOrUndefined(path.node.openingElement.loc)
-            || this.service.tagIsBlacklisted(tagname)
-          ) return
+              const entrance = () => buildRequire({
+                importName: t.identifier(this.options.importName),
+                cacheFilePath: t.stringLiteral(cacheFilePath),
+              })
+              // this.getRootDir(path)
+              const ast = withHooks(entrance, {
+                after: () => this.service.emit(cacheFilePath),
+              }).result as t.Statement
 
-          // gather the necessary metadata. we need a location and unique id
-          const start = this.getOpeningElementStartLocation(path)
-          const location = new WS.SourceLocationBuilder()
-            .withBasedir(this.basedir)
-            .withCol(start.column + 1)
-            .withLine(start.line)
-            .build()
+              path.node.body = [ast, ...path.node.body]
+            }
+          },
+        },
+        JSXElement: {
+          enter: (path, state): void => {
+            // visit every opening jsx element that isn't a fragment
+            if (this.disabled || this.isFragment(path.node.openingElement)) return
 
-          const nextId = this.service.cache(location, state.filename)
+            // don't visit blacklisted nodes
+            const tagname = this.getOpeningElementTagName(path.node)
+            if (
+              isNullOrUndefined(path.node.openingElement.loc)
+              || this.service.tagIsBlacklisted(tagname)
+            ) return
 
-          // create the data attribute
-          const newAttribute = t.jsxAttribute(
-            t.jsxIdentifier(this.options.dataTag),
-            t.stringLiteral(nextId)
-          )
+            // gather the necessary metadata. we need a location and unique id
+            const start = this.getOpeningElementStartLocation(path)
+            const location = new WS.SourceLocationBuilder()
+              .withBasedir(this.basedir)
+              .withCol(start.column + 1)
+              .withLine(start.line)
+              .build()
 
-          // push the new attribute onto the existing list
-          path.node.openingElement.attributes.push(newAttribute)
+            const nextId = this.service.cache(location, state.filename)
+
+            // create the data attribute
+            const newAttribute = t.jsxAttribute(
+              t.jsxIdentifier(this.options.dataTag),
+              t.stringLiteral(nextId)
+            )
+
+            // push the new attribute onto the existing list
+            path.node.openingElement.attributes.push(newAttribute)
+          },
         },
       },
     }
+  }
+
+  /**
+   *
+   *
+   * @private
+   * @param {*} state
+   * @returns
+   * @memberof WhatSrcBabelPlugin
+   */
+  private selectPluginFromState(state: PluginState) {
+    return state.opts.plugins
+      .find(o => o.key === this.PLUGIN_KEY) || { options: {} }
   }
 
   /**
@@ -190,4 +224,8 @@ export class WhatSrcBabelPlugin {
   private isFragment(openingElement: t.JSXOpeningElement) {
     return getIn('name.property.name', openingElement) === 'Fragment'
   }
+
+  // private getRootDir(path: traverse.NodePath<t.Program>) {
+  //   return path.hub.file.opts.root
+  // }
 }

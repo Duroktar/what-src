@@ -4,7 +4,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { Configuration } from 'webpack-dev-server'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
-import { WhatSrcServerWebpackPlugin } from '@what-src/plugin'
+// import { WhatSrcServerWebpackPlugin } from '@what-src/plugin'
 
 const config: webpack.Configuration & Configuration = {
   entry: './src/main.tsx',
@@ -43,7 +43,7 @@ const config: webpack.Configuration & Configuration = {
   },
   plugins: [
     new DotEnv({ safe: true }),
-    new WhatSrcServerWebpackPlugin(),
+    // new WhatSrcServerWebpackPlugin(), // !!! Not needed when `useRemote === true`
     new ForkTsCheckerWebpackPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({

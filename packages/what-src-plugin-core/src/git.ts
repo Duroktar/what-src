@@ -21,8 +21,8 @@ export const outputOrThrow = <T>(result: SpawnSyncReturns<T>) => {
  *
  * @returns
  */
-export const isGitInstalled = () => {
-  const result = spawn.sync('git', ['--version'])
+export const isGitInstalled = (ctx = spawn) => {
+  const result = ctx.sync('git', ['--version'])
   return (outputOrThrow(result) + '').trim().search(/git version /) === 0
 }
 
@@ -31,8 +31,8 @@ export const isGitInstalled = () => {
  *
  * @returns
  */
-export const isInsideGitWorkTree = () => {
-  const result = spawn.sync('git', ['rev-parse', '--is-inside-work-tree'])
+export const isInsideGitWorkTree = (ctx = spawn) => {
+  const result = ctx.sync('git', ['rev-parse', '--is-inside-work-tree'])
   return (outputOrThrow(result) + '').trim() === 'true'
 }
 
@@ -41,8 +41,8 @@ export const isInsideGitWorkTree = () => {
  *
  * @returns
  */
-export const getGitRemoteOriginUrl = () => {
-  const result = spawn.sync('git', ['config', '--get', 'remote.origin.url'])
+export const getGitRemoteOriginUrl = (ctx = spawn) => {
+  const result = ctx.sync('git', ['config', '--get', 'remote.origin.url'])
   const remotename = (outputOrThrow(result) + '').trim()
   if (empty(remotename)) { throw new Error() } else return remotename
 }
@@ -54,8 +54,8 @@ export const getGitRemoteOriginUrl = () => {
  * @param {string} filepath
  * @returns
  */
-export const getGitFileFullName = (filepath: string) => {
-  const result = spawn.sync('git', ['ls-files', '--full-name', filepath])
+export const getGitFileFullName = (filepath: string, ctx = spawn) => {
+  const result = ctx.sync('git', ['ls-files', '--full-name', filepath])
   const filename = (outputOrThrow(result) + '').trim()
   if (empty(filename)) { throw new Error() } else return filename
 }
@@ -66,8 +66,8 @@ export const getGitFileFullName = (filepath: string) => {
  *
  * @returns
  */
-export const getGitBranchName = () => {
-  const result = spawn.sync('git', ['rev-parse', '--abbrev-ref', 'HEAD'])
+export const getGitBranchName = (ctx = spawn) => {
+  const result = ctx.sync('git', ['rev-parse', '--abbrev-ref', 'HEAD'])
   const branchname = (outputOrThrow(result) + '').trim()
   if (empty(branchname)) { throw new Error() } else return branchname
 }

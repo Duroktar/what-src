@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`works as a babel-plugin with preset-typescript works in development mode 1`] = `
+"var __WhatSrcGlobalVariable = require(\\"/Users/duroktar/fun/what-src-webpack-plugin/dist/what-src-cache.jss\\");
+
+import * as React from 'react';
+
+class TestClassComponent extends React.Component {
+  render() {
+    return React.createElement(\\"div\\", {
+      className: \\"class-component\\",
+      \\"data-what-src\\": \\"1\\"
+    }, React.createElement(\\"p\\", {
+      \\"data-what-src\\": \\"2\\"
+    }, \\"some p thing\\"));
+  }
+
+}
+
+const TestFunctionalComponent = () => React.createElement(\\"div\\", {
+  className: \\"functional-component\\",
+  \\"data-what-src\\": \\"3\\"
+}, React.createElement(\\"p\\", {
+  \\"data-what-src\\": \\"4\\"
+}, \\"some p thing\\"));
+
+const TestMemoizedComponent = React.memo(() => React.createElement(\\"div\\", {
+  className: \\"memoized-component\\",
+  \\"data-what-src\\": \\"5\\"
+}, React.createElement(\\"p\\", {
+  \\"data-what-src\\": \\"6\\"
+}, \\"some p thing\\")));"
+`;
+
+exports[`works as a babel-plugin with preset-typescript works in production mode 1`] = `
+"var __WhatSrcGlobalVariable = require(\\"/Users/duroktar/fun/what-src-webpack-plugin/dist/what-src-cache.jss\\");
+
+import * as React from 'react';
+
+class TestClassComponent extends React.Component {
+  render() {
+    return React.createElement(\\"div\\", {
+      className: \\"class-component\\",
+      \\"data-what-src\\": \\"1\\"
+    }, React.createElement(\\"p\\", {
+      \\"data-what-src\\": \\"2\\"
+    }, \\"some p thing\\"));
+  }
+
+}
+
+const TestFunctionalComponent = () => React.createElement(\\"div\\", {
+  className: \\"functional-component\\",
+  \\"data-what-src\\": \\"3\\"
+}, React.createElement(\\"p\\", {
+  \\"data-what-src\\": \\"4\\"
+}, \\"some p thing\\"));
+
+const TestMemoizedComponent = React.memo(() => React.createElement(\\"div\\", {
+  className: \\"memoized-component\\",
+  \\"data-what-src\\": \\"5\\"
+}, React.createElement(\\"p\\", {
+  \\"data-what-src\\": \\"6\\"
+}, \\"some p thing\\")));"
+`;

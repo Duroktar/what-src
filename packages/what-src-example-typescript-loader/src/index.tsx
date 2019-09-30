@@ -28,10 +28,10 @@ class App extends React.Component {
           <Button id="but">Buttons!</Button>
         </div>
         <a href="http://google.com">And links too :D</a>
-        {/* <React.Fragment>
+        <React.Fragment>
           <div>inside</div>
           <div>fragment</div>
-        </React.Fragment> */}
+        </React.Fragment>
         <footer>
           The ol&apos; footer
         </footer>

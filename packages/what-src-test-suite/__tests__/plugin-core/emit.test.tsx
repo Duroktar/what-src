@@ -1,15 +1,14 @@
 import * as ts from 'typescript'
-import { getService } from '../service'
-import * as H from '../helpers'
+import * as T from '@what-src/plugin-core'
 
-const service = getService({
+const service = T.getService({
   basedir: '/home/user/app/packages/',
   cache: {},
   options: {},
 })
 
 it('emits a cache file', () => {
-  const source = H.generateClickHandlerRawString(
+  const source = T.generateClickHandlerRawString(
     service.options,
     service.getSourceCache(),
   )

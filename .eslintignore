@@ -1,10 +1,14 @@
 .git
 .vscode
 node_modules
+public
+dist
+build
 packages/*/node_modules
 packages/*/dist/**
 packages/what-src-example-basic
-packages/what-src-example-typescript
+packages/what-src-example-typescript-babel
+packages/what-src-example-typescript-loader
 scripts
 package.json
 lerna.json

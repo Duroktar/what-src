@@ -8,15 +8,15 @@
         "type": "node",
         "request": "launch",
         "name": "Debug Babel Plugin",
-        "program": "${workspaceFolder}/packages/what-src-plugin-babel/src/spec/index.ts",
+        "program": "${workspaceFolder}/packages/what-src-plugin-babel/src/__tests__/index.ts",
         "preLaunchTask": "npm: build",
-        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-babel/dist/*.js"]
+        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-babel/dist/__tests__/*.js"]
       },
       {
         "type": "node",
         "request": "launch",
         "name": "Debug Typescript Plugin",
-        "program": "${workspaceFolder}/packages/what-src-plugin-typescript/src/spec/index.ts",
+        "program": "${workspaceFolder}/packages/what-src-plugin-typescript/src/debug.ts",
         "preLaunchTask": "Build typescript plugin",
         "outFiles": ["${workspaceFolder}/packages/what-src-plugin-typescript/dist/*.js"]
       },
@@ -24,17 +24,17 @@
         "type": "node",
         "request": "launch",
         "name": "Debug Webpack Plugin",
-        "program": "${workspaceFolder}/packages/what-src-plugin-webpack/src/spec/index.ts",
+        "program": "${workspaceFolder}/packages/what-src-plugin-webpack/src/__tests__/index.ts",
         "preLaunchTask": "Build webpack plugin",
-        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-webpack/dist/*.js"]
+        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-webpack/dist/__tests__/*.js"]
       },
       {
         "type": "node",
         "request": "launch",
         "name": "Debug Core Module",
-        "program": "${workspaceFolder}/packages/what-src-plugin-core/src/spec/index.ts",
+        "program": "${workspaceFolder}/packages/what-src-plugin-core/src/__tests__/index.ts",
         "preLaunchTask": "Build core",
-        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-core/dist/*.js"]
+        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-core/dist/__tests__/*.js"]
       },
     ]
 }

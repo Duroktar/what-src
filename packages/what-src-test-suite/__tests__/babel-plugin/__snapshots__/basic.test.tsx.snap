@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`works 1`] = `
+"\\"use strict\\";
+
+var _interopRequireWildcard = require(\\"@babel/runtime/helpers/interopRequireWildcard\\");
+
+var _interopRequireDefault = require(\\"@babel/runtime/helpers/interopRequireDefault\\");
+
+var _classCallCheck2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/classCallCheck\\"));
+
+var _createClass2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/createClass\\"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/possibleConstructorReturn\\"));
+
+var _getPrototypeOf2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/getPrototypeOf\\"));
+
+var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inherits\\"));
+
+var React = _interopRequireWildcard(require(\\"react\\"));
+
+var __WhatSrcGlobalVariable = require(\\"/Users/duroktar/fun/what-src-webpack-plugin/dist/what-src-cache.jss\\");
+
+var TestClassComponent =
+/*#__PURE__*/
+function (_React$Component) {
+  (0, _inherits2[\\"default\\"])(TestClassComponent, _React$Component);
+
+  function TestClassComponent() {
+    (0, _classCallCheck2[\\"default\\"])(this, TestClassComponent);
+    return (0, _possibleConstructorReturn2[\\"default\\"])(this, (0, _getPrototypeOf2[\\"default\\"])(TestClassComponent).apply(this, arguments));
+  }
+
+  (0, _createClass2[\\"default\\"])(TestClassComponent, [{
+    key: \\"render\\",
+    value: function render() {
+      return React.createElement(\\"div\\", {
+        className: \\"class-component\\",
+        \\"data-what-src\\": \\"1\\"
+      }, React.createElement(\\"p\\", {
+        \\"data-what-src\\": \\"2\\"
+      }, \\"some p thing\\"));
+    }
+  }]);
+  return TestClassComponent;
+}(React.Component);
+
+var TestFunctionalComponent = function TestFunctionalComponent() {
+  return React.createElement(\\"div\\", {
+    className: \\"functional-component\\",
+    \\"data-what-src\\": \\"3\\"
+  }, React.createElement(\\"p\\", {
+    \\"data-what-src\\": \\"4\\"
+  }, \\"some p thing\\"));
+};
+
+var TestMemoizedComponent = React.memo(function () {
+  return React.createElement(\\"div\\", {
+    className: \\"memoized-component\\",
+    \\"data-what-src\\": \\"5\\"
+  }, React.createElement(\\"p\\", {
+    \\"data-what-src\\": \\"6\\"
+  }, \\"some p thing\\"));
+});"
+`;

@@ -90,30 +90,45 @@
   stopPropagation?: <span class="hljs-keyword">boolean</span>;
   preventDefault?: <span class="hljs-keyword">boolean</span>;
 };</code></pre>
+					<br />
 					<h4 id="--productionmode-boolean">- productionMode: [boolean]</h4>
 					<ul>
-						<li>Set &#39;true&#39; to enable running what-src in production mode (default: <code>false</code>)<h4 id="--enablexkcdmode-boolean">- enableXkcdMode: [boolean]</h4>
-						</li>
+						<li>Set &#39;true&#39; to enable running what-src in production mode (default: <code>false</code>)</li>
+					</ul>
+					<h4 id="--enablexkcdmode-boolean">- enableXkcdMode: [boolean]</h4>
+					<ul>
 						<li>Set <code>true</code> to enable the click tracking feature and have your clicks (and
 							everyone else&#39;s if <code>useRemote</code> is also used) count towards the total time
 							saved number displayed on the <a href="https://duroktar.github.io/what-src/">website</a>
-							(default: <code>false</code>)<h4 id="--useremote-boolean">- useRemote: [boolean]</h4>
-						</li>
+						(default: <code>false</code>)</li>
+					</ul>
+					<h4 id="--useremote-boolean">- useRemote: [boolean]</h4>
+					<ul>
 						<li>Set &#39;true&#39; to enable remote mode which creates links to the source code on github (default: <code>false</code>)<blockquote>
 								<p>Note: This requires your code to be in a valid <code>.git</code> directory. The generated
 									url will be based on the current branch at the time the code is compiled by
 								babel .</p>
 							</blockquote>
-							<h4 id="--serverurl-string">- serverUrl: [string]</h4>
 						</li>
-						<li>The full URL of the running @what-src/express server (default: <code>http://localhost:8018/__what_src</code>)<h4 id="--datatag-string">- dataTag: [string]</h4>
-						</li>
-						<li>A <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#HTML_syntax">valid</a> data attribute for tagging elements (default: <code>data-what-src</code>)<h4 id="--globalcachekey-string">- globalCacheKey: [string]</h4>
-						</li>
-						<li>The global cache key the click callback is keyed to (default: <code>__what-src-global-callback-key</code>)<h4 id="--stoppropagation-boolean">- stopPropagation: [boolean]</h4>
-						</li>
-						<li>Sets the stopPropagation property of the click event (default: <code>true</code>)<h4 id="--preventdefault-boolean">- preventDefault: [boolean]</h4>
-						</li>
+					</ul>
+					<h4 id="--serverurl-string">- serverUrl: [string]</h4>
+					<ul>
+						<li>The full URL of the running @what-src/express server (default: <code>http://localhost:8018/__what_src</code>)</li>
+					</ul>
+					<h4 id="--datatag-string">- dataTag: [string]</h4>
+					<ul>
+						<li>A <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#HTML_syntax">valid</a> data attribute for tagging elements (default: <code>data-what-src</code>)</li>
+					</ul>
+					<h4 id="--globalcachekey-string">- globalCacheKey: [string]</h4>
+					<ul>
+						<li>The global cache key the click callback is keyed to (default: <code>__what-src-global-callback-key</code>)</li>
+					</ul>
+					<h4 id="--stoppropagation-boolean">- stopPropagation: [boolean]</h4>
+					<ul>
+						<li>Sets the stopPropagation property of the click event (default: <code>true</code>)</li>
+					</ul>
+					<h4 id="--preventdefault-boolean">- preventDefault: [boolean]</h4>
+					<ul>
 						<li>Sets the preventDefault property of the click event (default: <code>true</code>)</li>
 					</ul>
 					<h2 id="license">License</h2>
@@ -124,40 +139,79 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
+						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html" class="tsd-kind-icon">What<wbr>Src<wbr>Babel<wbr>Plugin</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_babel.html#babelvisitor" class="tsd-kind-icon">Babel<wbr>Visitor</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_babel.html#pluginstate" class="tsd-kind-icon">Plugin<wbr>State</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_babel.html#buildrequire" class="tsd-kind-icon">build<wbr>Require</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_babel.html#cachefile" class="tsd-kind-icon">cache<wbr>File</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_babel.html#disabled" class="tsd-kind-icon">disabled</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_babel.html#importname" class="tsd-kind-icon">import<wbr>Name</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="/doc/modules/what_src_plugin_babel.html#resolver" class="tsd-kind-icon">resolver</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_babel.html#buildrequire" class="tsd-kind-icon">build<wbr>Require</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_babel.html#babelplugin" class="tsd-kind-icon">babel<wbr>Plugin</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Object literals</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_babel.html#defaultoptions" class="tsd-kind-icon">default<wbr>Options</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="/doc/modules/what_src_plugin_babel.html#getbabelplugin" class="tsd-kind-icon">get<wbr>Babel<wbr>Plugin</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="babelvisitor" class="tsd-anchor"></a>
+					<h3>Babel<wbr>Visitor</h3>
+					<div class="tsd-signature tsd-kind-icon">Babel<wbr>Visitor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PluginObj</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WS.VisitorState</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-babel/src/types.ts#L4">what-src-plugin-babel/src/types.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="pluginstate" class="tsd-anchor"></a>
+					<h3>Plugin<wbr>State</h3>
+					<div class="tsd-signature tsd-kind-icon">Plugin<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-babel/src/types.ts#L6">what-src-plugin-babel/src/types.ts:6</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>opts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter">
+										<h5>plugins<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
 					<a name="buildrequire" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> build<wbr>Require</h3>
 					<div class="tsd-signature tsd-kind-icon">build<wbr>Require<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> =&nbsp;template(&#x60;var %%importName%% &#x3D; require(%%cacheFilePath%%);&#x60;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/plugin.ts#L11">what-src-plugin-babel/src/plugin.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-babel/src/templates.ts#L3">what-src-plugin-babel/src/templates.ts:3</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -182,182 +236,39 @@
 						</ul>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="cachefile" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagLet">Let</span> cache<wbr>File</h3>
-					<div class="tsd-signature tsd-kind-icon">cache<wbr>File<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/plugin.ts#L9">what-src-plugin-babel/src/plugin.ts:9</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="disabled" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagLet">Let</span> disabled</h3>
-					<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/plugin.ts#L7">what-src-plugin-babel/src/plugin.ts:7</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="importname" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagLet">Let</span> import<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">import<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/plugin.ts#L10">what-src-plugin-babel/src/plugin.ts:10</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="resolver" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagLet">Let</span> resolver</h3>
-					<div class="tsd-signature tsd-kind-icon">resolver<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReturnType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;null as any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/plugin.ts#L8">what-src-plugin-babel/src/plugin.ts:8</a></li>
-						</ul>
-					</aside>
-				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="babelplugin" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> babel<wbr>Plugin</h3>
+					<a name="getbabelplugin" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Babel<wbr>Plugin</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">babel<wbr>Plugin<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T.BabelPlugin</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Babel<wbr>Plugin<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WS.BabelPluginContext</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">WS.WhatSrcPluginOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="/doc/modules/what_src_plugin_babel.html#babelvisitor" class="tsd-signature-type">BabelVisitor</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/plugin.ts#L15">what-src-plugin-babel/src/plugin.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-babel/src/plugin.ts#L16">what-src-plugin-babel/src/plugin.ts:16</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>create a new what-src babel-compiler plugin.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>__namedParameters: <span class="tsd-signature-type">object</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter">
-											<h5>rest<span class="tsd-signature-symbol">: </span><a href="/doc/undefined" class="tsd-signature-type">rest</a></h5>
-										</li>
-										<li class="tsd-parameter">
-											<h5>t<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;/Users/duroktar/fun/what-src-webpack-plugin/packages/what-src-plugin-core/node_modules/@babel/types/lib/index&quot;</span></h5>
-										</li>
-									</ul>
+									<h5>context: <span class="tsd-signature-type">WS.BabelPluginContext</span></h5>
+								</li>
+								<li>
+									<h5>config: <span class="tsd-signature-type">WS.WhatSrcPluginOptions</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T.BabelPlugin</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="/doc/modules/what_src_plugin_babel.html#babelvisitor" class="tsd-signature-type">BabelVisitor</a></h4>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Object literals</h2>
-				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-external-module">
-					<a name="defaultoptions" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> default<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/options.ts#L3">what-src-plugin-babel/src/options.ts:3</a></li>
-						</ul>
-					</aside>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="defaultoptions.datatag" class="tsd-anchor"></a>
-						<h3>data<wbr>Tag</h3>
-						<div class="tsd-signature tsd-kind-icon">data<wbr>Tag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;data-what-src&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/options.ts#L5">what-src-plugin-babel/src/options.ts:5</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="defaultoptions.enablexkcdmode" class="tsd-anchor"></a>
-						<h3>enable<wbr>Xkcd<wbr>Mode</h3>
-						<div class="tsd-signature tsd-kind-icon">enable<wbr>Xkcd<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/options.ts#L11">what-src-plugin-babel/src/options.ts:11</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="defaultoptions.globalcachekey" class="tsd-anchor"></a>
-						<h3>global<wbr>Cache<wbr>Key</h3>
-						<div class="tsd-signature tsd-kind-icon">global<wbr>Cache<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;__what-src-global-callback-key&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/options.ts#L9">what-src-plugin-babel/src/options.ts:9</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="defaultoptions.preventdefault" class="tsd-anchor"></a>
-						<h3>prevent<wbr>Default</h3>
-						<div class="tsd-signature tsd-kind-icon">prevent<wbr>Default<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/options.ts#L8">what-src-plugin-babel/src/options.ts:8</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="defaultoptions.productionmode" class="tsd-anchor"></a>
-						<h3>production<wbr>Mode</h3>
-						<div class="tsd-signature tsd-kind-icon">production<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/options.ts#L6">what-src-plugin-babel/src/options.ts:6</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="defaultoptions.serverurl" class="tsd-anchor"></a>
-						<h3>server<wbr>Url</h3>
-						<div class="tsd-signature tsd-kind-icon">server<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;http://localhost:8018/__what_src&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/options.ts#L4">what-src-plugin-babel/src/options.ts:4</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="defaultoptions.stoppropagation" class="tsd-anchor"></a>
-						<h3>stop<wbr>Propagation</h3>
-						<div class="tsd-signature tsd-kind-icon">stop<wbr>Propagation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/options.ts#L7">what-src-plugin-babel/src/options.ts:7</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="defaultoptions.useremote" class="tsd-anchor"></a>
-						<h3>use<wbr>Remote</h3>
-						<div class="tsd-signature tsd-kind-icon">use<wbr>Remote<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/options.ts#L10">what-src-plugin-babel/src/options.ts:10</a></li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="defaultoptions.whatsrcstatsurl" class="tsd-anchor"></a>
-						<h3>what<wbr>Src<wbr>Stats<wbr>Url</h3>
-						<div class="tsd-signature tsd-kind-icon">what<wbr>Src<wbr>Stats<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;https://webhooks.mongodb-stitch.com/api/client/v2.0/app/triggers_stitchapp-hnsgo/service/click-service/incoming_webhook/track-click&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/b9dbf15/packages/what-src-plugin-babel/src/options.ts#L12">what-src-plugin-babel/src/options.ts:12</a></li>
-							</ul>
-						</aside>
-					</section>
 				</section>
 			</section>
 		</div>
@@ -383,6 +294,9 @@
 						<a href="/doc/modules/what_src_plugin_webpack.html">what-<wbr>src-<wbr>plugin-<wbr>webpack</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_test_suite.html">what-<wbr>src-<wbr>test-<wbr>suite</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="/doc/modules/what_src_utils.html">what-<wbr>src-<wbr>utils</a>
 					</li>
 				</ul>
@@ -397,26 +311,20 @@
 					<li class="current tsd-kind-external-module">
 						<a href="/doc/modules/what_src_plugin_babel.html" class="tsd-kind-icon">what-<wbr>src-<wbr>plugin-<wbr>babel</a>
 						<ul>
-							<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+							<li class=" tsd-kind-class tsd-parent-kind-external-module">
+								<a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html" class="tsd-kind-icon">What<wbr>Src<wbr>Babel<wbr>Plugin</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+								<a href="/doc/modules/what_src_plugin_babel.html#babelvisitor" class="tsd-kind-icon">Babel<wbr>Visitor</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+								<a href="/doc/modules/what_src_plugin_babel.html#pluginstate" class="tsd-kind-icon">Plugin<wbr>State</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 								<a href="/doc/modules/what_src_plugin_babel.html#buildrequire" class="tsd-kind-icon">build<wbr>Require</a>
 							</li>
-							<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-								<a href="/doc/modules/what_src_plugin_babel.html#cachefile" class="tsd-kind-icon">cache<wbr>File</a>
-							</li>
-							<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-								<a href="/doc/modules/what_src_plugin_babel.html#disabled" class="tsd-kind-icon">disabled</a>
-							</li>
-							<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-								<a href="/doc/modules/what_src_plugin_babel.html#importname" class="tsd-kind-icon">import<wbr>Name</a>
-							</li>
-							<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-								<a href="/doc/modules/what_src_plugin_babel.html#resolver" class="tsd-kind-icon">resolver</a>
-							</li>
 							<li class=" tsd-kind-function tsd-parent-kind-external-module">
-								<a href="/doc/modules/what_src_plugin_babel.html#babelplugin" class="tsd-kind-icon">babel<wbr>Plugin</a>
-							</li>
-							<li class=" tsd-kind-object-literal tsd-parent-kind-external-module">
-								<a href="/doc/modules/what_src_plugin_babel.html#defaultoptions" class="tsd-kind-icon">default<wbr>Options</a>
+								<a href="/doc/modules/what_src_plugin_babel.html#getbabelplugin" class="tsd-kind-icon">get<wbr>Babel<wbr>Plugin</a>
 							</li>
 						</ul>
 					</li>
@@ -430,6 +338,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="/doc/modules/what_src_plugin_webpack.html" class="tsd-kind-icon">what-<wbr>src-<wbr>plugin-<wbr>webpack</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="/doc/modules/what_src_test_suite.html" class="tsd-kind-icon">what-<wbr>src-<wbr>test-<wbr>suite</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="/doc/modules/what_src_utils.html" class="tsd-kind-icon">what-<wbr>src-<wbr>utils</a>

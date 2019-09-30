@@ -57,8 +57,8 @@ export class WhatSrcTsTransformer {
    */
   constructor(
     public defaultOptions: WhatSrcTsTransformerOptions,
-    public basedir: string = '',
-    public cache: WS.SourceCache = { __basedir: '' }
+    public basedir: string = '', // TODO(Important): This needs to be set for cache optimization to work!
+    public cache: WS.SourceCache = WS.defaultCache
   ) {
     this.options = WS.mergePluginOptions(defaultOptions)
     this.service = WS.getService(this)
@@ -119,7 +119,7 @@ export class WhatSrcTsTransformer {
 
     // decorate any valid elements with a what-src tag
     if (ts.isJsxElement(node) && !ts.isJsxFragment(node)) {
-      this.createAndUpdateJsxAttribute(node)
+      node = this.createAndUpdateJsxAttribute(node)
     }
 
     // not sure if this is needed or not, to be honest :/
@@ -213,6 +213,7 @@ export class WhatSrcTsTransformer {
         node.openingElement.attributes = newAttributes
       }
     }
+    return node
   }
 
   /**
@@ -224,7 +225,7 @@ export class WhatSrcTsTransformer {
    * @memberof WhatSrcBabelPlugin
    */
   private getOpeningElementStartLocation(node: ts.JsxElement) {
-    const start = node.openingElement.getStart()
+    const start = node.openingElement.pos
     return this.sourceFile.getLineAndCharacterOfPosition(start)
   }
 

@@ -1,3 +1,4 @@
-import { getBabelPlugin } from './plugin'
+import { getBabelPlugin, WhatSrcBabelPlugin } from './plugin'
 
+export { WhatSrcBabelPlugin }
 export default getBabelPlugin

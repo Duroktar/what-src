@@ -34,7 +34,8 @@
     "operator-linebreak": ["error", "after", {
       "overrides": { "||": "before", "|": "before" }
     }],
-    "jsx-a11y/click-events-have-key-events": "off"
+    "jsx-a11y/click-events-have-key-events": "off",
+    "standard/no-callback-literal": "off"
   },
   "overrides": [{
     "files": ["**/*.ts", "**/*.tsx"],

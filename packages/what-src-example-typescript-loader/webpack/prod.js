@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 const webpack = require('webpack')
+const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin')
 const base = require('./base')
 const merge = require('webpack-merge')
@@ -8,6 +9,7 @@ const merge = require('webpack-merge')
 module.exports = merge(base, {
   mode: 'production',
   output: {
+    path: path.resolve(__dirname, '..', 'public'),
     filename: '[name].[chunkhash].bundle.min.js',
   },
   devtool: false,

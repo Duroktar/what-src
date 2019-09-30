@@ -73,8 +73,8 @@ export const capitalize = ([o, ...r]: string) => o.toUpperCase() + r.join('')
  * @returns
  */
 export const toCamelCase = (str: string) => {
-  const [a, ...rest] = str.replace(' ', '-').replace('_', '-').split('-')
-  return [a, ...rest.map(capitalize)].join('')
+  const [[a, ...fRest], ...rest] = str.replace('-', ' ').replace('_', ' ').split(' ')
+  return [a.toLowerCase(), ...fRest, ...rest.map(capitalize)].join('')
 }
 
 /**

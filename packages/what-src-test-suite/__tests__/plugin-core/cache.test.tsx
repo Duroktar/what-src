@@ -1,7 +1,6 @@
-import { getService } from '../service'
-import * as T from '../types'
+import * as T from '@what-src/plugin-core'
 
-const service = getService({
+const service = T.getService({
   basedir: '/home/user/app/packages/',
   cache: {},
   options: {},

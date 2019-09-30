@@ -6,6 +6,7 @@
     {"path": "./packages/what-src-plugin-core"},
     {"path": "./packages/what-src-plugin-typescript"},
     {"path": "./packages/what-src-plugin-webpack"},
+    {"path": "./packages/what-src-test-suite"},
     {"path": "./packages/what-src-utils"}
   ]
 }

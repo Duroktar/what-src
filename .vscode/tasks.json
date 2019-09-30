@@ -7,11 +7,9 @@
         "label": "AAA: What-Src Development - [Master Task]",
         "dependsOn": [
           "Typescript: Full Project Compilation - [watch-mode]",
-          "ESLint: Full Project Linting - [watch-mode]"
+          // "ESLint: Full Project Linting - [watch-mode]"
         ],
-        "runOptions": {
-          // "runOn": "folderOpen"
-        },
+        "runOptions": {},
         "group": {
           "kind": "build",
           "isDefault": true
@@ -68,31 +66,44 @@
         "tsconfig": "./packages/what-src-plugin-babel/tsconfig.json",
         "problemMatcher": [
           "$tsc"
-        ],
+        ]
       },
       {
         "label": "Build webpack plugin",
         "type": "typescript",
-        "tsconfig": "./packages/what-src-plugin-babel/tsconfig.json",
+        "tsconfig": "./packages/what-src-plugin-webpack/tsconfig.json",
         "problemMatcher": [
           "$tsc"
-        ],
+        ]
       },
       {
         "label": "Build typescript plugin",
         "type": "typescript",
-        "tsconfig": "./packages/what-src-plugin-babel/tsconfig.json",
+        "tsconfig": "./packages/what-src-plugin-typescript/tsconfig.json",
         "problemMatcher": [
           "$tsc"
-        ],
+        ]
       },
       {
         "label": "Build core",
         "type": "typescript",
-        "tsconfig": "./packages/what-src-plugin-babel/tsconfig.json",
+        "tsconfig": "./packages/what-src-plugin-core/tsconfig.json",
         "problemMatcher": [
           "$tsc"
-        ],
+        ]
+      },
+      {
+        "type": "npm",
+        "script": "test",
+        "group": "test"
+      },
+      {
+        "type": "npm",
+        "script": "test:watch",
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        }
       }
     ]
 }

@@ -1,4 +1,5 @@
 export * from './builders'
+export * from './git'
 export * from './helpers'
 export * from './options'
 export * from './service'

@@ -10,8 +10,9 @@ coverage
 build
 public
 dist
+logs
 .next
-
+*.jss
 # misc
 .DS_Store
 .env

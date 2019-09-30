@@ -20,3 +20,24 @@ Object {
   "useRemote": false,
 }
 `;
+
+exports[`what-src configuration is configurable 1`] = `
+Object {
+  "blacklistedTags": Array [
+    "Helmet",
+    "head",
+    "meta",
+    "script",
+  ],
+  "dataTag": "data-what-src",
+  "enableXkcdMode": false,
+  "globalCacheKey": "__what-src-global-callback-key",
+  "importFrom": "what-src-cache.jss",
+  "importName": "__WhatSrcGlobalVariable",
+  "preventDefault": true,
+  "productionMode": true,
+  "serverUrl": "new_server_url",
+  "stopPropagation": true,
+  "useRemote": false,
+}
+`;

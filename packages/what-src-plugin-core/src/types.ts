@@ -37,6 +37,9 @@ export type VisitorState = {
   opts: WhatSrcPluginOptions;
   cache: { [k: string]: string };
   path: traverse.NodePath<types.JSXElement>;
+  cwd: string;
+  key: string;
+  file: any;
 }
 
 export type SourceLocationStart = {

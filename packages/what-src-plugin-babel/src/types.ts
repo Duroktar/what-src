@@ -1,6 +1,6 @@
-import * as traverse from '@babel/traverse'
 import * as WS from '@what-src/plugin-core'
+import { PluginObj } from '@babel/core'
 
-export type BabelVisitor = {
-  visitor: traverse.Visitor<WS.VisitorState>
-}
+export type BabelVisitor = PluginObj<WS.VisitorState>
+
+export type PluginState = { opts: { plugins: Array<{ key: string; options: {} }> } }

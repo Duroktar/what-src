@@ -5,13 +5,14 @@
   "scripts": {
     "build:clean": "tsc -b --clean && npm run build",
     "build:docs": "typedoc --tsconfig ./tsconfig.base.json",
-    "build:gh-pages": "npm run logo && npm run clean:gh-pages && npm run build:docs && lerna run build:stats && npm run copy:stats",
+    "build:gh-pages": "./scripts/build-gh-pages.sh",
     "build:stats": "npm run logo && lerna run build:stats",
     "build:watch": "npm run logo && tsc -b -v --watch --pretty",
     "build:force": "tsc -b -v --pretty --force",
     "build": "tsc -b -v --pretty",
     "clean": "tsc -b --clean",
     "clean:gh-pages": "rimraf ./docs",
+    "copy:coverage": "./scripts/copy-coverage-to-docs.sh",
     "copy:stats": "./scripts/copy-website-to-docs.sh",
     "dev:stats": "lerna run dev:stats --stream",
     "lint:watch": "esw --ext .js,.jsx,.ts,.tsx --watch-ignore '/\\.git|node_modules|\\.eslintcache/' --clear -w ./packages",
@@ -20,8 +21,11 @@
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./packages",
     "logo": "./scripts/print-console-logo.sh",
     "prebuild": "lerna run logo",
-    "prepublish": "npm run logo && ./scripts/clone-license.sh",
-		"serve:gh-pages": "npm run logo && serve -l 9000 ./docs"
+    "prepublish": "npm run logo && ./scripts/clone-license.sh && npm run build",
+		"serve:gh-pages": "npm run logo && serve -l 9000 ./docs",
+    "test:update": "jest -u",
+    "test:watch": "jest --watch",
+    "test": "jest"
   },
   "engines": {
     "node": ">= 6.9.0 < 13.0.0",
@@ -35,9 +39,12 @@
         "tsConfig": "tsconfig.base.json"
       }
     },
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
     "testPathIgnorePatterns" : [
       "/node_modules/",
-      "/dist/"
+      "/dist/",
+      "/*.debug.ts"
     ]
   },
   "devDependencies": {
@@ -45,6 +52,8 @@
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
     "@strictsoftware/typedoc-plugin-monorepo": "^0.2.1",
     "@typescript-eslint/eslint-plugin": "^2.3.1",
     "@typescript-eslint/parser": "^2.3.1",

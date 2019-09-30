@@ -12,7 +12,9 @@
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./src",
     "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx  --fix ./src",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.js ",
-    "start": "webpack-dev-server --config webpack/base.js"
+    "start:dev": "webpack-dev-server --config webpack/base.js",
+		"start": "npm run build && npm run serve",
+		"serve": "serve -l 9000 public"
   },
   "dependencies": {
   },
@@ -44,6 +46,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
+    "serve": "^11.2.0",
     "terser-webpack-plugin": "^2.1.0",
     "ts-loader": "^6.1.2",
     "typescript": "^3.6.3",
