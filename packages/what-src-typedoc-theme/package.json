@@ -1,7 +1,7 @@
 {
   "name": "@what-src/typedoc-theme",
   "description": "Customized default typedoc theme for what-src api documentation.",
-  "version": "0.0.10",
+  "version": "1.1.0-alpha.0",
   "license": "MIT",
   "author": {
     "name": "Duroktar"

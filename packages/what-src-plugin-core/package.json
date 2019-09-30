@@ -1,6 +1,6 @@
 {
 	"name": "@what-src/plugin-core",
-	"version": "1.0.11",
+	"version": "1.1.0-alpha.0",
 	"description": "what-src babel-plugin.",
 	"author": "Scott Doucet <duroktar@gmail.com>",
 	"license": "MIT",
@@ -22,7 +22,6 @@
 	"engines": {
 		"node": ">=6.9.0"
 	},
-	"dependencies": {},
 	"devDependencies": {
 		"@babel/cli": "^7.6.2",
 		"@babel/parser": "^7.6.2",
@@ -34,7 +33,7 @@
 		"@types/hosted-git-info": "^2.7.0",
 		"@types/node": "^12.7.8",
 		"@types/yup": "^0.26.24",
-		"@what-src/utils": "^1.0.11",
+		"@what-src/utils": "^1.1.0-alpha.0",
 		"cross-spawn": "^7.0.0",
 		"hosted-git-info": "^3.0.0",
 		"yup": "^0.27.0"

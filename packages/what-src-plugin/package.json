@@ -1,6 +1,6 @@
 {
   "name": "@what-src/plugin",
-  "version": "1.0.11",
+  "version": "1.1.0-alpha.0",
   "description": "what-src plugin bundle.",
   "author": "Scott Doucet <duroktar@gmail.com>",
   "license": "MIT",
@@ -22,10 +22,10 @@
     "node": ">=6.9.0"
   },
   "dependencies": {
-    "@what-src/plugin-core": "^1.0.11",
-    "@what-src/babel-plugin": "^1.0.11",
-    "@what-src/typescript-plugin": "^1.0.11",
-    "@what-src/webpack-plugin": "^1.0.11"
+    "@what-src/babel-plugin": "^1.1.0-alpha.0",
+    "@what-src/plugin-core": "^1.1.0-alpha.0",
+    "@what-src/typescript-plugin": "^1.1.0-alpha.0",
+    "@what-src/webpack-plugin": "^1.1.0-alpha.0"
   },
   "devDependencies": {
     "@types/node": "^12.7.8"
