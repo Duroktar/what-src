@@ -1,5 +1,6 @@
 import * as babel from '@babel/core'
 import plugin from '@what-src/babel-plugin'
+import { WhatSrcPluginOptions } from '@what-src/plugin-core'
 
 const example = `
 import * as React from 'react'
@@ -28,8 +29,12 @@ const TestMemoizedComponent = React.memo(() => (
 `
 
 it('works', () => {
+  const configuration: WhatSrcPluginOptions = { importFrom: '' }
   const res = babel.transformSync(example, {
-    plugins: ['@babel/plugin-transform-runtime', plugin],
+    plugins: [
+      '@babel/plugin-transform-runtime',
+      [plugin, configuration],
+    ],
     filename: 'testfile.ts',
     presets: [
       '@babel/preset-env',

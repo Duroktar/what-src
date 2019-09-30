@@ -30,9 +30,10 @@ const TestMemoizedComponent = React.memo(() => (
 
 describe('works as a babel-plugin with preset-typescript', () => {
   it('works in development mode', () => {
+    const configuration: WhatSrcPluginOptions = { importFrom: '' }
     const res = babel.transformSync(example, {
       envName: 'development',
-      plugins: [whatSrcBabelPlugin],
+      plugins: [[whatSrcBabelPlugin, configuration]],
       filename: 'README.md',
       presets: [
         '@babel/preset-react',
@@ -49,6 +50,7 @@ describe('works as a babel-plugin with preset-typescript', () => {
     const configuration: WhatSrcPluginOptions = {
       useRemote: true,
       productionMode: true,
+      importFrom: '',
     }
 
     const res = babel.transformSync(example, {

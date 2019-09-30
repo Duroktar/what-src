@@ -8,33 +8,33 @@
         "type": "node",
         "request": "launch",
         "name": "Debug Babel Plugin",
-        "program": "${workspaceFolder}/packages/what-src-plugin-babel/src/__tests__/index.ts",
+        "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/babel-plugin/debug.ts",
         "preLaunchTask": "npm: build",
-        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-babel/dist/__tests__/*.js"]
+        "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/babel-plugin/*.js"]
       },
       {
         "type": "node",
         "request": "launch",
         "name": "Debug Typescript Plugin",
-        "program": "${workspaceFolder}/packages/what-src-plugin-typescript/src/debug.ts",
+        "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/typescript-plugin/debug.ts",
         "preLaunchTask": "Build typescript plugin",
-        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-typescript/dist/*.js"]
+        "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/typescript-plugin/*.js"]
       },
-      {
-        "type": "node",
-        "request": "launch",
-        "name": "Debug Webpack Plugin",
-        "program": "${workspaceFolder}/packages/what-src-plugin-webpack/src/__tests__/index.ts",
-        "preLaunchTask": "Build webpack plugin",
-        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-webpack/dist/__tests__/*.js"]
-      },
-      {
-        "type": "node",
-        "request": "launch",
-        "name": "Debug Core Module",
-        "program": "${workspaceFolder}/packages/what-src-plugin-core/src/__tests__/index.ts",
-        "preLaunchTask": "Build core",
-        "outFiles": ["${workspaceFolder}/packages/what-src-plugin-core/dist/__tests__/*.js"]
-      },
+      // {
+      //   "type": "node",
+      //   "request": "launch",
+      //   "name": "Debug Webpack Plugin",
+      //   "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/index.ts",
+      //   "preLaunchTask": "Build webpack plugin",
+      //   "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/__tests__/*.js"]
+      // },
+      // {
+      //   "type": "node",
+      //   "request": "launch",
+      //   "name": "Debug Core Module",
+      //   "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/index.ts",
+      //   "preLaunchTask": "Build core",
+      //   "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/__tests__/*.js"]
+      // },
     ]
 }

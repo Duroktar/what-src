@@ -6,8 +6,11 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/@what-src/plugin"><img alt="project version" src="https://img.shields.io/npm/v/@what-src/plugin.svg?maxAge=3600"></a>
   <a href="https://lerna.js.org/"><img alt="Managed By Lerna" src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg"></a>
-  <a href="https://david-dm.org/duroktar/what-src?type=dev" title="devDependencies status"><img src="https://david-dm.org/duroktar/what-src/dev-status.svg"/></a>
   <a href="https://www.npmjs.com/package/@what-src/plugin"><img alt="npm Downloads" src="https://img.shields.io/npm/dm/@what-src/plugin.svg?maxAge=43200"></a>
+</p>
+<p align="center">
+  <a href="https://david-dm.org/duroktar/what-src?type=dev" title="devDependencies status"><img src="https://david-dm.org/duroktar/what-src/dev-status.svg"/></a>
+  <a href="https://travis-ci.org/Duroktar/what-src"><img alt="Build Status" src="https://travis-ci.org/Duroktar/what-src.svg?branch=1.1.x-release"></a>
 </p>
 
 `@what-src/plugin` is a tool for developers that puts the code for every element

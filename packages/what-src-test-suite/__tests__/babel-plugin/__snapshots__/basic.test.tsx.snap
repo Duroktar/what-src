@@ -19,7 +19,7 @@ var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inheri
 
 var React = _interopRequireWildcard(require(\\"react\\"));
 
-var __WhatSrcGlobalVariable = require(\\"/Users/duroktar/fun/what-src-webpack-plugin/dist/what-src-cache.jss\\");
+var __WhatSrcGlobalVariable = require(\\"/Users/duroktar/fun/what-src-webpack-plugin/dist\\");
 
 var TestClassComponent =
 /*#__PURE__*/

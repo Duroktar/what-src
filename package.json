@@ -37,6 +37,7 @@
   "jest": {
     "preset": "ts-jest",
     "globals": {
+      "OUTDIR": "/",
       "ts-jest": {
         "tsConfig": "tsconfig.base.json"
       }

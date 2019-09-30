@@ -32,7 +32,7 @@ describe('works as a babel-plugin', () => {
   it('works in development mode', () => {
     const res = babel.transformSync(example, {
       envName: 'development',
-      plugins: ['@babel/plugin-transform-runtime', whatSrcBabelPlugin],
+      plugins: ['@babel/plugin-transform-runtime', [whatSrcBabelPlugin, { importFrom: '' }]],
       filename: 'README.md',
       presets: [
         '@babel/preset-env',
@@ -49,6 +49,7 @@ describe('works as a babel-plugin', () => {
     const configuration: WhatSrcPluginOptions = {
       useRemote: true,
       productionMode: true,
+      importFrom: '',
     }
 
     const res = babel.transformSync(example, {

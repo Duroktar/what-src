@@ -82,7 +82,7 @@ export class WhatSrcBabelPlugin {
    */
   private PLUGIN_KEY = 'what-src-plugin'
 
-  // private CWD = ''
+  public OUTDIR!: string
 
   /**
    * typescript node ast visitor
@@ -95,6 +95,7 @@ export class WhatSrcBabelPlugin {
       pre: (state) => {
         const plugin = this.selectPluginFromState(state)
         this.options = WS.mergePluginOptions(plugin.options)
+        this.OUTDIR = process.env.OUTDIR || state.opts.cwd
       },
       visitor: {
         Program: {
@@ -102,7 +103,7 @@ export class WhatSrcBabelPlugin {
             if (!this.disabled) {
               // at the very end we write out our cache file and append an import to it
               // to be used for starting the click listener in the comsumers client
-              const cacheFilePath = this.getFullCacheFilePath(state.cwd)
+              const cacheFilePath = this.getFullCacheFilePath(this.OUTDIR)
 
               const entrance = () => buildRequire({
                 importName: t.identifier(this.options.importName),
