@@ -2,6 +2,8 @@ import * as babel from '@babel/core'
 import plugin from '@what-src/babel-plugin'
 import { WhatSrcPluginOptions } from '@what-src/plugin-core'
 
+Object.defineProperty(process.env, 'OUTDIR', { value: '/' })
+
 const example = `
 import * as React from 'react'
 
@@ -32,7 +34,4 @@ const res = babel.transformSync(example, {
   ],
 })
 
-it('has a test', () => {
-  expect(res).toHaveProperty('code')
-  // console.log(res!.code)
-})
+console.log(res)

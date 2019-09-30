@@ -3,7 +3,7 @@ import * as traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import * as WS from '@what-src/plugin-core'
 import { isNullOrUndefined, isNodeEnvProduction, getIn, withHooks } from '@what-src/utils'
-import { join } from 'path'
+import { join, relative } from 'path'
 import { buildRequire } from './templates'
 import { BabelVisitor, PluginState } from './types'
 
@@ -95,7 +95,7 @@ export class WhatSrcBabelPlugin {
       pre: (state) => {
         const plugin = this.selectPluginFromState(state)
         this.options = WS.mergePluginOptions(plugin.options)
-        this.OUTDIR = process.env.OUTDIR || state.opts.cwd
+        this.OUTDIR = relative(state.opts.cwd, __dirname)
       },
       visitor: {
         Program: {
