@@ -95,7 +95,7 @@ export class WhatSrcBabelPlugin {
       pre: (state) => {
         const plugin = this.selectPluginFromState(state)
         this.options = WS.mergePluginOptions(plugin.options)
-        this.OUTDIR = relative(state.opts.cwd, __dirname)
+        this.OUTDIR = join(state.opts.root, 'node_modules', '.cache', 'what-src')
       },
       visitor: {
         Program: {
@@ -189,7 +189,7 @@ export class WhatSrcBabelPlugin {
    * @memberof WhatSrcTsTransformer
    */
   private getFullCacheFilePath(outDir: string) {
-    return join(outDir, 'dist', this.options.importFrom)
+    return relative(__dirname, join(outDir, this.options.importFrom))
   }
 
   /**
