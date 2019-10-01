@@ -3,7 +3,7 @@
 exports[`works 1`] = `
 "\\"use strict\\";
 Object.defineProperty(exports, \\"__esModule\\", { value: true });
-require(\\"/Users/duroktar/fun/what-src-webpack-plugin/node_modules/@what-src/.cache/runtimeService\\").default;
+require(\\"/CACHE_LOCATION/OVERRIDE/node_modules/@what-src/.cache/runtimeService\\").default;
 const React = require(\\"react\\");
 class TestClassComponent extends React.Component {
     render() {

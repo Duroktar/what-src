@@ -13,7 +13,7 @@ import { WhatSrcTsTransformerOptions } from './types'
  */
 export function createTransformer(tsLoaderOpts: any, userOpts?: any): ts.TransformerFactory<ts.SourceFile> {
   if (arguments.length === 1) {
-    return new WhatSrcTsTransformer(userOpts).transformer
+    return new WhatSrcTsTransformer(tsLoaderOpts).transformer
   } else {
     return new WhatSrcTsTransformer(userOpts, tsLoaderOpts).transformer
   }

@@ -9,7 +9,11 @@ const compilerOptions: ts.CompilerOptions = {
   importHelpers: true,
 }
 
-const transformerOptions = {}
+const transformerOptions = {
+  cacheLocOverride: '/CACHE_LOCATION/OVERRIDE',
+  createCacheDir: false,
+  createCacheFile: false,
+}
 
 const sourceText = `
 import * as React from 'react'
