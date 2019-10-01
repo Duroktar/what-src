@@ -175,5 +175,15 @@ describe('what-src common utilities', () => {
       expect(U.empty('hi')).toEqual(false)
       expect(U.empty([42])).toEqual(false)
     })
+    it('try works as intended', async() => {
+      const res = await U.λTry(() => Promise.resolve(1))
+      const rej = await U.λTry(() => { throw new Error() })
+
+      expect(res.data).toBeTruthy()
+      expect(res.err).not.toBeTruthy()
+
+      expect(rej.err).toBeTruthy()
+      expect(rej.data).not.toBeTruthy()
+    })
   })
 })
