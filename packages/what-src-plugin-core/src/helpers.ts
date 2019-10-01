@@ -1,6 +1,6 @@
+import * as ts from 'typescript'
 import { toCamelCase, isNullOrUndefined, λIf } from '@what-src/utils'
 import { defaultOptions } from './options'
-import * as GIT from './git'
 import * as T from './types'
 import { STATS_URL } from './constants'
 
@@ -28,7 +28,7 @@ export const mergePluginOptions = (
  * @param {string} filepath
  * @returns {string} The resolved git url
  */
-export const gitUrlResolver = (() => {
+export const gitUrlResolver = ((GIT = require('./git')) => {
   const remoteUrl = GIT.getGitRemoteOriginUrl()
   const branch = GIT.getGitBranchName()
   return function getRemoteFileUrl(filepath: string) {
@@ -46,10 +46,22 @@ export const gitUrlResolver = (() => {
  * @param {T.WhatSrcConfiguration} options
  * @param {(str: string) => string} resolver
  */
-export const getRemoteFilenameIfSet = (
+export const getRemoteFilenameOrNull = (
   filename: string,
   options: T.WhatSrcConfiguration
-) => options.useRemote ? gitUrlResolver(filename) : filename
+) => options.useRemote ? gitUrlResolver(filename) : null
+
+/**
+ * resolves to the base github url for the current branch and repo
+ *
+ * @returns
+ */
+export const getGitRemoteBaseDir = (GIT = require('./git')) => {
+  const remoteUrl = GIT.getGitRemoteOriginUrl()
+  const branch = GIT.getGitBranchName()
+  const options = { branch, filepath: '' }
+  return generateGitFileUrl(remoteUrl, options)
+}
 
 /**
  * generates the github url for the current git branch and filepath
@@ -109,7 +121,7 @@ export const generateClickHandlerRawString = (
             ${λIf(o.preventDefault, 'e.preventDefault();', '')}
             if (typeof dataset === 'undefined') return;
             ${λIf(o.useRemote, {
-              value: 'window.open(dataset.remoteUrl, "_blank");',
+              value: 'window.open(cache.__basedir + dataset.remoteFn, "_blank");',
               otherwise: `
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', "${o.serverUrl}", true);
@@ -146,12 +158,31 @@ export const generateClickHandlerRawString = (
  * }
  * @returns
  */
-export const generateJsxMetaData = (location: T.SourceLocationFullStart) => {
-  const { col, filename, line } = location
+export const generateJsxMetaData = (
+  location: T.SourceLocationFullStart,
+  remote = false,
+) => {
+  const { column, filename, line } = location
   return {
-    filename: filename,
-    line: line,
-    column: col,
-    remoteUrl: `${filename}#L${line}`,
-  }
+    filename: remote ? null : filename,
+    remoteFn: remote ? `${filename}#L${line}` : null,
+    column,
+    line,
+  } as T.SourceLocationDTO
+}
+
+/**
+ * Compile source down to ES2015 (uses ts compiler)
+ *
+ * @param {string} src
+ * @returns
+ */
+export const compileSource = (src: string) => {
+  const result = ts.transpileModule(src, {
+    compilerOptions: {
+      module: ts.ModuleKind.CommonJS,
+      target: ts.ScriptTarget.ES2015,
+    },
+  })
+  return result.outputText
 }

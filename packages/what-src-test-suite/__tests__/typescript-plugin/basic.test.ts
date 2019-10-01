@@ -5,6 +5,7 @@ import { createTransformer } from '@what-src/typescript-plugin'
 const compilerOptions: ts.CompilerOptions = {
   module: ts.ModuleKind.CommonJS,
   jsx: ts.JsxEmit.React,
+  target: ts.ScriptTarget.ESNext,
   importHelpers: true,
 }
 
@@ -37,16 +38,10 @@ const TestMemoizedComponent = React.memo(() => (
 `
 
 it('works', () => {
-  const sourceFile = ts.createSourceFile(
-    'anything.tsx',
-    sourceText,
-    ts.ScriptTarget.ES2015,
-  )
+  const result = ts.transpileModule(sourceText, {
+    compilerOptions,
+    transformers: { before: [createTransformer(transformerOptions)] },
+  })
 
-  const result = ts.transform(sourceFile,
-    [createTransformer(transformerOptions)],
-    compilerOptions
-  )
-
-  expect(result.transformed).toMatchSnapshot()
+  expect(result.outputText).toMatchSnapshot()
 })

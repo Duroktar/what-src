@@ -16,6 +16,7 @@ logs
 # misc
 .DS_Store
 .env
+.cache
 .vscode/*
 !.vscode/launch.json
 !.vscode/tasks.json

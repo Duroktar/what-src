@@ -21,11 +21,11 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'],
             plugins: [
               ['module:@what-src/plugin',
-              {
-                productionMode: true,
-                useRemote: true,
-                enableXkcdMode: true
-              }]],
+                {
+                  productionMode: true,
+                  useRemote: true,
+                  enableXkcdMode: true,
+                }]],
           },
         },
       },

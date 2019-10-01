@@ -7,10 +7,10 @@
   "author": {
     "name": "Duroktar"
   },
-  "main": "dist/plugin.js",
+  "main": "plugin.js",
   "files": [
     "LICENSE",
-    "dist"
+    "default"
   ],
   "publishConfig": {
     "access": "public"

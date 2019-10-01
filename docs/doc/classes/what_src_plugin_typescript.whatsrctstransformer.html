@@ -106,10 +106,10 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#basedir" class="tsd-kind-icon">basedir</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#cache" class="tsd-kind-icon">cache</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#cachefile" class="tsd-kind-icon">cache<wbr>File</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#context" class="tsd-kind-icon">context</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#defaultoptions" class="tsd-kind-icon">default<wbr>Options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#disabled" class="tsd-kind-icon">disabled</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#host" class="tsd-kind-icon">host</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#module" class="tsd-kind-icon">module</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#options" class="tsd-kind-icon">options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#service" class="tsd-kind-icon">service</a></li>
@@ -131,18 +131,18 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>What<wbr>Src<wbr>TsTransformer<span class="tsd-signature-symbol">(</span>defaultOptions<span class="tsd-signature-symbol">: </span><a href="/doc/modules/what_src_plugin_typescript.html#whatsrctstransformeroptions" class="tsd-signature-type">WhatSrcTsTransformerOptions</a>, basedir<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, cache<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WS.SourceCache</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html" class="tsd-signature-type">WhatSrcTsTransformer</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>What<wbr>Src<wbr>TsTransformer<span class="tsd-signature-symbol">(</span>defaultOptions<span class="tsd-signature-symbol">: </span><a href="/doc/modules/what_src_plugin_typescript.html#whatsrctstransformeroptions" class="tsd-signature-type">WhatSrcTsTransformerOptions</a>, host<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, basedir<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, cache<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WS.WhatSrcCache</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html" class="tsd-signature-type">WhatSrcTsTransformer</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L50">what-src-plugin-typescript/src/transformer.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L73">what-src-plugin-typescript/src/transformer.ts:73</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Constructs a TS compiler API transformer</p>
+									<p>Creates an instance of WhatSrcTsTransformer.</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>memberof</dt>
@@ -156,10 +156,13 @@
 									<h5>defaultOptions: <a href="/doc/modules/what_src_plugin_typescript.html#whatsrctstransformeroptions" class="tsd-signature-type">WhatSrcTsTransformerOptions</a></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> basedir: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;&quot;</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> host: <span class="tsd-signature-type">any</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> cache: <span class="tsd-signature-type">WS.SourceCache</span><span class="tsd-signature-symbol"> =&nbsp;WS.defaultCache</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> basedir: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;process.cwd()</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> cache: <span class="tsd-signature-type">WS.WhatSrcCache</span><span class="tsd-signature-symbol"> =&nbsp;WS.defaultCache</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html" class="tsd-signature-type">WhatSrcTsTransformer</a></h4>
@@ -175,27 +178,17 @@
 					<div class="tsd-signature tsd-kind-icon">basedir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L60">what-src-plugin-typescript/src/transformer.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L86">what-src-plugin-typescript/src/transformer.ts:86</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="cache" class="tsd-anchor"></a>
 					<h3>cache</h3>
-					<div class="tsd-signature tsd-kind-icon">cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WS.SourceCache</span></div>
+					<div class="tsd-signature tsd-kind-icon">cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WS.WhatSrcCache</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L61">what-src-plugin-typescript/src/transformer.ts:61</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="cachefile" class="tsd-anchor"></a>
-					<h3>cache<wbr>File</h3>
-					<div class="tsd-signature tsd-kind-icon">cache<wbr>File<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L50">what-src-plugin-typescript/src/transformer.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L87">what-src-plugin-typescript/src/transformer.ts:87</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -205,9 +198,22 @@
 					<div class="tsd-signature tsd-kind-icon">context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TransformationContext</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L47">what-src-plugin-typescript/src/transformer.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L57">what-src-plugin-typescript/src/transformer.ts:57</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The typescript compiler transformation context.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{ts.TransformationContext}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>WhatSrcTsTransformer</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="defaultoptions" class="tsd-anchor"></a>
@@ -215,7 +221,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="/doc/modules/what_src_plugin_typescript.html#whatsrctstransformeroptions" class="tsd-signature-type">WhatSrcTsTransformerOptions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L59">what-src-plugin-typescript/src/transformer.ts:59</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L84">what-src-plugin-typescript/src/transformer.ts:84</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -225,7 +231,7 @@
 					<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L45">what-src-plugin-typescript/src/transformer.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L49">what-src-plugin-typescript/src/transformer.ts:49</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -243,14 +249,37 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="host" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> host</h3>
+					<div class="tsd-signature tsd-kind-icon">host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L85">what-src-plugin-typescript/src/transformer.ts:85</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="module" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> module</h3>
 					<div class="tsd-signature tsd-kind-icon">module<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ts.ModuleKind</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L49">what-src-plugin-typescript/src/transformer.ts:49</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L73">what-src-plugin-typescript/src/transformer.ts:73</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A reference to the current module under compilation.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{ts.ModuleKind}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>WhatSrcTsTransformer</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="options" class="tsd-anchor"></a>
@@ -258,7 +287,7 @@
 					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Required</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">WS.WhatSrcPluginOptions</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L31">what-src-plugin-typescript/src/transformer.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L35">what-src-plugin-typescript/src/transformer.ts:35</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -281,7 +310,7 @@
 					<div class="tsd-signature tsd-kind-icon">service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WhatSrcService</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L38">what-src-plugin-typescript/src/transformer.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L42">what-src-plugin-typescript/src/transformer.ts:42</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -304,9 +333,22 @@
 					<div class="tsd-signature tsd-kind-icon">source<wbr>File<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SourceFile</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L48">what-src-plugin-typescript/src/transformer.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L65">what-src-plugin-typescript/src/transformer.ts:65</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A reference to the current source file under compilation.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{ts.SourceFile}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>WhatSrcTsTransformer</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -321,7 +363,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/59b3adb/packages/what-src-plugin-typescript/src/transformer.ts#L81">what-src-plugin-typescript/src/transformer.ts:81</a></li>
+									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L125">what-src-plugin-typescript/src/transformer.ts:125</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -399,9 +441,6 @@
 										<a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#cache" class="tsd-kind-icon">cache</a>
 									</li>
 									<li class=" tsd-kind-property tsd-parent-kind-class">
-										<a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#cachefile" class="tsd-kind-icon">cache<wbr>File</a>
-									</li>
-									<li class=" tsd-kind-property tsd-parent-kind-class">
 										<a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#context" class="tsd-kind-icon">context</a>
 									</li>
 									<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -409,6 +448,9 @@
 									</li>
 									<li class=" tsd-kind-property tsd-parent-kind-class">
 										<a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#disabled" class="tsd-kind-icon">disabled</a>
+									</li>
+									<li class=" tsd-kind-property tsd-parent-kind-class">
+										<a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#host" class="tsd-kind-icon">host</a>
 									</li>
 									<li class=" tsd-kind-property tsd-parent-kind-class">
 										<a href="/doc/classes/what_src_plugin_typescript.whatsrctstransformer.html#module" class="tsd-kind-icon">module</a>

@@ -9,6 +9,7 @@
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "scripts": {
+    "dev:ts-loader": "npm run start:dev",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./src",
     "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx  --fix ./src",
     "build": "cross-env NODE_ENV=production webpack --config webpack/prod.js ",

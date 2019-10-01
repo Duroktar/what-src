@@ -9,7 +9,7 @@ module.exports = {
     '**/node_modules/**',
     '**/*.spec.ts',
   ],
-  theme: './packages/what-src-typedoc-theme/dist/default',
+  theme: './packages/what-src-typedoc-theme/default',
   ignoreCompilerErrors: 'false',
   'external-modulemap': String.raw`.*packages\/(what-src-[^\/]+)\/.*`,
   preserveConstEnums: 'true',

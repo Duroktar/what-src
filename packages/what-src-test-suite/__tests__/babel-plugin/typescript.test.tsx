@@ -30,7 +30,11 @@ const TestMemoizedComponent = React.memo(() => (
 
 describe('works as a babel-plugin with preset-typescript', () => {
   it('works in development mode', () => {
-    const configuration: WhatSrcPluginOptions = { importFrom: '' }
+    const configuration: WhatSrcPluginOptions = {
+      cacheLocOverride: '/CACHE_LOCATION/OVERRIDE',
+      createCacheDir: false,
+      createCacheFile: false,
+    }
     const res = babel.transformSync(example, {
       envName: 'development',
       plugins: [[whatSrcBabelPlugin, configuration]],
@@ -50,7 +54,9 @@ describe('works as a babel-plugin with preset-typescript', () => {
     const configuration: WhatSrcPluginOptions = {
       useRemote: true,
       productionMode: true,
-      importFrom: '',
+      cacheLocOverride: '/CACHE_LOCATION/OVERRIDE',
+      createCacheDir: false,
+      createCacheFile: false,
     }
 
     const res = babel.transformSync(example, {

@@ -1,18 +1,22 @@
 import ts from 'typescript'
-import path from 'path'
 import * as WS from '@what-src/plugin-core'
 import { getIn, withHooks, isNodeEnvProduction } from '@what-src/utils'
 import { WhatSrcTsTransformerOptions } from './types'
 
 /**
- * creates the what-src TS compiler API transformer
+ * Factory function for TS TransformerFactory<ts.SourceFile> instances.
  *
  * @export
- * @param {WhatSrcTsTransformerOptions} [opts={}]
- * @returns
+ * @param {*} tsLoaderOpts
+ * @param {*} [userOpts]
+ * @returns {ts.TransformerFactory<ts.SourceFile>}
  */
-export function createTransformer(opts: WhatSrcTsTransformerOptions = {}) {
-  return new WhatSrcTsTransformer(opts).transformer
+export function createTransformer(tsLoaderOpts: any, userOpts?: any): ts.TransformerFactory<ts.SourceFile> {
+  if (arguments.length === 1) {
+    return new WhatSrcTsTransformer(userOpts).transformer
+  } else {
+    return new WhatSrcTsTransformer(userOpts, tsLoaderOpts).transformer
+  }
 }
 
 /**
@@ -44,21 +48,43 @@ export class WhatSrcTsTransformer {
    */
   public disabled: boolean = false
 
+  /**
+   * The typescript compiler transformation context.
+   *
+   * @type {ts.TransformationContext}
+   * @memberof WhatSrcTsTransformer
+   */
   public context!: ts.TransformationContext
-  public sourceFile!: ts.SourceFile
-  public module?: ts.ModuleKind
-  public cacheFile!: string
 
   /**
-   * Constructs a TS compiler API transformer
+   * A reference to the current source file under compilation.
+   *
+   * @type {ts.SourceFile}
+   * @memberof WhatSrcTsTransformer
+   */
+  public sourceFile!: ts.SourceFile
+
+  /**
+   * A reference to the current module under compilation.
+   *
+   * @type {ts.ModuleKind}
+   * @memberof WhatSrcTsTransformer
+   */
+  public module?: ts.ModuleKind
+
+  /**
+   *Creates an instance of WhatSrcTsTransformer.
    * @param {WhatSrcTsTransformerOptions} defaultOptions
-   * @param {WS.CacheType} [cache={ __basedir: '' }]
+   * @param {*} [host]
+   * @param {string} [basedir=process.cwd()]
+   * @param {WS.WhatSrcCache} [cache=WS.defaultCache]
    * @memberof WhatSrcTsTransformer
    */
   constructor(
     public defaultOptions: WhatSrcTsTransformerOptions,
-    public basedir: string = '', // TODO(Important): This needs to be set for cache optimization to work!
-    public cache: WS.SourceCache = WS.defaultCache
+    public host?: any, // ts.LanguageServiceHost,  // TODO: what is this interface?
+    public basedir: string = process.cwd(), // TODO(Important): This needs to be set for cache optimization to work!
+    public cache: WS.WhatSrcCache = WS.defaultCache
   ) {
     this.options = WS.mergePluginOptions(defaultOptions)
     this.service = WS.getService(this)
@@ -73,23 +99,43 @@ export class WhatSrcTsTransformer {
   }
 
   /**
+   * Absolute path to the base cache directory.
+   *
+   * @private
+   * @type {string}
+   * @memberof WhatSrcTsTransformer
+   */
+  private CACHE_DIR!: string
+
+  /**
+   * Relative import path to the cache file.
+   *
+   * @private
+   * @type {string}
+   * @memberof WhatSrcTsTransformer
+   */
+  private CACHE_IMPORT!: string
+
+  /**
    * TS compiler API transformer application method
    *
    * @type {ts.TransformerFactory<ts.SourceFile>}
    * @memberof WhatSrcTsTransformer
    */
   public transformer: ts.TransformerFactory<ts.SourceFile> = context => {
-    const { outDir, module: mod } = context.getCompilerOptions()
+    const { module: mod } = context.getCompilerOptions()
     this.context = context
     this.module = mod
-    this.cacheFile = this.getFullCacheFilePath(outDir)
+    const rootdir = this.options.cacheLocOverride || this.basedir
+    this.CACHE_DIR = this.service.getCacheFileLocation(rootdir)
+    this.CACHE_IMPORT = this.service.getCacheFileImport(rootdir)
 
     const entrance = () => ts.visitNode(this.sourceFile, this.visitor)
 
     return (sourceFile: ts.SourceFile) => {
       return withHooks(entrance, {
         before: () => { this.sourceFile = sourceFile },
-        after: () => this.service.emit(this.cacheFile),
+        after: () => this.service.emit(this.CACHE_DIR),
       }).result
     }
   }
@@ -104,17 +150,7 @@ export class WhatSrcTsTransformer {
   private visitor = (node: ts.Node): ts.VisitResult<ts.Node> => {
     // inject what-src cache-file import statement
     if (ts.isSourceFile(node)) {
-      // <3 <3 <3 https://github.com/Microsoft/TypeScript/issues/18369#issuecomment-330133796
-
-      // const WhatSrcGlobalVariable = require('../../what-src-cache.js')  <-- example
-      if (this.module === ts.ModuleKind.CommonJS) {
-        node = this.createCommonJSImport(node, this.cacheFile)
-      }
-
-      // import WhatSrcGlobalVariable from '../../what-src-cache.js'   <-- example
-      if (this.module === ts.ModuleKind.ES2015 || this.module === ts.ModuleKind.ESNext) {
-        node = this.createModernJSImport(node, this.cacheFile)
-      }
+      node = this.createWhatSrcRuntimeRequire(node)
     }
 
     // decorate any valid elements with a what-src tag
@@ -136,45 +172,19 @@ export class WhatSrcTsTransformer {
    * @private
    * @memberof WhatSrcTsTransformer
    */
-  private createModernJSImport = (node: ts.Node, cacheFile: string) => {
+  private createWhatSrcRuntimeRequire = (node: ts.Node) => {
     const file = (node as ts.Node) as ts.SourceFile
     node = ts.updateSourceFileNode(file, [
-      ts.createImportDeclaration(
-        /* decorators */ undefined,
-        /* modifiers */ undefined,
-        ts.createImportClause(
-          ts.createIdentifier(this.options.importName),
-          undefined
-        ),
-        ts.createLiteral(cacheFile)
+      ts.createExpressionStatement(
+        ts.createPropertyAccess(
+          ts.createCall(
+            ts.createIdentifier('require'),
+            [],
+            [ts.createLiteral(this.CACHE_IMPORT)]
+          ),
+          ts.createIdentifier('default')
+        )
       ),
-      ...file.statements,
-    ])
-    return node
-  }
-
-  /**
-   * creates the what-src import statement commonjs style
-   *
-   * @private
-   * @memberof WhatSrcTsTransformer
-   */
-  private createCommonJSImport = (node: ts.Node, cacheFile: string) => {
-    const file = (node as ts.Node) as ts.SourceFile
-    node = ts.updateSourceFileNode(file, [
-      ts.createVariableStatement(
-        /* modifiers */ undefined,
-        ts.createVariableDeclarationList([
-          ts.createVariableDeclaration(this.options.importName,
-            /* type */ undefined,
-            ts.createPropertyAccess(
-              ts.createCall(
-                ts.createIdentifier('require'),
-                [],
-                [ts.createLiteral(cacheFile)]
-              ),
-              ts.createIdentifier('default'))),
-        ])),
       ...file.statements,
     ])
     return node
@@ -194,7 +204,7 @@ export class WhatSrcTsTransformer {
         // gather the necessary metadata. we need a location and unique id
         const start = this.getOpeningElementStartLocation(node)
         const location = new WS.SourceLocationBuilder()
-          .withBasedir(this.cache.__basedir)
+          .withBasedir(this.basedir)
           .withCol(start.character + 1)
           .withLine(start.line + 1)
           .build()
@@ -227,18 +237,6 @@ export class WhatSrcTsTransformer {
   private getOpeningElementStartLocation(node: ts.JsxElement) {
     const start = node.openingElement.pos
     return this.sourceFile.getLineAndCharacterOfPosition(start)
-  }
-
-  /**
-   * get normalized full path to the cache file
-   *
-   * @private
-   * @param {(string | undefined)} outDir
-   * @returns
-   * @memberof WhatSrcTsTransformer
-   */
-  private getFullCacheFilePath(outDir: string | undefined) {
-    return path.join(outDir || '', this.options.importFrom)
   }
 
   /**

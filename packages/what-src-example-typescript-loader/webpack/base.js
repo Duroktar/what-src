@@ -22,8 +22,8 @@ module.exports = {
             loader: 'ts-loader',
             options: {
               transpileOnly: true,
-              getCustomTransformers: () => ({
-                before: [whatSrcServerTsLoaderPlugin()],
+              getCustomTransformers: (o) => ({
+                before: [whatSrcServerTsLoaderPlugin({}, o)],
               }),
             },
           },

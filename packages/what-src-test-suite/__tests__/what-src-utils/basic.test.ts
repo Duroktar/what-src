@@ -91,7 +91,7 @@ describe('what-src common utilities', () => {
       const before = Date.now()
       await U.wait(1000)
       const delta = Date.now() - before
-      expect(delta > 1000 && delta < 2000).toBeTruthy()
+      expect(delta > 900).toBeTruthy()
     })
   })
 

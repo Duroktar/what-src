@@ -6,6 +6,12 @@
     "configurations": [
       {
         "type": "node",
+        "request": "attach",
+        "name": "Attach by Process ID",
+        "processId": "${command:PickProcess}"
+      },
+      {
+        "type": "node",
         "request": "launch",
         "name": "Debug Babel Plugin",
         "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/babel-plugin/debug.ts",
@@ -17,7 +23,7 @@
         "request": "launch",
         "name": "Debug Typescript Plugin",
         "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/typescript-plugin/debug.ts",
-        "preLaunchTask": "Build typescript plugin",
+        "preLaunchTask": "npm: build",
         "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/typescript-plugin/*.js"]
       },
       // {
@@ -25,7 +31,7 @@
       //   "request": "launch",
       //   "name": "Debug Webpack Plugin",
       //   "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/index.ts",
-      //   "preLaunchTask": "Build webpack plugin",
+      //   "preLaunchTask": "npm: build",
       //   "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/__tests__/*.js"]
       // },
       // {
@@ -33,7 +39,7 @@
       //   "request": "launch",
       //   "name": "Debug Core Module",
       //   "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/index.ts",
-      //   "preLaunchTask": "Build core",
+      //   "preLaunchTask": "npm: build",
       //   "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/__tests__/*.js"]
       // },
     ]

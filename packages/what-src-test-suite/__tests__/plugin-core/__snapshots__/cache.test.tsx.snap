@@ -2,9 +2,11 @@
 
 exports[`caches source locations 1`] = `
 Object {
-  "1": "{\\"filename\\":\\"filename1.ts\\",\\"line\\":2,\\"column\\":1,\\"remoteUrl\\":\\"filename1.ts#L2\\"}",
-  "2": "{\\"filename\\":\\"filename2.ts\\",\\"line\\":7,\\"column\\":4,\\"remoteUrl\\":\\"filename2.ts#L7\\"}",
-  "3": "{\\"filename\\":\\"filename3.ts\\",\\"line\\":1,\\"column\\":8,\\"remoteUrl\\":\\"filename3.ts#L1\\"}",
+  "1": "{\\"filename\\":\\"filename1.ts\\",\\"remoteFn\\":null,\\"column\\":1,\\"line\\":2}",
+  "2": "{\\"filename\\":\\"deep/filename2.ts\\",\\"remoteFn\\":null,\\"column\\":4,\\"line\\":37}",
+  "3": "{\\"filename\\":\\"deep/deeper/filename3.ts\\",\\"remoteFn\\":null,\\"column\\":43,\\"line\\":1}",
+  "4": "{\\"filename\\":\\"deep/deeper/deepest/filename4.ts\\",\\"remoteFn\\":null,\\"column\\":3,\\"line\\":12}",
+  "5": "{\\"filename\\":\\"deep/deeper/deepest/filename5.ts\\",\\"remoteFn\\":null,\\"column\\":34,\\"line\\":51}",
   "__basedir": "/home/user/app/packages/",
 }
 `;

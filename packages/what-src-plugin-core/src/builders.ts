@@ -9,13 +9,13 @@ import { SourceLocationStart } from './types'
  * @class SourceLocationBuilder
  */
 export class SourceLocationBuilder {
-  private col!: number
+  private column!: number
   private basedir!: string
   private line!: number
 
   public build(): SourceLocationStart {
     return this.validate({
-      col: this.col,
+      column: this.column,
       basedir: this.basedir,
       line: this.line,
     })
@@ -28,13 +28,13 @@ export class SourceLocationBuilder {
   public get schema() {
     return yupObject({
       basedir: string().max(1000),
-      col: number().required(),
+      column: number().required(),
       line: number().min(1).max(1000 * 1000).required(),
     })
   }
 
   public withCol(value: number) {
-    this.col = value
+    this.column = value
     return this
   }
 

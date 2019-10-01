@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`works as a babel-plugin with preset-typescript works in development mode 1`] = `
-"var __WhatSrcGlobalVariable = require(\\"../../../node_modules/.cache/what-src\\");
+"require(\\"/CACHE_LOCATION/OVERRIDE/node_modules/@what-src/.cache/runtimeService\\");
 
 import * as React from 'react';
 
@@ -33,7 +33,7 @@ const TestMemoizedComponent = React.memo(() => React.createElement(\\"div\\", {
 `;
 
 exports[`works as a babel-plugin with preset-typescript works in production mode 1`] = `
-"var __WhatSrcGlobalVariable = require(\\"../../../node_modules/.cache/what-src\\");
+"require(\\"/CACHE_LOCATION/OVERRIDE/node_modules/@what-src/.cache/runtimeService\\");
 
 import * as React from 'react';
 

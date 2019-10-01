@@ -2,17 +2,20 @@
 
 exports[`what-src babel-plugin configuration is stable 1`] = `
 Object {
+  "baseDirOverride": null,
   "blacklistedTags": Array [
     "Helmet",
     "head",
     "meta",
     "script",
   ],
+  "cacheFileName": "whatSrcRuntime.js",
+  "cacheLocOverride": null,
+  "createCacheDir": true,
+  "createCacheFile": true,
   "dataTag": "data-what-src",
   "enableXkcdMode": false,
   "globalCacheKey": "__what-src-global-callback-key",
-  "importFrom": "what-src-cache.jss",
-  "importName": "__WhatSrcGlobalVariable",
   "preventDefault": true,
   "productionMode": false,
   "serverUrl": "http://localhost:8018/__what_src",

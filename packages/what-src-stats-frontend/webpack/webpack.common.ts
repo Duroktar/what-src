@@ -5,6 +5,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { Configuration } from 'webpack-dev-server'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 // import { WhatSrcServerWebpackPlugin } from '@what-src/plugin'
+// import { WhatSrcPluginOptions } from '@what-src/plugin-core/dist'
 
 const config: webpack.Configuration & Configuration = {
   entry: './src/main.tsx',

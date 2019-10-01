@@ -1,11 +1,9 @@
-// import { Pl } from '@babel/core'
 import * as traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import * as WS from '@what-src/plugin-core'
 import { isNullOrUndefined, isNodeEnvProduction, getIn, withHooks } from '@what-src/utils'
-import { join, relative } from 'path'
 import { buildRequire } from './templates'
-import { BabelVisitor, PluginState } from './types'
+import { BabelVisitor, BabelPluginState, BabelPluginContext } from './types'
 
 /**
  * create a new what-src babel-compiler plugin.
@@ -14,7 +12,7 @@ import { BabelVisitor, PluginState } from './types'
  * @returns {BabelVisitor}
  */
 export const getBabelPlugin = (
-  context: WS.BabelPluginContext,
+  context: BabelPluginContext,
   config: WS.WhatSrcPluginOptions,
 ): BabelVisitor => {
   return new WhatSrcBabelPlugin(config).getPlugin()
@@ -60,7 +58,7 @@ export class WhatSrcBabelPlugin {
   constructor(
     public defaultOptions: WS.WhatSrcPluginOptions = {},
     public basedir: string = '',
-    public cache: WS.SourceCache = WS.defaultCache
+    public cache: WS.WhatSrcCache = WS.defaultCache
   ) {
     this.options = WS.mergePluginOptions(defaultOptions)
     this.service = WS.getService(this)
@@ -75,14 +73,30 @@ export class WhatSrcBabelPlugin {
   }
 
   /**
-   *
+   * plugin identifier name
    *
    * @private
    * @memberof WhatSrcBabelPlugin
    */
   private PLUGIN_KEY = 'what-src-plugin'
 
-  public OUTDIR!: string
+  /**
+   * the absolute path to the cache file directory
+   *
+   * @private
+   * @type {string}
+   * @memberof WhatSrcBabelPlugin
+   */
+  private CACHE_DIR!: string
+
+  /**
+   * the relative path used to import the cache file
+   *
+   * @private
+   * @type {string}
+   * @memberof WhatSrcBabelPlugin
+   */
+  private CACHE_IMPORT!: string
 
   /**
    * typescript node ast visitor
@@ -92,10 +106,12 @@ export class WhatSrcBabelPlugin {
   public getPlugin = (): BabelVisitor => {
     return {
       name: this.PLUGIN_KEY,
-      pre: (state) => {
+      pre: (state: BabelPluginState) => {
         const plugin = this.selectPluginFromState(state)
         this.options = WS.mergePluginOptions(plugin.options)
-        this.OUTDIR = join(state.opts.root, 'node_modules', '.cache', 'what-src')
+        const rootdir = this.options.cacheLocOverride || state.opts.root
+        this.CACHE_DIR = this.service.getCacheFileLocation(rootdir)
+        this.CACHE_IMPORT = this.service.getCacheFileImport(rootdir)
       },
       visitor: {
         Program: {
@@ -103,15 +119,14 @@ export class WhatSrcBabelPlugin {
             if (!this.disabled) {
               // at the very end we write out our cache file and append an import to it
               // to be used for starting the click listener in the comsumers client
-              const cacheFilePath = this.getFullCacheFilePath(this.OUTDIR)
-
               const entrance = () => buildRequire({
-                importName: t.identifier(this.options.importName),
-                cacheFilePath: t.stringLiteral(cacheFilePath),
+                // importName: path.scope.generateUidIdentifier('WhatSrcRuntime'),
+                cacheFilePath: t.stringLiteral(this.CACHE_IMPORT), // <-- '@what-src/.cache/runtime'
               })
-              // this.getRootDir(path)
+
               const ast = withHooks(entrance, {
-                after: () => this.service.emit(cacheFilePath),
+                // `CACHE_DIR` needs to point to a `node_modules` folder accessible to `CACHE_IMPORT`
+                after: () => this.service.emit(this.CACHE_DIR),
               }).result as t.Statement
 
               path.node.body = [ast, ...path.node.body]
@@ -155,14 +170,14 @@ export class WhatSrcBabelPlugin {
   }
 
   /**
-   *
+   * selects this plugin instance from the babel loader state
    *
    * @private
    * @param {*} state
    * @returns
    * @memberof WhatSrcBabelPlugin
    */
-  private selectPluginFromState(state: PluginState) {
+  private selectPluginFromState(state: BabelPluginState) {
     return state.opts.plugins
       .find(o => o.key === this.PLUGIN_KEY) || { options: {} }
   }
@@ -178,18 +193,6 @@ export class WhatSrcBabelPlugin {
   private getOpeningElementStartLocation(path: traverse.NodePath<t.JSXElement>) {
     type SourceLocationStart = { line: number; column: number }
     return getIn('node.openingElement.loc.start', path) as SourceLocationStart
-  }
-
-  /**
-   * get normalized full path to the cache file
-   *
-   * @private
-   * @param {(string)} outDir
-   * @returns
-   * @memberof WhatSrcTsTransformer
-   */
-  private getFullCacheFilePath(outDir: string) {
-    return relative(__dirname, join(outDir, this.options.importFrom))
   }
 
   /**
@@ -225,8 +228,4 @@ export class WhatSrcBabelPlugin {
   private isFragment(openingElement: t.JSXOpeningElement) {
     return getIn('name.property.name', openingElement) === 'Fragment'
   }
-
-  // private getRootDir(path: traverse.NodePath<t.Program>) {
-  //   return path.hub.file.opts.root
-  // }
 }

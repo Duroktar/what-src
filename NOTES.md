@@ -1,3 +1,10 @@
+# important!
+
+- ***need*** to use absolute dir set from plugin with a base dir normalizer key
+- also must make it overridable for test to not fail
+- throttle the file emitter in the core service
+<!-- - document options -->
+- cache class (mostly to make __rootdir an implementation detail)
 
 # Bugs
 

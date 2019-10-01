@@ -19,7 +19,7 @@ var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inheri
 
 var React = _interopRequireWildcard(require(\\"react\\"));
 
-var __WhatSrcGlobalVariable = require(\\"../../../node_modules/.cache/what-src\\");
+require(\\"/CACHE_LOCATION/OVERRIDE/node_modules/@what-src/.cache/runtimeService\\");
 
 var TestClassComponent =
 /*#__PURE__*/
@@ -83,7 +83,7 @@ var _inherits2 = _interopRequireDefault(require(\\"@babel/runtime/helpers/inheri
 
 var React = _interopRequireWildcard(require(\\"react\\"));
 
-var __WhatSrcGlobalVariable = require(\\"../../../node_modules/.cache/what-src\\");
+require(\\"/CACHE_LOCATION/OVERRIDE/node_modules/@what-src/.cache/runtimeService\\");
 
 var TestClassComponent =
 /*#__PURE__*/

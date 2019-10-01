@@ -28,8 +28,13 @@ const TestMemoizedComponent = React.memo(() => (
 ))
 `
 
+const configuration: WhatSrcPluginOptions = {
+  cacheLocOverride: '/CACHE_LOCATION/OVERRIDE',
+  createCacheDir: false,
+  createCacheFile: false,
+}
+
 it('works', () => {
-  const configuration: WhatSrcPluginOptions = { importFrom: '' }
   const res = babel.transformSync(example, {
     plugins: [
       '@babel/plugin-transform-runtime',

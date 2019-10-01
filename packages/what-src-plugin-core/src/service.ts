@@ -1,11 +1,13 @@
 import * as ts from 'typescript'
+import { join, dirname } from 'path'
 import { withHooks } from '@what-src/utils'
 import { defaultOptions, defaultCache } from './options'
 import * as H from './helpers'
 import * as T from './types'
+import { mkdirSync } from 'fs'
 
 /**
- * create a new what-src service instance
+ * Factory function for the WhatSrcService class.
  *
  * @param {"WhatSrcService"} { options, basedir, cache = defaultCache }
  * @returns new what-src service instance
@@ -14,6 +16,12 @@ export const getService = ({ options, ...args }: T.ServiceOptions = {}) => {
   return new WhatSrcService(options, args.basedir, args.cache)
 }
 
+/**
+ * The primary @what-src/plugin-core service class.
+ *
+ * @export
+ * @class WhatSrcService
+ */
 export class WhatSrcService {
   /**
    * full set of what-src configuration options
@@ -45,11 +53,19 @@ export class WhatSrcService {
    * the cache *theme song plays
    *
    * @private
-   * @type {T.SourceCache}
+   * @type {T.WhatSrcCache}
    * @memberof WhatSrcService
    */
-  private _cache!: T.SourceCache
+  private _cache!: T.WhatSrcCache
 
+  /**
+   * Creates an instance of WhatSrcService.
+   *
+   * @param {T.WhatSrcPluginOptions} [options={}]
+   * @param {string} [basedir='']
+   * @param {{}} [cache={}]
+   * @memberof WhatSrcService
+   */
   constructor(
     options: T.WhatSrcPluginOptions = {},
     basedir: string = '',
@@ -57,7 +73,18 @@ export class WhatSrcService {
   ) {
     this.options = H.mergePluginOptions(options, defaultOptions)
     this.blockedTags = new Set(this.options.blacklistedTags)
-    this._cache = { ...defaultCache, ...cache, __basedir: basedir }
+    this._cache = this.initializeCache(basedir, cache)
+  }
+
+  /**
+   * Initialize the cache with system/user settings and basedir.
+   *
+   * @private
+   * @memberof WhatSrcService
+   */
+  private initializeCache = (basedir: string, cache: {}) => {
+    const __basedir = this.getBaseDirForCache(basedir)
+    return { ...defaultCache, ...cache, __basedir }
   }
 
   /**
@@ -68,23 +95,46 @@ export class WhatSrcService {
   public emit = (location: string) => {
     const source = H.generateClickHandlerRawString(this.options, this._cache)
 
+    // using ts here cause it's got builtin filesystem helpers
     const result = ts.transpileModule(source, {
       compilerOptions: { module: ts.ModuleKind.CommonJS },
     })
 
+    // create the necessary caching directories and paths
     const host = ts.createCompilerHost(this.options)
-    host.writeFile(location, result.outputText, false)
+    if (this.options.createCacheDir && !host.directoryExists!(dirname(location))) {
+      mkdirSync(dirname(location), { recursive: true })
+    }
+
+    // useful mostly for CI but we can skip the actual write part if needed
+    if (this.options.createCacheFile) {
+      const transpiledSource = H.compileSource(result.outputText) // TODO: Make this overridable from options
+      host.writeFile(location, transpiledSource, false, errMsg => {
+        throw new Error(
+          '[@what-src/core] Error writing file.. ' +
+          'Make sure the path is absolute! ->' + errMsg)
+      })
+    }
   }
 
   /**
-   * cache a given source file location. returns the items unique cache key.
+   * caches a location object and returns a retrieval key.
    *
    * @memberof WhatSrcService
    */
   public cache = (loc: T.SourceLocationStart, sourcefile: string) => {
-    const remoteFn = H.getRemoteFilenameIfSet(sourcefile, this.options)
-    const filename = remoteFn.replace(this._cache.__basedir, '')
-    const metaData = H.generateJsxMetaData({ ...loc, filename })
+    const remoteFn = H.getRemoteFilenameOrNull(sourcefile, this.options)
+
+    let filename = remoteFn || sourcefile
+
+    if (filename.startsWith(this._cache.__basedir)) {
+      filename = filename.slice(this._cache.__basedir.length)
+    }
+
+    const metaData = H.generateJsxMetaData(
+      { ...loc, filename },
+      this.options.useRemote,
+    )
 
     return withHooks(() => this.nextId.toString(), {
       after: () => this.setCache(JSON.stringify(metaData)),
@@ -92,19 +142,9 @@ export class WhatSrcService {
   }
 
   /**
-   * returns the source file location cache
-   *
-   * @memberof WhatSrcService
-   */
-  public getSourceCache = () => {
-    return this._cache
-  }
-
-  /**
    * ignore any explicitly blacklisted tags. the blacklist is converted to a set
    * during class construction to be used for fast lookups
    *
-   * @private
    * @param {ts.JsxElement} node
    * @returns
    * @memberof WhatSrcTsTransformer
@@ -114,12 +154,66 @@ export class WhatSrcService {
   }
 
   /**
-   *  sets the next cache value then increments the key
+   * get cache file relative import path
    *
-   * @private
+   * @returns
+   * @memberof WhatSrcTsTransformer
+   */
+  public getCacheFileImport(rootDir: string) {
+    return this.getCacheFileLocation(rootDir, '')
+  }
+
+  /**
+   * get the absolute path to the cache file
+   *
+   * @returns
+   * @memberof WhatSrcTsTransformer
+   */
+  public getCacheFileLocation(rootDir: string, ft = '.js') {
+    const path = ['node_modules', '@what-src', '.cache']
+    return join(rootDir, ...path, 'runtimeService' + ft)
+  }
+
+  /**
+   * resolves the base dir for the cache depending on if
+   * useRemote is set. the path can be completely overriden
+   * by setting the baseDirOverride options
+   *
+   * @param {string} basedir
+   * @returns
    * @memberof WhatSrcService
    */
-  private setCache = (metaData: string) => {
+  public getBaseDirForCache(basedir: string) {
+    if (this.options.baseDirOverride) return basedir
+    else if (this.options.useRemote) return H.getGitRemoteBaseDir()
+    else return basedir
+  }
+
+  /**
+   * returns the source file location cache
+   *
+   * @memberof WhatSrcService
+   */
+  public getCache = (): T.WhatSrcCache => {
+    return this._cache
+  }
+
+  /**
+   *  sets the next cache value then increments the key
+   *
+   * @memberof WhatSrcService
+   */
+  public setCache = (metaData: string) => {
     this._cache[this.nextId++] = metaData
+  }
+
+  /**
+   * get the basedir as set in the cache
+   *
+   * @readonly
+   * @memberof WhatSrcService
+   */
+  public get basedir() {
+    return this._cache.__basedir
   }
 }

@@ -29,10 +29,18 @@ const TestMemoizedComponent = React.memo(() => (
 `
 
 describe('works as a babel-plugin', () => {
+  const configuration: WhatSrcPluginOptions = {
+    cacheLocOverride: '/CACHE_LOCATION/OVERRIDE',
+    createCacheDir: false,
+    createCacheFile: false,
+  }
   it('works in development mode', () => {
     const res = babel.transformSync(example, {
       envName: 'development',
-      plugins: ['@babel/plugin-transform-runtime', [whatSrcBabelPlugin, { importFrom: '' }]],
+      plugins: [
+        '@babel/plugin-transform-runtime',
+        [whatSrcBabelPlugin, configuration],
+      ],
       filename: 'README.md',
       presets: [
         '@babel/preset-env',
@@ -49,12 +57,17 @@ describe('works as a babel-plugin', () => {
     const configuration: WhatSrcPluginOptions = {
       useRemote: true,
       productionMode: true,
-      importFrom: '',
+      cacheLocOverride: '/CACHE_LOCATION/OVERRIDE',
+      createCacheDir: false,
+      createCacheFile: false,
     }
 
     const res = babel.transformSync(example, {
       envName: 'production',
-      plugins: ['@babel/plugin-transform-runtime', [whatSrcBabelPlugin, configuration]],
+      plugins: [
+        '@babel/plugin-transform-runtime',
+        [whatSrcBabelPlugin, configuration],
+      ],
       filename: 'README.md',
       presets: [
         '@babel/preset-env',

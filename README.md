@@ -10,6 +10,7 @@
 </p>
 <p align="center">
   <a href="https://david-dm.org/duroktar/what-src?type=dev" title="devDependencies status"><img src="https://david-dm.org/duroktar/what-src/dev-status.svg"/></a>
+  <a href="https://coveralls.io/github/Duroktar/what-src?branch=master"><img alt="Coverage Status" src="https://coveralls.io/repos/github/Duroktar/what-src/badge.svg?branch=master" /></a>
   <a href="https://travis-ci.org/Duroktar/what-src"><img alt="Build Status" src="https://travis-ci.org/Duroktar/what-src.svg?branch=1.1.x-release"></a>
 </p>
 

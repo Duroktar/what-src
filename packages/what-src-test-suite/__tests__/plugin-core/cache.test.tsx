@@ -8,9 +8,11 @@ const service = T.getService({
 
 it('caches source locations', () => {
   const testArgs = [
-    [{ col: 1, line: 2 }, 'filename1.ts'],
-    [{ col: 4, line: 7 }, 'filename2.ts'],
-    [{ col: 8, line: 1 }, 'filename3.ts'],
+    [{ column: 1, line: 2 }, '/home/user/app/packages/filename1.ts'],
+    [{ column: 4, line: 37 }, '/home/user/app/packages/deep/filename2.ts'],
+    [{ column: 43, line: 1 }, '/home/user/app/packages/deep/deeper/filename3.ts'],
+    [{ column: 3, line: 12 }, '/home/user/app/packages/deep/deeper/deepest/filename4.ts'],
+    [{ column: 34, line: 51 }, '/home/user/app/packages/deep/deeper/deepest/filename5.ts'],
   ] as const
 
   const cacheKeys: string[] = []
@@ -19,5 +21,5 @@ it('caches source locations', () => {
     cacheKeys.push(service.cache(test[0], test[1]))
   })
 
-  expect<T.SourceCache>(service.getSourceCache()).toMatchSnapshot()
+  expect<T.WhatSrcCache>(service.getCache()).toMatchSnapshot()
 })

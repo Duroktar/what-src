@@ -1,17 +1,20 @@
 import * as T from './types'
 
 export const defaultOptions: Required<T.WhatSrcPluginOptions> = {
+  blacklistedTags: ['Helmet', 'head', 'meta', 'script'],
   dataTag: 'data-what-src',
   enableXkcdMode: false,
-  globalCacheKey: '__what-src-global-callback-key',
-  importFrom: 'what-src-cache.jss',
-  importName: '__WhatSrcGlobalVariable',
-  preventDefault: true,
   productionMode: false,
-  serverUrl: 'http://localhost:8018/__what_src',
-  stopPropagation: true,
   useRemote: false,
-  blacklistedTags: ['Helmet', 'head', 'meta', 'script'],
+  preventDefault: true,
+  stopPropagation: true,
+  serverUrl: 'http://localhost:8018/__what_src',
+  globalCacheKey: '__what-src-global-callback-key',
+  cacheFileName: 'whatSrcRuntime.js',
+  cacheLocOverride: null,
+  baseDirOverride: null,
+  createCacheDir: true,
+  createCacheFile: true,
 }
 
 export const defaultCache = { __basedir: '' }
