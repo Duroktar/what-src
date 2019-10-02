@@ -14,7 +14,7 @@
         "type": "node",
         "request": "launch",
         "name": "Debug Babel Plugin",
-        "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/babel-plugin/debug.ts",
+        "program": "${workspaceFolder}/packages/what-src-test-suite/src/__tests__/babel-plugin/debug.ts",
         "preLaunchTask": "npm: build",
         "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/babel-plugin/*.js"]
       },
@@ -22,7 +22,7 @@
         "type": "node",
         "request": "launch",
         "name": "Debug Typescript Plugin",
-        "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/typescript-plugin/debug.ts",
+        "program": "${workspaceFolder}/packages/what-src-test-suite/src/__tests__/typescript-plugin/debug.ts",
         "preLaunchTask": "npm: build",
         "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/typescript-plugin/*.js"]
       },
@@ -30,17 +30,17 @@
       //   "type": "node",
       //   "request": "launch",
       //   "name": "Debug Webpack Plugin",
-      //   "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/index.ts",
+      //   "program": "${workspaceFolder}/packages/what-src-test-suite/src/__tests__/webpack-plugin/index.ts",
       //   "preLaunchTask": "npm: build",
-      //   "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/__tests__/*.js"]
+      //   "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/webpack-plugin/*.js"]
       // },
       // {
       //   "type": "node",
       //   "request": "launch",
       //   "name": "Debug Core Module",
-      //   "program": "${workspaceFolder}/packages/what-src-test-suite/__tests__/index.ts",
+      //   "program": "${workspaceFolder}/packages/what-src-test-suite/src/__tests__/plugin-core/index.ts",
       //   "preLaunchTask": "npm: build",
-      //   "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/__tests__/*.js"]
+      //   "outFiles": ["${workspaceFolder}/packages/what-src-test-suite/dist/plugin-core/*.js"]
       // },
     ]
 }

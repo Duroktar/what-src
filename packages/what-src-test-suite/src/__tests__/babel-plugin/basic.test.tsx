@@ -1,32 +1,7 @@
 import * as babel from '@babel/core'
 import plugin from '@what-src/babel-plugin'
 import { WhatSrcPluginOptions } from '@what-src/plugin-core'
-
-const example = `
-import * as React from 'react'
-
-class TestClassComponent extends React.Component {
-  render() {
-    return (
-      <div className="class-component">
-        <p>some p thing</p>
-      </div>
-    )
-  }
-}
-
-const TestFunctionalComponent = () => (
-  <div className="functional-component">
-    <p>some p thing</p>
-  </div>
-)
-
-const TestMemoizedComponent = React.memo(() => (
-  <div className="memoized-component">
-    <p>some p thing</p>
-  </div>
-))
-`
+import { basicComponents } from '../../fixtures/component.fixture'
 
 const configuration: WhatSrcPluginOptions = {
   cacheLocOverride: '/CACHE_LOCATION/OVERRIDE',
@@ -35,7 +10,7 @@ const configuration: WhatSrcPluginOptions = {
 }
 
 it('works', () => {
-  const res = babel.transformSync(example, {
+  const res = babel.transformSync(basicComponents, {
     plugins: [
       '@babel/plugin-transform-runtime',
       [plugin, configuration],

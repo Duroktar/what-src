@@ -1,7 +1,7 @@
 import * as babel from '@babel/core'
 import whatSrcBabelPlugin, { WhatSrcBabelPlugin } from '@what-src/babel-plugin'
 import { WhatSrcPluginOptions } from '@what-src/plugin-core'
-import { basicComponents } from '../fixtures/component.fixture'
+import { basicComponents } from '../../fixtures/component.fixture'
 
 describe('works as a babel-plugin', () => {
   const configuration: WhatSrcPluginOptions = {

@@ -7,7 +7,6 @@
   "license": "MIT",
   "repository": "https://github.com/duroktar/what-src/tree/master/packages/what-src-test-suite",
   "files": [
-    "__tests__",
     "dist"
   ],
   "publishConfig": {

@@ -18,7 +18,9 @@
 on the page, a single click away.
 
 > Check out [the live demo](https://duroktar.github.io/what-src/) or [the
-> video](https://github.com/Duroktar/what-src-logo/tree/master/demo). There's also a [website](https://duroktar.github.io/what-src/) where you can see the clicks of users live ([opt-in]()). Have fun!
+> video](https://github.com/Duroktar/what-src-logo/tree/master/demo). There's
+> also a [website](https://duroktar.github.io/what-src/) where you can see the
+> clicks of users live ([opt-in]()). Have fun!
 
 ## Intro
 
@@ -37,7 +39,7 @@ being inside your editor, **at the line it was declared**! Nice.
 
 > NOTE: [System Hotkey](#system-hotkey) must be pressed when clicking elements.
 
-## Usage
+## Install
 
 First install the plugin from npm.
 
@@ -48,14 +50,22 @@ npm install @what-src/plugin --save-dev
 > `@what-src/plugin` respects your systems `$EDITOR` environment variable (default: "vscode")
 > Read [here](https://github.com/sindresorhus/env-editor) for more info.
 
+
+## First Steps
+
+<p align="center">
+  <span style="color: red; font-size: 24px">TODO</span>
+</p>
+
+## Usage
+
 ### babel (required)
 
 Via .babelrc or babel-loader.
 ```json
 {
   "plugins": [
-    "module:@what-src/plugin",
-    ...
+    "module:@what-src/plugin"
   ]
 }
 ```
@@ -72,28 +82,22 @@ $ webpack.config.js
 
 const { WhatSrcServerWebpackPlugin } = require('@what-src/plugin') // <- import plugin
 
-...
 module.exports = {
   mode: 'development',
   entry: './src/index.jsx',
   output: {
     filename: 'bundle.js',
   },
-  ...
-plugins: [new WhatSrcServerWebpackPlugin()] // <- add plugin
-...
+  plugins: [new WhatSrcServerWebpackPlugin()] // <- add plugin
 }
 ```
 
 ```json
 $ package.json
 {
-  ...
   "scripts": {
-    ...
     "develop": "webpack-dev-server"
-  },
-  ...
+  }
 }
 ```
 
@@ -115,12 +119,9 @@ npm install @what-src/express --save-dev
 ```json
 $ package.json
 {
-  ...
   "scripts": {
-    ...
     "start:what-src": "what-src-express"
   },
-  ...
 }
 
 $ npm run start:what-src
