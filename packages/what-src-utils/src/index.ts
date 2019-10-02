@@ -47,6 +47,7 @@ export const isUndefined = (obj: unknown): obj is undefined => {
  *
  * @param {(Array<string | number> | string)} p
  * @param {object} o
+* @param {*} [d]
  * @returns
  */
 export const getIn = (p: Array<string | number> | string, o: object, d?: any) => {
