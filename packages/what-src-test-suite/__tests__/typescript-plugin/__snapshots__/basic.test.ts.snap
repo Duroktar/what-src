@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`works 1`] = `
+exports[`ts-transformer plugin basic tests works as advertised 1`] = `
 "\\"use strict\\";
 Object.defineProperty(exports, \\"__esModule\\", { value: true });
 require(\\"/CACHE_LOCATION/OVERRIDE/node_modules/@what-src/.cache/runtimeService\\").default;

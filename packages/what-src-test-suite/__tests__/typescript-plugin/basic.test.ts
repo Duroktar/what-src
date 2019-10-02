@@ -1,6 +1,6 @@
 
 import * as ts from 'typescript'
-import { createTransformer } from '@what-src/typescript-plugin'
+import { createTransformer, WhatSrcTsTransformer } from '@what-src/typescript-plugin'
 
 const compilerOptions: ts.CompilerOptions = {
   module: ts.ModuleKind.CommonJS,
@@ -41,11 +41,33 @@ const TestMemoizedComponent = React.memo(() => (
 ))
 `
 
-it('works', () => {
-  const result = ts.transpileModule(sourceText, {
-    compilerOptions,
-    transformers: { before: [createTransformer(transformerOptions)] },
+describe('ts-transformer plugin basic tests', () => {
+  it('works as advertised', () => {
+    const result = ts.transpileModule(sourceText, {
+      compilerOptions,
+      transformers: { before: [createTransformer(transformerOptions)] },
+    })
+
+    expect(result.outputText).toMatchSnapshot()
   })
 
-  expect(result.outputText).toMatchSnapshot()
+  it('can optionally take a ts.Loader argument', () => {
+    expect(createTransformer({}, transformerOptions)).not.toBeNull()
+  })
+
+  it('can also be disabled if needed', () => {
+    const Transformer = WhatSrcTsTransformer as any
+    const logger = { log: () => null, error: () => null }
+    const old = process.env.NODE_ENV
+
+    process.env.NODE_ENV = 'production'
+
+    const plug = new Transformer({}, null, null, null, logger)
+    expect(plug.disabled).toEqual(true)
+
+    process.env.NODE_ENV = old
+
+    const plug2 = new Transformer({}, null, null, null, logger)
+    expect(plug2.disabled).toEqual(false)
+  })
 })

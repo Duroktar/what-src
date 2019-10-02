@@ -58,13 +58,14 @@ export class WhatSrcBabelPlugin {
   constructor(
     public defaultOptions: WS.WhatSrcPluginOptions = {},
     public basedir: string = '',
-    public cache: WS.WhatSrcCache = WS.defaultCache
+    public cache: WS.WhatSrcCache = WS.defaultCache,
+    public logger: Console = console
   ) {
     this.options = WS.mergePluginOptions(defaultOptions)
     this.service = WS.getService(this)
 
     if (this.shouldPrintProductionWarning) {
-      console.log(
+      this.logger.log(
         '@what-src/babel-plugin - running in production mode is disabled. ' +
         'To enable set the "productionMode" configuration option to true.',
       )

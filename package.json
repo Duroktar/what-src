@@ -28,7 +28,9 @@
     "postinstall": "npm run bootstrap && npm run build:force",
     "prebuild": "npm run logo",
     "prepublishOnly": "npm run logo && ./scripts/clone-license.sh && npm run build",
+		"serve:coverage": "npm run logo && serve -l 9001 ./coverage/lcov-report",
 		"serve:gh-pages": "npm run logo && serve -l 9000 ./docs",
+    "test:coverage": "npm run logo && jest --coverage && serve -l 9001 ./coverage/lcov-report && open http://localhost:9001/",
     "test:update": "jest -u",
     "test:watch": "jest --watch",
     "test": "jest"
@@ -50,7 +52,8 @@
     "testPathIgnorePatterns" : [
       "/node_modules/",
       "/dist/",
-      "/*.debug.ts"
+      "/*.debug.ts",
+      "/*.fixture.*"
     ]
   },
   "devDependencies": {

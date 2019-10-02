@@ -20,7 +20,7 @@ export function createTransformer(tsLoaderOpts: any, userOpts?: any): ts.Transfo
 }
 
 /**
- * the what-src TS compiler API transformer
+ * The what-src TS compiler API transformer
  *
  * @export
  * @class WhatSrcTsTransformer
@@ -78,19 +78,21 @@ export class WhatSrcTsTransformer {
    * @param {*} [host]
    * @param {string} [basedir=process.cwd()]
    * @param {WS.WhatSrcCache} [cache=WS.defaultCache]
+   * @param {Console} [logger=console]
    * @memberof WhatSrcTsTransformer
    */
   constructor(
     public defaultOptions: WhatSrcTsTransformerOptions,
     public host?: any, // ts.LanguageServiceHost,  // TODO: what is this interface?
     public basedir: string = process.cwd(), // TODO(Important): This needs to be set for cache optimization to work!
-    public cache: WS.WhatSrcCache = WS.defaultCache
+    public cache: WS.WhatSrcCache = WS.defaultCache,
+    public logger: Console = console
   ) {
     this.options = WS.mergePluginOptions(defaultOptions)
     this.service = WS.getService(this)
 
     if (this.shouldPrintProductionWarning) {
-      console.log(
+      this.logger.log(
         '@what-src/typescript-plugin - running in production mode is disabled. ' +
         'To enable set the "productionMode" configuration option to true.',
       )
