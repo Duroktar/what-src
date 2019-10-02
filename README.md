@@ -9,9 +9,9 @@
   <a href="https://www.npmjs.com/package/@what-src/plugin"><img alt="npm Downloads" src="https://img.shields.io/npm/dm/@what-src/plugin.svg?maxAge=43200"></a>
 </p>
 <p align="center">
+  <a href="https://travis-ci.org/Duroktar/what-src"><img alt="Build Status" src="https://travis-ci.org/Duroktar/what-src.svg?branch=1.1.x-release"></a>
   <a href="https://david-dm.org/duroktar/what-src?type=dev" title="devDependencies status"><img src="https://david-dm.org/duroktar/what-src/dev-status.svg"/></a>
   <a href='https://coveralls.io/github/Duroktar/what-src?branch=1.1.x-release'><img src='https://coveralls.io/repos/github/Duroktar/what-src/badge.svg?branch=1.1.x-release' alt='Coverage Status' /></a>
-  <a href="https://travis-ci.org/Duroktar/what-src"><img alt="Build Status" src="https://travis-ci.org/Duroktar/what-src.svg?branch=1.1.x-release"></a>
 </p>
 
 `@what-src/plugin` is a tool for developers that puts the code for every element
