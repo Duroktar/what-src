@@ -1,8 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const { WhatSrcServerWebpackPlugin } = require('@what-src/plugin')
-const { whatSrcServerTsLoaderPlugin } = require('@what-src/plugin')
+const { WhatSrcServerWebpackPlugin, whatSrcServerTsLoaderPlugin } = require('@what-src/plugin')
 
 /** @type {webpack.Configuration} */
 module.exports = {

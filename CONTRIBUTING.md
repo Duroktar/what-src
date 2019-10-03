@@ -74,6 +74,7 @@ The following is the list of supported scopes:
 * **core**
 * **babel-plugin**
 * **webpack-plugin**
+* **ts-plugin**
 * **stats-frontend**
 * **express-server**
 * **express-middleware**

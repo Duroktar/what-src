@@ -1,1 +1,4 @@
-export { createTransformer, WhatSrcTsTransformer } from './transformer'
+import { createTransformer, WhatSrcTsTransformer } from './transformer'
+
+export { createTransformer, WhatSrcTsTransformer }
+export default createTransformer
