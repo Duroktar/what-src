@@ -32,7 +32,10 @@
     }],
     "space-before-function-paren": ["error", "never"],
     "operator-linebreak": ["error", "after", {
-      "overrides": { "||": "before", "|": "before" }
+      "overrides": {
+        "||": "before", "|": "before",
+        "?": "before", ":": "before"
+      }
     }],
     "jsx-a11y/click-events-have-key-events": "off",
     "standard/no-callback-literal": "off"

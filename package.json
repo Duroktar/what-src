@@ -17,6 +17,7 @@
     "copy:stats": "./scripts/copy-website-to-docs.sh",
     "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "dev:example:basic": "lerna run dev:basic --stream",
+    "dev:example:cra": "cd packages/what-src-example-cra/ && npm run develop",
     "dev:example:ts-loader": "lerna run dev:ts-loader --stream",
     "dev:example:ts-babel": "lerna run dev:ts-babel --stream",
     "dev:stats-frontend": "lerna run dev:stats --stream",
@@ -53,7 +54,8 @@
       "/node_modules/",
       "/dist/",
       "/*.debug.ts",
-      "/*.fixture.*"
+      "/*.fixture.*",
+      "packages/what-src-example-cra/"
     ]
   },
   "devDependencies": {

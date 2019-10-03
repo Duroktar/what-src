@@ -1,0 +1,41 @@
+{
+  "name": "what-src-example-cra",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
+    "react-scripts": "3.1.2"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-scripts eject",
+    "dev:cra": "npm run develop",
+    "dev:server": "what-src-express",
+    "develop": "concurrently \"npm:start\" \"npm:dev:server\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@what-src/express": "^1.1.0-alpha.0",
+    "@what-src/babel-plugin": "^1.1.2-alpha.0",
+    "concurrently": "^4.1.2",
+    "customize-cra": "^0.8.0",
+    "react-app-rewired": "^2.1.3"
+  }
+}

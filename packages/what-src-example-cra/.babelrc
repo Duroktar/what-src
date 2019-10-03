@@ -1,0 +1,3 @@
+{
+    "plugins": ["@what-src/babel-plugin"]
+}
