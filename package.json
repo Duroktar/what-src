@@ -22,6 +22,7 @@
     "dev:example:ts-loader": "lerna run dev:ts-loader --stream",
     "dev:example:ts-babel": "lerna run dev:ts-babel --stream",
     "dev:stats-frontend": "lerna run dev:stats --stream",
+    "fix:stats": "./scripts/fix-what-src-utils-error.sh",
     "lint:watch": "esw --ext .js,.jsx,.ts,.tsx --watch-ignore '/\\.git|node_modules|\\.eslintcache/' --clear -w ./packages",
     "lint:fix-dry-run": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix-dry-run ./packages",
     "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx --fix ./packages",
