@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "build:changelog": "npx conventional-changelog --preset angular --release-count 0 --outfile ./CHANGELOG.md --verbose",
     "build:clean": "tsc -b --clean && npm run build",
     "build:docs": "typedoc --tsconfig ./tsconfig.base.json",
     "build:gh-pages": "./scripts/build-gh-pages.sh",
@@ -74,6 +75,7 @@
     "@what-src/typescript-plugin": "^1.1.2-alpha.0",
     "@what-src/utils": "^1.1.0-alpha.0",
     "@what-src/webpack-plugin": "^1.1.0-alpha.0",
+    "conventional-changelog-cli": "^2.0.23",
     "coveralls": "^3.0.6",
     "eslint": "^6.4.0",
     "eslint-config-standard": "^14.1.0",
