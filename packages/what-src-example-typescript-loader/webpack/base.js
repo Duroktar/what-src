@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const { WhatSrcServerWebpackPlugin, whatSrcServerTsLoaderPlugin } = require('@what-src/plugin')
 
+/** @type {WhatSrcPluginOptions} */
+const options = {}
+
 /** @type {webpack.Configuration} */
 module.exports = {
   mode: 'development',
@@ -21,8 +24,8 @@ module.exports = {
             loader: 'ts-loader',
             options: {
               transpileOnly: true,
-              getCustomTransformers: (o) => ({
-                before: [whatSrcServerTsLoaderPlugin({}, o)],
+              getCustomTransformers: () => ({
+                before: [whatSrcServerTsLoaderPlugin(options)],
               }),
             },
           },

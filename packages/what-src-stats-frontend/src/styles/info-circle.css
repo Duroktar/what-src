@@ -7,8 +7,14 @@
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   transform: scale(3);
+  transition: all .09s ease-in-out;
+
 }
 
 .info-circle:before {
   content: "\f05a";
+}
+
+.info-circle:hover {
+  transform: scale(3.8);
 }

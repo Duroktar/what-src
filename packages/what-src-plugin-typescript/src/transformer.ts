@@ -6,16 +6,25 @@ import { WhatSrcTsTransformerOptions } from './types'
 /**
  * Factory function for TS TransformerFactory<ts.SourceFile> instances.
  *
+ * When passed a single argument than it will be parsed as the plugin options.
+ * When passed two arguments then the first will be parsed as ts.LoaderOpts
+ * and the second will be parsed as the plugin options.
+ *
+ * > NOTE: ts.LoaderOpts is currenlty unused so the two argument scenario
+ * > should be avoided.
+ *
  * @export
  * @param {*} tsLoaderOpts
  * @param {*} [userOpts]
  * @returns {ts.TransformerFactory<ts.SourceFile>}
  */
-export function createTransformer(tsLoaderOpts: any, userOpts?: any): ts.TransformerFactory<ts.SourceFile> {
+export function createTransformer(userOpts: any, tsLoaderOpts?: any): ts.TransformerFactory<ts.SourceFile> {
   if (arguments.length === 1) {
-    return new WhatSrcTsTransformer(tsLoaderOpts).transformer
+    return new WhatSrcTsTransformer(userOpts).transformer
   } else {
-    return new WhatSrcTsTransformer(userOpts, tsLoaderOpts).transformer
+    const posUserOpts = tsLoaderOpts
+    // const posTsLoaderOpts = userOpts
+    return new WhatSrcTsTransformer(posUserOpts/* , posTsLoaderOpts */).transformer
   }
 }
 

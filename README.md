@@ -14,28 +14,14 @@
   <a href='https://coveralls.io/github/Duroktar/what-src?branch=1.1.x-release'><img src='https://coveralls.io/repos/github/Duroktar/what-src/badge.svg?branch=1.1.x-release' alt='Coverage Status' /></a>
 </p>
 
-`@what-src/plugin` is a tool for developers that puts the code for every element
-on the page, a single click away.
+`@what-src/plugin` is like having reverse source maps for your React app. It
+lets you click elements in the browser to open them in an editor. You can
+even set them to open on github if they're in a repo.
 
-> Check out [the live demo](https://duroktar.github.io/what-src/) or [the
-> video](https://github.com/Duroktar/what-src-logo/tree/master/demo). There's
-> also a [website](https://duroktar.github.io/what-src/) where you can see the
-> clicks of users live ([opt-in]()). Have fun!
-
-## Intro
-
-Getting familiar with a new codebase can be challenging. Even *if*
-you've been working around in it for a while, once any project grows past a
-certain size you'll inevitably find yourself **grepping around** to find some
-particular spot.. in some **long forgotten file**.. to make some quick
-change to something ***you were just looking at in the browser!*** It gets
-annoying, and that time adds up pretty quickly (see relevant
-[xkcd](https://xkcd.com/1205/)). 
-
-*But we can do better than that.*
-
-Now ***every single element*** on the page is only **one click away** from
-being inside your editor, **at the line it was declared**! Nice.
+> Check out the [live demo](https://duroktar.github.io/what-src/) or the
+> [video](https://github.com/Duroktar/what-src-logo/tree/master/demo). There's
+> also a [website](https://duroktar.github.io/what-src/) where you can see
+[all the time saved](packages/what-src-plugin-core#--enablexkcdmode-boolean).
 
 > NOTE: [System Hotkey](#system-hotkey) must be pressed when clicking elements.
 
@@ -47,17 +33,19 @@ First install the plugin from npm.
 npm install @what-src/plugin --save-dev
 ```
 
-> `@what-src/plugin` respects your systems `$EDITOR` environment variable (default: "vscode")
-> Read [here](https://github.com/sindresorhus/env-editor) for more info.
-
-
-## First Steps
-
-<p align="center">
-  <span style="color: red; font-size: 24px">TODO</span>
-</p>
+> `@what-src/plugin` checks the `$EDITOR` environment variable (default:
+> "vscode") to determine which editor to open your code in. Read
+> [here](https://github.com/sindresorhus/env-editor) more here.
 
 ## Usage
+
+There's primarily two ways to use what-src.
+
+*1. Create React App*
+
+See the guide [here](/packages/what-src-example-cra/SETUP.md)
+
+*2. Babel & Webpack/Express*
 
 ### babel (required)
 

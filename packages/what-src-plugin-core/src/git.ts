@@ -44,7 +44,7 @@ export const isInsideGitWorkTree = (ctx = spawn) => {
 export const getGitRemoteOriginUrl = (ctx = spawn) => {
   const result = ctx.sync('git', ['config', '--get', 'remote.origin.url'])
   const remotename = (outputOrThrow(result) + '').trim()
-  if (empty(remotename)) { throw new Error() } else return remotename
+  if (empty(remotename)) { return null } else return remotename
 }
 
 /**
@@ -57,7 +57,7 @@ export const getGitRemoteOriginUrl = (ctx = spawn) => {
 export const getGitFileFullName = (filepath: string, ctx = spawn) => {
   const result = ctx.sync('git', ['ls-files', '--full-name', filepath])
   const filename = (outputOrThrow(result) + '').trim()
-  if (empty(filename)) { throw new Error() } else return filename
+  if (empty(filename)) { return null } else return filename
 }
 
 /**
@@ -69,5 +69,5 @@ export const getGitFileFullName = (filepath: string, ctx = spawn) => {
 export const getGitBranchName = (ctx = spawn) => {
   const result = ctx.sync('git', ['rev-parse', '--abbrev-ref', 'HEAD'])
   const branchname = (outputOrThrow(result) + '').trim()
-  if (empty(branchname)) { throw new Error() } else return branchname
+  if (empty(branchname)) { return null } else return branchname
 }

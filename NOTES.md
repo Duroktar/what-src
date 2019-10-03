@@ -1,14 +1,18 @@
-# important!
+# TODO
 
-- ***need*** to use absolute dir set from plugin with a base dir normalizer key
-- also must make it overridable for test to not fail
-- throttle the file emitter in the core service
-<!-- - document options -->
-- cache class (mostly to make __rootdir an implementation detail)
+- throttle/batch the file emitter in the core service
+- stats frontend different configs (circle buttons for selectors)
+
+* need
+    - logos: babel, webpack, ts-loader, express?
+
+- improved examples (grids made up of cells of deeply nested/hard to find components)
+- update and improve readme
+
+***To consider***
+- create ABC for remote url resolvers then extract usage for github & add others (gitlab, etc..)
 
 # Bugs
-
-Somewhere to track shit.
 
 ## Regressions
 

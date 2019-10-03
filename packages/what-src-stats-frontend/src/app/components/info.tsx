@@ -8,7 +8,7 @@ type InfoProps = {
 export const Info = React.memo((props: InfoProps) => {
   return (
     <>
-      <ReactTooltip offset={{ top: 12, left: 4 }} />
+      <ReactTooltip offset={{ top: 12, left: 12 }} />
       <i data-tip={props.txt} className="info-circle" />
     </>
   )
