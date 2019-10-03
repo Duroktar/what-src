@@ -112,7 +112,7 @@ export class WhatSrcBabelPlugin {
         this.options = WS.mergePluginOptions(plugin.options)
         const rootdir = this.options.cacheLocOverride || state.opts.root
         this.CACHE_DIR = this.service.getCacheFileLocation(rootdir)
-        this.CACHE_IMPORT = this.service.getCacheFileImport(rootdir)
+        this.CACHE_IMPORT = this.service.getCacheFileImport()
       },
       visitor: {
         Program: {
@@ -121,7 +121,6 @@ export class WhatSrcBabelPlugin {
               // at the very end we write out our cache file and append an import to it
               // to be used for starting the click listener in the comsumers client
               const entrance = () => buildRequire({
-                // importName: path.scope.generateUidIdentifier('WhatSrcRuntime'),
                 cacheFilePath: t.stringLiteral(this.CACHE_IMPORT), // <-- '@what-src/.cache/runtime'
               })
 

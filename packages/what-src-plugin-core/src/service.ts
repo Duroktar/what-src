@@ -1,6 +1,6 @@
 import * as ts from 'typescript'
 import { join, dirname } from 'path'
-import { withHooks } from '@what-src/utils'
+import { withHooks, isNullOrUndefined } from '@what-src/utils'
 import { defaultOptions, defaultCache } from './options'
 import * as H from './helpers'
 import * as T from './types'
@@ -108,7 +108,7 @@ export class WhatSrcService {
 
     // useful mostly for CI but we can skip the actual write part if needed
     if (this.options.createCacheFile) {
-      const transpiledSource = H.compileSource(result.outputText) // TODO: Make this overridable from options
+      const transpiledSource = H.compileSource(result.outputText)
       host.writeFile(location, transpiledSource, false, errMsg => {
         throw new Error(
           '[@what-src/core] Error writing file.. ' +
@@ -159,8 +159,10 @@ export class WhatSrcService {
    * @returns
    * @memberof WhatSrcTsTransformer
    */
-  public getCacheFileImport(rootDir: string) {
-    return this.getCacheFileLocation(rootDir, '')
+  public getCacheFileImport() {
+    return isNullOrUndefined(this.options.cacheRequireOverride)
+      ? '@what-src/runtime-cache'
+      : this.options.cacheRequireOverride
   }
 
   /**
@@ -170,8 +172,8 @@ export class WhatSrcService {
    * @memberof WhatSrcTsTransformer
    */
   public getCacheFileLocation(rootDir: string, ft = '.js') {
-    const path = ['node_modules', '@what-src', '.cache']
-    return join(rootDir, ...path, 'runtimeService' + ft)
+    const path = ['node_modules', '@what-src', 'runtime-cache']
+    return join(rootDir, ...path, 'index' + ft)
   }
 
   /**
@@ -184,7 +186,7 @@ export class WhatSrcService {
    * @memberof WhatSrcService
    */
   public getBaseDirForCache(basedir: string) {
-    if (this.options.baseDirOverride) return basedir
+    if (this.options.baseDirOverride) return this.options.baseDirOverride
     else if (this.options.useRemote) return H.getGitRemoteBaseDir()
     else return basedir
   }

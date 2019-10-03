@@ -206,6 +206,13 @@ export type WhatSrcPluginOptions = {
   baseDirOverride?: null | string;
 
   /**
+   * Override the string used in the cache' require statement
+   *
+   * @type {(null | string)}
+   */
+  cacheRequireOverride?: null | string
+
+  /**
    * When false, skips creating missing folders to the cache location.
    * (used mostly for testing and CI)
    *

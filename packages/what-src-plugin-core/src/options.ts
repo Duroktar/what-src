@@ -13,6 +13,7 @@ export const defaultOptions: Required<T.WhatSrcPluginOptions> = {
   cacheFileName: 'whatSrcRuntime.js',
   cacheLocOverride: null,
   baseDirOverride: null,
+  cacheRequireOverride: null,
   createCacheDir: true,
   createCacheFile: true,
 }

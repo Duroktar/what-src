@@ -116,6 +116,31 @@ describe('works as a babel-plugin', () => {
     })
 
     expect((plug as any).CACHE_DIR).toMatch(identifier)
+  })
+
+  it('can override the cache import string', () => {
+    let plug!: WhatSrcBabelPlugin
+    const identifier = `OOGIE_BOOGEY_${Date.now()}`
+
+    babel.transformSync(basicComponents, {
+      envName: 'production',
+      plugins: [
+        '@babel/plugin-transform-runtime',
+        [(ctx, cfg) => {
+          plug = new WhatSrcBabelPlugin(cfg)
+          return plug.getPlugin()
+        }, {
+          ...configuration,
+          cacheRequireOverride: identifier,
+        } as WhatSrcPluginOptions],
+      ],
+      filename: 'README.md',
+      presets: [
+        '@babel/preset-env',
+        '@babel/preset-react',
+      ],
+    })
+
     expect((plug as any).CACHE_IMPORT).toMatch(identifier)
   })
 })

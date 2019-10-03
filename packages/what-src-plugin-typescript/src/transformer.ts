@@ -130,7 +130,7 @@ export class WhatSrcTsTransformer {
     this.module = mod
     const rootdir = this.options.cacheLocOverride || this.basedir
     this.CACHE_DIR = this.service.getCacheFileLocation(rootdir)
-    this.CACHE_IMPORT = this.service.getCacheFileImport(rootdir)
+    this.CACHE_IMPORT = this.service.getCacheFileImport()
 
     const entrance = () => ts.visitNode(this.sourceFile, this.visitor)
 
