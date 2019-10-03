@@ -23,7 +23,9 @@
     "node": ">=6.9.0"
   },
   "devDependencies": {
+		"@types/lodash.throttle": "^4.1.6",
     "@types/node": "^12.7.8",
+		"lodash.throttle": "^4.1.1",
     "typescript": "^3.6.3"
   }
 }

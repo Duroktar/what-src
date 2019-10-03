@@ -14,9 +14,5 @@ export default merge(base, {
     compress: true,
     port: 9000,
     overlay: true,
-    // open: true,
-    after: () => {
-      require('../scripts/print-console-logo')
-    },
   },
 })

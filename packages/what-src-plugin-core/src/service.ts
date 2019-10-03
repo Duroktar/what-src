@@ -7,7 +7,7 @@ import * as T from './types'
 import { mkdirSync } from 'fs'
 
 /**
- * Factory function for the WhatSrcService class.
+ * Factory function for a `WhatSrcService` class.
  *
  * @param {"WhatSrcService"} { options, basedir, cache = defaultCache }
  * @returns new what-src service instance
@@ -92,21 +92,23 @@ export class WhatSrcService {
    *
    * @memberof WhatSrcService
    */
-  public emit = (location: string) => {
-    const source = H.generateClickHandlerRawString(this.options, this._cache)
+  public emit(location: string) {
+    const source = H.generateClickHandlerRawString(this.options, this.getCache())
 
-    // using ts here cause it's got builtin filesystem helpers
+    // using ts for its got builtin filesystem helpers
     const result = ts.transpileModule(source, {
       compilerOptions: { module: ts.ModuleKind.CommonJS },
     })
 
     // create the necessary caching directories and paths
     const host = ts.createCompilerHost(this.options)
-    if (this.options.createCacheDir && !host.directoryExists!(dirname(location))) {
-      mkdirSync(dirname(location), { recursive: true })
+    const cacheDir = dirname(location)
+    const cacheDirExists = host.directoryExists!(cacheDir)
+    if (!cacheDirExists && this.options.createCacheDir) {
+      mkdirSync(cacheDir, { recursive: true })
     }
 
-    // useful mostly for CI but we can skip the actual write part if needed
+    // consumers can skip the actual write part if wanted
     if (this.options.createCacheFile) {
       const transpiledSource = H.compileSource(result.outputText)
       host.writeFile(location, transpiledSource, false, errMsg => {
@@ -122,13 +124,13 @@ export class WhatSrcService {
    *
    * @memberof WhatSrcService
    */
-  public cache = (loc: T.SourceLocationStart, sourcefile: string) => {
+  public cache(loc: T.SourceLocationStart, sourcefile: string) {
     const remoteFn = H.getRemoteFilenameOrNull(sourcefile, this.options)
 
     let filename = remoteFn || sourcefile
 
-    if (filename.startsWith(this._cache.__basedir)) {
-      filename = filename.slice(this._cache.__basedir.length)
+    if (filename.startsWith(this.basedir)) {
+      filename = filename.slice(this.basedir.length)
     }
 
     const metaData = H.generateJsxMetaData(
