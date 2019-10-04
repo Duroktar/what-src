@@ -14,6 +14,9 @@ First install the package from npm.
 npm install @what-src/typescript-plugin --save-dev
 ```
 
+> If you prefer to use [babel-loader](https://github.com/babel/babel-loader)
+> instead follow the steps [here](/packages/what-src-example-typescript-babel/).
+
 ### via Webpack (recommended)
 
 Via webpack.config.ts (or .json, .js, ...).
@@ -21,8 +24,8 @@ Via webpack.config.ts (or .json, .js, ...).
 ```ts
 import devserver from 'webpack-dev-server'
 import webpack from 'webpack'
-import { whatSrcServerTsLoaderPlugin } from '@what-src/plugin'
-import { WhatSrcServerWebpackPlugin } from '@what-src/plugin'
+
+import * as ws from '@what-src/plugin'
 
 const config: webpack.Configuration & devserver.Configuration = {
   mode: process.env.NODE_ENV,
@@ -35,7 +38,9 @@ const config: webpack.Configuration & devserver.Configuration = {
             loader: 'ts-loader',
             options: {
               getCustomTransformers: () => ({
-                before: [whatSrcServerTsLoaderPlugin()],
+                before: [ws.whatSrcServerTsLoaderPlugin({
+                  // options
+                })],
               }),
             },
           },
@@ -43,7 +48,7 @@ const config: webpack.Configuration & devserver.Configuration = {
       },
     ],
   },
-  plugins: [new WhatSrcServerWebpackPlugin()],
+  plugins: [new ws.WhatSrcServerWebpackPlugin()],
 }
 ```
 
@@ -62,11 +67,6 @@ $ package.json
 ```sh
 npm run develop
 ```
-
-### Planned Support
-
-- [ttypescript](https://github.com/cevek/ttypescript)
-- [custom compiler](https://levelup.gitconnected.com/writing-typescript-custom-ast-transformer-part-1-7585d6916819)
 
 ## Example
 

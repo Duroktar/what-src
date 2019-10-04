@@ -12,7 +12,16 @@ Via .babelrc or babel-loader.
 {
   "plugins": [["module:@what-src/plugin", options]]
 }
+
+or simply
+
+{
+  "plugins": ["module:@what-src/plugin"]
+}
 ```
+
+> If you prefer to use [ts-loader](https://github.com/TypeStrong/ts-loader)
+> instead follow the steps [here](/packages/what-src-example-typescript-loader/).
 
 ### options
 

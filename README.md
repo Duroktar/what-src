@@ -29,6 +29,8 @@ from the [typescript-loader](packages/what-src-example-typescript-loader) packag
 
 ## Install
 
+First install the plugin from npm.
+
 ```sh
 npm install @what-src/plugin --save-dev
 ```
@@ -39,7 +41,8 @@ npm install @what-src/plugin --save-dev
 
 ## Usage
 
-There's primarily two ways to use what-src.
+Choose from one of the more common setups below or check out one of the
+[examples](#Are-there-any-examples).
 
 *1. Create React App*
 
@@ -47,7 +50,7 @@ See the guide [here](/packages/what-src-example-cra/SETUP.md)
 
 *2. Babel & Webpack/Express*
 
-See an example [here](/packages/what-src-example-basic/) or follow the steps below.
+(For an example in typescript see [here](/packages/what-src-example-typescript-babel/))
 
 ### babel (required)
 
@@ -60,15 +63,15 @@ Via .babelrc or babel-loader.
 }
 ```
 
-***Now pick from one of the following to enable file opening on your local
-editor.*** *(Alternatively, check out the [remotes](#remotes) section for
-opening files on Github).*
+***Now pick from one of the following to enable file opening in local editor.***
+
+> *(Alternatively, check out the [remotes](#remotes) section for opening them on
+Github).*
 
 ### Webpack-Dev-Server (Option 1: easiest)
 
 ```ts
 $ webpack.config.js
-
 
 const { WhatSrcServerWebpackPlugin } = require('@what-src/plugin') // <- import plugin
 
@@ -155,7 +158,7 @@ app.listen(port, () => {
 ### Remotes
 
 Making clicks navigate to source code hosted on GitHub is possible by enabling
-the [useRemote setting](/packages/what-src-plugin-babel/README.md#options) in
+the [useRemote](/packages/what-src-plugin-babel/README.md#options) setting in
 the [babel-plugin](/packages/what-src-plugin-babel/README.md). Have a look at
 the [demo](https://duroktar.github.io/what-src/) for an example of this and
 click around into the source code hosted on GitHub.
@@ -174,7 +177,7 @@ See more configuration options in the
 *the web-server is also available as an `express-middleware` module, or a
 complete standalone application.
 
-Opening a local filepath from javascript in your browser is not possible, so the
+Opening a local filepath from javascript in your browser is not possible so the
 `@what-src/express` server is responsible for opening the requested file in the
 correct editor on your system at the correct location. *To do this it uses the
 [open-editor](https://github.com/sindresorhus/open-editor#readme) package from [@sindresorhus](https://github.com/sindresorhus)
@@ -184,7 +187,7 @@ The `@what-src/babel-plugin` tags any html elements it comes across in your code
 with a key to a cache line containing the necessary data, which can then be sent
 to the server whenever a "valid" click event is detected (ie: with the hotkey
 pressed). The cache key for each element is stored in a `data-what-src` attribute
-and is guaranteed to be unique across all nodes.
+on the element itself and is guaranteed to be unique across all nodes.
 
 The actual click events are detected using a global listener on the
 `window.document` object which then sends a native xhr request to the server
