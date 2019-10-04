@@ -223,16 +223,21 @@ export class WhatSrcTsTransformer {
 
         const nextId = this.service.cache(location, this.sourceFile.fileName)
 
+        const origAttributes: ts.JsxAttribute[] = []
+        node.openingElement.attributes.forEachChild(node => {
+          origAttributes.push(node as any)
+        })
+
         // create the data attribute and add to existing
-        const attributes = node.openingElement.attributes
-        const newAttributes = ts.updateJsxAttributes(attributes, [
+        const attributes = ts.createJsxAttributes([
+          ...origAttributes,
           ts.createJsxAttribute(
             ts.createIdentifier(this.options.dataTag),
             ts.createStringLiteral(nextId)
-          )])
+          ),
+        ])
 
-        // set opening element attributes to the new list
-        node.openingElement.attributes = newAttributes
+        node.openingElement.attributes = attributes
       }
     }
     return node
