@@ -42,6 +42,11 @@
   "overrides": [{
     "files": ["**/*.ts", "**/*.tsx"],
     "rules": {
+      "semi": "off",
+      "@typescript-eslint/semi": ["warn", "never"],
+      "no-useless-constructor": ["off"],
+      "no-unused-vars": ["off"],
+      "no-undef": ["off"]
     }
   }]
 }
