@@ -52,12 +52,19 @@ class App extends React.Component {
       <React.Fragment>
         <header>
           <h1>Can you find the source file?</h1>
+          (<a href="https://github.com/Duroktar/what-src/tree/master/packages/what-src-example-basic" target="_blank" rel="noopener noreferrer">repo</a>)
         </header>
         <main>
           {this.generateCells(12)}
         </main>
+        <aside>
+          Guide: Hold down the meta key (command on mac) on your keyboard and click
+          any element (even this text!) to go straight to the source on Github.
+        </aside>
         <footer>
-          <p>Created by Duroktar</p>
+          <a href="http://github.com/Duroktar" target="_blank" rel="noopener noreferrer">
+            <p>Created by Duroktar</p>
+          </a>
         </footer>
       </React.Fragment>
     )

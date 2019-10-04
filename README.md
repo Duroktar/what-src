@@ -15,19 +15,19 @@
 </p>
 
 `@what-src/plugin` is like having reverse source maps for your React app. It
-lets you click elements in the browser to open them in an editor. You can
-even set them to open on github if they're in a repo.
+lets you click on elements in the browser to open them in your editor. You can
+even set them to open on github if they're in a repository.
 
 > Check out the [live demo](https://duroktar.github.io/what-src/) or the
 > [video](https://github.com/Duroktar/what-src-logo/tree/master/demo). There's
 > also a [website](https://duroktar.github.io/what-src/) where you can see
-[all the time saved](packages/what-src-plugin-core#--enablexkcdmode-boolean).
+[all the time saved](packages/what-src-plugin-core#--enablexkcdmode-boolean) and
+an interactive [example](https://duroktar.github.io/what-src/example/) built
+from the [typescript-loader](packages/what-src-example-typescript-loader) package.
 
 > NOTE: [System Hotkey](#system-hotkey) must be pressed when clicking elements.
 
 ## Install
-
-First install the plugin from npm.
 
 ```sh
 npm install @what-src/plugin --save-dev
@@ -46,6 +46,8 @@ There's primarily two ways to use what-src.
 See the guide [here](/packages/what-src-example-cra/SETUP.md)
 
 *2. Babel & Webpack/Express*
+
+See an example [here](/packages/what-src-example-basic/) or follow the steps below.
 
 ### babel (required)
 
@@ -174,8 +176,8 @@ complete standalone application.
 
 Opening a local filepath from javascript in your browser is not possible, so the
 `@what-src/express` server is responsible for opening the requested file in the
-correct editor on your system at the correct location. To do this it uses the
-`open-editor` package from [@sindresorhus](https://github.com/sindresorhus)
+correct editor on your system at the correct location. *To do this it uses the
+[open-editor](https://github.com/sindresorhus/open-editor#readme) package from [@sindresorhus](https://github.com/sindresorhus)
 which works on multiple platforms, is well maintained, and highly configurable.
 
 The `@what-src/babel-plugin` tags any html elements it comes across in your code
@@ -188,18 +190,24 @@ The actual click events are detected using a global listener on the
 `window.document` object which then sends a native xhr request to the server
 with the relevant cache line for the clicked element.
 
+#### *For Github links [open](https://github.com/sindresorhus/open) (same maintainer) is used instead.
+
 ## Why?
 
 It seemed like a good idea and I was bored. Mix that with some free time from
-the day job and this is the result.
+the day job and this is the result. Also, it'd be cool to see the counter on
+the [webapp](https://duroktar.github.io/what-src/) go wild if this thing gets users :D
 
 ## FAQ
 
 ### Are there any examples?
 
-Check out the [what-src-example-basic](/packages/what-src-example-basic) and
-[what-src-example-typescript](/packages/what-src-example-typescript) packages
-for some working examples.
+Yes!
+
+ - [what-src-example-basic](/packages/what-src-example-basic) - A basic Javascript example
+ - [what-src-example-cra](/packages/what-src-example-cra) - An example [Create React App](https://github.com/facebook/create-react-app) setup
+ - [what-src-example-typescript-babel](/packages/what-src-example-typescript-babel) - Example using [babel-loader](https://github.com/babel/babel-loader) with Webpack
+ - [what-src-example-typescript-loader](/packages/what-src-example-typescript-loader) - Example using [ts-loader](https://github.com/TypeStrong/ts-loader) with Webpack
 
 ### Want to report a bug or request a feature?
 

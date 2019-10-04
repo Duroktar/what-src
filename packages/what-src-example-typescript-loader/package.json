@@ -12,7 +12,8 @@
     "dev:ts-loader": "npm run start:dev",
     "lint": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx ./src",
     "lint:fix": "./node_modules/.bin/eslint --ext .js,.jsx,.ts,.tsx  --fix ./src",
-    "build": "cross-env NODE_ENV=production webpack --config webpack/prod.js ",
+    "build": "cross-env NODE_ENV=production webpack --config webpack/prod.js",
+    "build:example": "npm run build",
     "start:dev": "webpack-dev-server --config webpack/base.js",
     "start": "npm run build && npm run serve",
     "serve": "serve -l 9000 public"
