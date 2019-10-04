@@ -26,6 +26,7 @@ describe('git utilities', () => {
         T.isGitInstalled(getMockSpawn({ stdout: 'git not installed' }))
       ).not.toBeTruthy()
     })
+
     it('tells if git is inside a git repo or not', () => {
       expect(
         T.isInsideGitWorkTree(getMockSpawn({ stdout: 'true' }))
@@ -34,29 +35,26 @@ describe('git utilities', () => {
         T.isInsideGitWorkTree(getMockSpawn({ stdout: 'false' }))
       ).not.toBeTruthy()
     })
-    it('can get the current repositories remote url if it has one', () => {
+
+    it('get the current repositories remote url if it has one', () => {
       expect(
         T.getGitRemoteOriginUrl(getMockSpawn({ stdout: 'https://github.com/Duroktar' }))
       ).toBeTruthy()
-      expect(
-        () => T.getGitRemoteOriginUrl(getMockSpawn({ stdout: '' }))
-      ).toThrow()
+      expect(T.getGitRemoteOriginUrl(getMockSpawn({ stdout: '' }))).toBeNull()
     })
-    it('can get the github url of a local file in the current repo if it exists', () => {
+
+    it('get the github url of a local file in the current repo if it exists', () => {
       expect(
         T.getGitFileFullName('myfile.ts', getMockSpawn({ stdout: 'https://github.com/Duroktar/what-src/master/.../.../myfile.ts' }))
       ).toBeTruthy()
-      expect(
-        () => T.getGitFileFullName('myfile.ts', getMockSpawn({ stdout: '' }))
-      ).toThrow()
+      expect(T.getGitFileFullName('myfile.ts', getMockSpawn({ stdout: '' }))).toBeNull()
     })
+
     it('get the name of the currently checked out branch if it exists', () => {
       expect(
         T.getGitBranchName(getMockSpawn({ stdout: 'master' }))
       ).toBeTruthy()
-      expect(
-        () => T.getGitBranchName(getMockSpawn({ stdout: '' }))
-      ).toThrow()
+      expect(T.getGitBranchName(getMockSpawn({ stdout: '' }))).toBeNull()
     })
   })
 

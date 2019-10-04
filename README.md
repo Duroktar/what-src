@@ -60,7 +60,7 @@ Via .babelrc or babel-loader.
 
 ***Now pick from one of the following to enable file opening on your local
 editor.*** *(Alternatively, check out the [remotes](#remotes) section for
-opening files on github in the browser).*
+opening files on Github).*
 
 ### Webpack-Dev-Server (Option 1: easiest)
 

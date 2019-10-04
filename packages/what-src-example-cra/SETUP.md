@@ -7,16 +7,14 @@ Setup what-src in a CRA app in just 5 easy steps!
 ### 1. Create App and Install dependencies
 
 ```bash
-
 yarn create react-app my-app && cd my-app
 
 yarn add -D react-app-rewired customize-cra concurrently
 
 yarn add -D @what-src/babel-plugin @what-src/express
-
 ```
 
-### 2. Create a customize-cra config file
+### 2. Create a `customize-cra` config file
 
 ```js
 /* config-overrides.js */
@@ -26,20 +24,18 @@ const { useBabelRc, override } = require('customize-cra')
 module.exports = override(
   useBabelRc()
 );
-
 ```
 
-### 3. Create a babel config
+### 3. Create a `babel` config
 ```js
 /* .babelrc */
 
 {
     "plugins": ["@what-src/babel-plugin"]
 }
-
 ```
 
-### 4. Update launch scripts
+### 4. Update `npm` scripts
 
 ```js
 /* package.json */
@@ -53,15 +49,12 @@ module.exports = override(
     "dev:server": "what-src-express",
     "develop": "concurrently \"npm:start\" \"npm:dev:server\""
   },
-
 ```
 
 ### 5. Launch!
 
 ```bash
-
 npm run develop
-
 ```
 
 ## Help

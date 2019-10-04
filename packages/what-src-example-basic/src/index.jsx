@@ -1,40 +1,65 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom'
+import sample from 'lodash.sample'
+import waldo1 from './assets/waldo-1.jpeg'
+import waldo2 from './assets/waldo-2.jpeg'
+import waldo3 from './assets/waldo-3.jpeg'
+// r/programminghorror
+import { SomeCell as SomeCell1 } from './components/a/SomeCell.jsx'
+import { SomeCell as SomeCell2 } from './components/b/c/d/SomeCell.jsx'
+import { SomeCell as SomeCell3 } from './components/b/c/d/e/f/g/SomeCell.jsx'
+import { SomeCell as SomeCell4 } from './components/b/c/e/SomeCell.jsx'
+import { SomeCell as SomeCell5 } from './components/c/d/SomeCell.jsx'
+import './style.css'
 
-import Button from './Button.jsx'
+const components = [
+  SomeCell1,
+  SomeCell2,
+  SomeCell3,
+  SomeCell4,
+  SomeCell5,
+]
+
+const images = [
+  waldo1,
+  waldo2,
+  waldo3,
+]
+
+export const strings = [
+  'Find me!',
+  'Where am I?',
+  'Where could I be?',
+  'Can you find me??',
+]
 
 class App extends React.Component {
+  generateCells(n) {
+    const nodes = []
+    for (let i = 0; i < n; i++) {
+      const Component = sample(components)
+      const img = sample(images)
+      const txt = sample(strings)
+      const child = <Component img={img} txt={<p>{txt}</p>} />
+      const article = <article key={i}>{child}</article>
+      nodes.push(article)
+    }
+    return nodes
+  }
+
   render() {
     return (
-      <div className="first">
-        <p>some p thing</p>
-        <br />
-        <div id="hat">
-          <h1>Header</h1>
-          <article>
-            Some article..
-
-            More texxt and stuffz
-          </article>
-          <article>
-            A Second article!!
-
-            With even more texxt and stuffz!!!!!!!!
-          </article>
-        </div>
-        <div>
-          <label htmlFor="but">And</label>
-          <Button id="but">Buttons!</Button>
-        </div>
-        <a href="http://google.com">And links too :D</a>
-        <React.Fragment>
-          <div>inside</div>
-          <div>fragment</div>
-        </React.Fragment>
+      <React.Fragment>
+        <header>
+          <h1>Can you find the source file?</h1>
+        </header>
+        <main>
+          {this.generateCells(12)}
+        </main>
         <footer>
-          The ol&apos; footer
+          <p>Created by Duroktar</p>
         </footer>
-      </div>
+      </React.Fragment>
     )
   }
 }

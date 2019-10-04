@@ -27,7 +27,16 @@
 
 ### Tracking No: 2
 
-**TITLE.**
+**TS-plugin crashing on start.**
+
+|  Affects  |  Status  |
+|  -------  |  ------  |
+|  ts-plugin  |  fixed  |
+
+
+### Tracking No: 3
+
+**Fragments are getting tagged and other attributes (eg: classname) are being removed.**
 
 |  Affects  |  Status  |
 |  -------  |  ------  |
