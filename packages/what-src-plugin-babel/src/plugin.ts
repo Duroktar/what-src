@@ -248,6 +248,10 @@ export class WhatSrcBabelPlugin {
    * @returns
    */
   private isFragment(openingElement: t.JSXOpeningElement) {
-    return getIn('name.property.name', openingElement) === 'Fragment'
+    const elementNames: Set<string> = new Set([
+      getIn('name.property.name', openingElement),
+      getIn('name.name', openingElement),
+    ])
+    return elementNames.has('Fragment')
   }
 }

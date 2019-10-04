@@ -23,4 +23,22 @@ const TestMemoizedComponent = React.memo(() => (
     <p>some p thing</p>
   </div>
 ))
+
+const TestFragment = () => (
+  <Fragment>
+    <p>some p thing</p>
+  </Fragment>
+)
+
+const TestReactDotFragment = () => (
+  <React.Fragment>
+    <p>some p thing</p>
+  </React.Fragment>
+)
+
+const TestEmptyFragment = () => (
+  <>
+    <p>some p thing</p>
+  </>
+)
 `

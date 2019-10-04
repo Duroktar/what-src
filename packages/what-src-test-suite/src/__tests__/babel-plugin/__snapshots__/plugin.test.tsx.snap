@@ -61,7 +61,25 @@ var TestMemoizedComponent = React.memo(function () {
   }, React.createElement(\\"p\\", {
     \\"data-what-src\\": \\"6\\"
   }, \\"some p thing\\"));
-});"
+});
+
+var TestFragment = function TestFragment() {
+  return React.createElement(Fragment, null, React.createElement(\\"p\\", {
+    \\"data-what-src\\": \\"7\\"
+  }, \\"some p thing\\"));
+};
+
+var TestReactDotFragment = function TestReactDotFragment() {
+  return React.createElement(React.Fragment, null, React.createElement(\\"p\\", {
+    \\"data-what-src\\": \\"8\\"
+  }, \\"some p thing\\"));
+};
+
+var TestEmptyFragment = function TestEmptyFragment() {
+  return React.createElement(React.Fragment, null, React.createElement(\\"p\\", {
+    \\"data-what-src\\": \\"9\\"
+  }, \\"some p thing\\"));
+};"
 `;
 
 exports[`works as a babel-plugin works in production mode 1`] = `
@@ -125,5 +143,23 @@ var TestMemoizedComponent = React.memo(function () {
   }, React.createElement(\\"p\\", {
     \\"data-what-src\\": \\"6\\"
   }, \\"some p thing\\"));
-});"
+});
+
+var TestFragment = function TestFragment() {
+  return React.createElement(Fragment, null, React.createElement(\\"p\\", {
+    \\"data-what-src\\": \\"7\\"
+  }, \\"some p thing\\"));
+};
+
+var TestReactDotFragment = function TestReactDotFragment() {
+  return React.createElement(React.Fragment, null, React.createElement(\\"p\\", {
+    \\"data-what-src\\": \\"8\\"
+  }, \\"some p thing\\"));
+};
+
+var TestEmptyFragment = function TestEmptyFragment() {
+  return React.createElement(React.Fragment, null, React.createElement(\\"p\\", {
+    \\"data-what-src\\": \\"9\\"
+  }, \\"some p thing\\"));
+};"
 `;

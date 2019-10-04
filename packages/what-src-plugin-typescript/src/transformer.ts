@@ -92,8 +92,8 @@ export class WhatSrcTsTransformer {
    */
   constructor(
     public defaultOptions: WhatSrcTsTransformerOptions,
-    public host?: any, // ts.LanguageServiceHost,  // TODO: what is this interface?
-    public basedir: string = process.cwd(), // TODO(Important): This needs to be set for cache optimization to work!
+    public host?: any, // ts.LanguageServiceHost,
+    public basedir: string = process.cwd(),
     public cache: WS.WhatSrcCache = WS.defaultCache,
     public logger: Console = console
   ) {
@@ -166,13 +166,13 @@ export class WhatSrcTsTransformer {
     }
 
     // decorate any valid elements with a what-src tag
-    if (ts.isJsxElement(node) && !ts.isJsxFragment(node)) {
+    if (ts.isJsxElement(node) && !this.isJsxFragment(node)) {
       node = this.createAndUpdateJsxAttribute(node)
     }
 
     // not sure if this is needed or not, to be honest :/
     ts.forEachChild(node, n => {
-      if (!n.parent) n.parent = node
+      if (!n.parent) { n.parent = node }
     })
 
     return ts.visitEachChild(node, this.visitor, this.context)
@@ -298,7 +298,32 @@ export class WhatSrcTsTransformer {
    * @returns {(string | null)}
    */
   private getOpeningElementTagName(node: ts.JsxElement): string {
-    return getIn('openingElement.tagName.escapedText', node) || ''
+    return getIn('openingElement.tagName.escapedText', node, '')
+  }
+
+  /**
+   * Determines if this node is also a `jsxFragment`.
+   *
+   * NOTE: builtins wont't work for this because the node
+   * type has already been determined to be a `JsxElement`
+   * by the visitor.
+   *
+   * ```ts
+   *  ts.isJsxFragment(node)                         // <-- won't work
+   *  ts.isJsxOpeningFragment(node.openingElement)   // <-- won't work
+   * ```
+   *
+   * @private
+   * @param {ts.JsxElement} node
+   * @returns
+   * @memberof WhatSrcTsTransformer
+   */
+  private isJsxFragment(node: ts.JsxElement) {
+    const elementNames: Set<string> = new Set([
+      getIn('openingElement.tagName.escapedText', node, ''),
+      getIn('openingElement.tagName.name.escapedText', node, ''),
+    ])
+    return elementNames.has('Fragment')
   }
 }
 
