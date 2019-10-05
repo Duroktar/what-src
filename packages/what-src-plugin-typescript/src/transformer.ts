@@ -1,6 +1,6 @@
 import ts from 'typescript'
 import * as WS from '@what-src/plugin-core'
-import { getIn, withHooks, isNodeEnvProduction, throttle } from '@what-src/utils'
+import { getIn, withHooks, isNodeEnvProduction } from '@what-src/utils'
 import { WhatSrcTsTransformerOptions } from './types'
 
 /**
@@ -147,7 +147,7 @@ export class WhatSrcTsTransformer {
     return (sourceFile: ts.SourceFile) => {
       return withHooks(entrance, {
         before: () => { this.sourceFile = sourceFile },
-        after: () => this.emitFile(this.CACHE_DIR),
+        after: () => this.service.emit(this.CACHE_DIR),
       }).result
     }
   }
@@ -242,28 +242,6 @@ export class WhatSrcTsTransformer {
     }
     return node
   }
-
-  /**
-   * The amount in milliseconds to debounce cache file writes (emit).
-   *
-   * > REASON: emit can be called many times in a row very quickly since babel
-   * > parses each file one at a time during which time what-src is building up
-   * > the cache then writing it on every 'end' callback.
-   *
-   * @private
-   * @memberof WhatSrcBabelPlugin
-   */
-  private EMIT_THROTTLE_VALUE = 50
-
-  /**
-   * A debounced version of this.service.emit
-   *
-   * @private
-   * @memberof WhatSrcBabelPlugin
-   */
-  private emitFile = throttle((file: string) => {
-    return this.service.emit(file)
-  }, this.EMIT_THROTTLE_VALUE, { leading: true, trailing: true })
 
   /**
    * Node "OpeningElementStart" path selector

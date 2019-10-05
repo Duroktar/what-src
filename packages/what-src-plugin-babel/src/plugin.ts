@@ -1,7 +1,7 @@
 import * as traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import * as WS from '@what-src/plugin-core'
-import { isNullOrUndefined, isNodeEnvProduction, getIn, withHooks, throttle } from '@what-src/utils'
+import { isNullOrUndefined, isNodeEnvProduction, getIn, withHooks } from '@what-src/utils'
 import { buildRequire } from './templates'
 import { BabelVisitor, BabelPluginState, BabelPluginContext } from './types'
 
@@ -126,7 +126,7 @@ export class WhatSrcBabelPlugin {
 
               const ast = withHooks(entrance, {
                 // `CACHE_DIR` needs to point to a `node_modules` folder accessible to `CACHE_IMPORT`
-                after: () => this.emitFile(this.CACHE_DIR),
+                after: () => this.service.emit(this.CACHE_DIR),
               }).result as t.Statement
 
               path.node.body = [ast, ...path.node.body]
@@ -168,28 +168,6 @@ export class WhatSrcBabelPlugin {
       },
     }
   }
-
-  /**
-   * The amount in milliseconds to debounce cache file writes (emit).
-   *
-   * > REASON: emit can be called many times in a row very quickly since babel
-   * > parses each file one at a time during which time what-src is building up
-   * > the cache then writing it on every 'end' callback.
-   *
-   * @private
-   * @memberof WhatSrcBabelPlugin
-   */
-  private EMIT_THROTTLE_VALUE = 50
-
-  /**
-   * A debounced version of this.service.emit
-   *
-   * @private
-   * @memberof WhatSrcBabelPlugin
-   */
-  private emitFile = throttle((file: string) => {
-    return this.service.emit(file)
-  }, this.EMIT_THROTTLE_VALUE, { leading: true, trailing: true })
 
   /**
    * selects this plugin instance from the babel loader state
