@@ -10,7 +10,7 @@ module.exports = {
     '**/*.spec.ts',
   ],
   theme: './packages/what-src-typedoc-theme/default',
-  ignoreCompilerErrors: 'false',
+  ignoreCompilerErrors: 'true',
   'external-modulemap': String.raw`.*packages\/(what-src-[^\/]+)\/.*`,
   preserveConstEnums: 'true',
   excludePrivate: 'true',

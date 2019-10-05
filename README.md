@@ -37,12 +37,17 @@ npm install @what-src/plugin --save-dev
 
 > `@what-src/plugin` checks the `$EDITOR` environment variable (default:
 > "vscode") to determine which editor to open your code in. Read
-> [here](https://github.com/sindresorhus/env-editor) more here.
+> [here](https://github.com/sindresorhus/env-editor) for more info.
 
-## Usage
+## Getting Started
 
 Choose from one of the more common setups below or check out one of the
-[examples](#Are-there-any-examples).
+[examples](#Are-there-any-examples) in the repository.
+
+<p align="center">
+  <img id="what-src-config" alt="what-src configuration" src="https://raw.githubusercontent.com/Duroktar/what-src-logo/master/carbon/config-basic-no-padding.png" width="760px">
+  <label style="">Example configuration - Please follow the rest of the guide to determine your setup</label>
+</p>
 
 *1. Create React App*
 

@@ -74,18 +74,28 @@
 					</blockquote>
 					<p>Check out the <a href="https://github.com/duroktar/what-src/tree/master/packages">packages folder</a> for more information.</p>
 					<h2 id="usage">Usage</h2>
+					<p>There&#39;s primarily two ways to use what-src in a project. For more custom usages
+						you may want to check out the docs for the particular plugin system you are
+					using.</p>
+					<blockquote>
+						<p>NOTE: Choose <em>only</em> #1 if you are installing what-src into a CRA app, and
+						<em>only</em> #2 otherwise.</p>
+					</blockquote>
+					<p><em>1. Create React App</em></p>
+					<p>See the guide <a href="/packages/what-src-example-cra/SETUP.md">here</a></p>
+					<p><em>2. Babel &amp; Webpack/Express</em></p>
 					<p>First install the plugin from npm.</p>
 					<pre><code class="language-sh"><span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">install</span> @<span class="hljs-keyword">what</span>-<span class="hljs-keyword">src</span>/<span class="hljs-keyword">plugin</span> --save-dev</code></pre>
 					<blockquote>
-						<p>what-src respects your systems $EDITOR environment variable (default: &quot;vscode&quot;)
-						Read <a href="https://github.com/sindresorhus/env-editor">here</a> for more info.</p>
+						<p><code>@what-src/plugin</code> checks the <code>$EDITOR</code> environment variable (default:
+							&quot;vscode&quot;) to determine which editor to open your code in. Read
+						<a href="https://github.com/sindresorhus/env-editor">here</a> for more info.</p>
 					</blockquote>
 					<h3 id="babel-required">babel (required)</h3>
 					<p>Via .babelrc or babel-loader.</p>
 					<pre><code class="language-json">{
   <span class="hljs-attr">"plugins"</span>: [
     <span class="hljs-string">"module:@what-src/plugin"</span>,
-    ...
   ]
 }</code></pre>
 					<h3 id="webpack-dev-server">Webpack-Dev-Server</h3>
@@ -93,25 +103,19 @@
 
 
 <p>const { WhatSrcServerWebpackPlugin } = require(<span class="hljs-string">&#39;@what-src/plugin&#39;</span>) <span class="hljs-comment">// &lt;- import plugin</span></p>
-<p>...
-module<span class="hljs-selector-class">.exports</span> = {
+<p>module<span class="hljs-selector-class">.exports</span> = {
   mode: <span class="hljs-string">&#39;development&#39;</span>,
   entry: <span class="hljs-string">&#39;./src/index.jsx&#39;</span>,
   output: {
     filename: <span class="hljs-string">&#39;bundle.js&#39;</span>,
   },
-  ...
-plugins: [new WhatSrcServerWebpackPlugin()] <span class="hljs-comment">// &lt;- add plugin</span>
-...
+  plugins: [new WhatSrcServerWebpackPlugin()] <span class="hljs-comment">// &lt;- add plugin</span>
 }</code></pre></p>
-					<pre><code class="language-json">$ package.json
-{
-  <span class="hljs-string">...</span>
+					<pre><code class="language-json">$ <span class="hljs-class"><span class="hljs-keyword">package</span>.<span class="hljs-title">json</span>
+{</span>
   <span class="hljs-string">"scripts"</span>: {
-    <span class="hljs-string">...</span>
     <span class="hljs-string">"develop"</span>: <span class="hljs-string">"webpack-dev-server"</span>
-  },
-  <span class="hljs-string">...</span>
+  }
 }</code></pre>
 					<pre><code class="language-sh">npm <span class="hljs-keyword">run</span><span class="bash"> develop</span></code></pre>
 					<blockquote>

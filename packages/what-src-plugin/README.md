@@ -28,7 +28,7 @@ npm install @what-src/plugin --save-dev
 
 > `@what-src/plugin` checks the `$EDITOR` environment variable (default:
 > "vscode") to determine which editor to open your code in. Read
-> [here](https://github.com/sindresorhus/env-editor) more here.
+> [here](https://github.com/sindresorhus/env-editor) for more info.
 
 ### babel (required)
 

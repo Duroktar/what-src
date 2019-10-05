@@ -8,6 +8,7 @@ packages/*/node_modules
 packages/*/dist/**
 packages/**/*.d.ts
 packages/what-src-example-basic
+packages/what-src-example-cra
 packages/what-src-example-typescript-babel
 packages/what-src-example-typescript-loader
 scripts

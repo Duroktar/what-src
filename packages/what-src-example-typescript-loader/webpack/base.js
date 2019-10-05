@@ -1,10 +1,15 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { WhatSrcServerWebpackPlugin, whatSrcServerTsLoaderPlugin } = require('@what-src/plugin')
 
 /** @type {WhatSrcPluginOptions} */
-const options = {}
+const options = {
+  productionMode: true,
+  useRemote: true,
+  enableXkcdMode: true,
+}
 
 /** @type {webpack.Configuration} */
 module.exports = {
@@ -78,6 +83,7 @@ module.exports = {
     overlay: true,
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: './index.html',
       favicon: './static/favicon.ico',

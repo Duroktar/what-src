@@ -25,9 +25,17 @@ body,
   position: absolute;
   left: 1em;
 }
+#example-link {
+  position: absolute;
+  left: 15px;
+  font-weight: bolder;
+  font-size: medium;
+  bottom: 38px;
+}
 #api-docs {
   margin: -2em 1em;
   font-size: 14px;
+  font-size: medium;
   font-weight: bold;
 }
 #info-bubble {

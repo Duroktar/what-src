@@ -106,6 +106,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html#cache" class="tsd-kind-icon">cache</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html#defaultoptions" class="tsd-kind-icon">default<wbr>Options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html#disabled" class="tsd-kind-icon">disabled</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html#logger" class="tsd-kind-icon">logger</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html#options" class="tsd-kind-icon">options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html#service" class="tsd-kind-icon">service</a></li>
 							</ul>
@@ -125,13 +126,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>What<wbr>Src<wbr>Babel<wbr>Plugin<span class="tsd-signature-symbol">(</span>defaultOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WS.WhatSrcPluginOptions</span>, basedir<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, cache<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WS.WhatSrcCache</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html" class="tsd-signature-type">WhatSrcBabelPlugin</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>What<wbr>Src<wbr>Babel<wbr>Plugin<span class="tsd-signature-symbol">(</span>defaultOptions<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WS.WhatSrcPluginOptions</span>, basedir<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, cache<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">WS.WhatSrcCache</span>, logger<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Console</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html" class="tsd-signature-type">WhatSrcBabelPlugin</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-babel/src/plugin.ts#L47">what-src-plugin-babel/src/plugin.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-babel/src/plugin.ts#L47">what-src-plugin-babel/src/plugin.ts:47</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -155,6 +156,9 @@
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> cache: <span class="tsd-signature-type">WS.WhatSrcCache</span><span class="tsd-signature-symbol"> =&nbsp;WS.defaultCache</span></h5>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> logger: <span class="tsd-signature-type">Console</span><span class="tsd-signature-symbol"> =&nbsp;console</span></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html" class="tsd-signature-type">WhatSrcBabelPlugin</a></h4>
 						</li>
@@ -169,7 +173,7 @@
 					<div class="tsd-signature tsd-kind-icon">basedir<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-babel/src/plugin.ts#L60">what-src-plugin-babel/src/plugin.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-babel/src/plugin.ts#L60">what-src-plugin-babel/src/plugin.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -179,7 +183,7 @@
 					<div class="tsd-signature tsd-kind-icon">cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WS.WhatSrcCache</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-babel/src/plugin.ts#L61">what-src-plugin-babel/src/plugin.ts:61</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-babel/src/plugin.ts#L61">what-src-plugin-babel/src/plugin.ts:61</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -189,7 +193,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WS.WhatSrcPluginOptions</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-babel/src/plugin.ts#L59">what-src-plugin-babel/src/plugin.ts:59</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-babel/src/plugin.ts#L59">what-src-plugin-babel/src/plugin.ts:59</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -199,7 +203,7 @@
 					<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-babel/src/plugin.ts#L47">what-src-plugin-babel/src/plugin.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-babel/src/plugin.ts#L47">what-src-plugin-babel/src/plugin.ts:47</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -217,12 +221,22 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="logger" class="tsd-anchor"></a>
+					<h3>logger</h3>
+					<div class="tsd-signature tsd-kind-icon">logger<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Console</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-babel/src/plugin.ts#L62">what-src-plugin-babel/src/plugin.ts:62</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="options" class="tsd-anchor"></a>
 					<h3>options</h3>
 					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WS.WhatSrcConfiguration</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-babel/src/plugin.ts#L33">what-src-plugin-babel/src/plugin.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-babel/src/plugin.ts#L33">what-src-plugin-babel/src/plugin.ts:33</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -245,7 +259,7 @@
 					<div class="tsd-signature tsd-kind-icon">service<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WhatSrcService</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-babel/src/plugin.ts#L40">what-src-plugin-babel/src/plugin.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-babel/src/plugin.ts#L40">what-src-plugin-babel/src/plugin.ts:40</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -275,7 +289,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-babel/src/plugin.ts#L106">what-src-plugin-babel/src/plugin.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-babel/src/plugin.ts#L107">what-src-plugin-babel/src/plugin.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -345,6 +359,9 @@
 									</li>
 									<li class=" tsd-kind-property tsd-parent-kind-class">
 										<a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html#disabled" class="tsd-kind-icon">disabled</a>
+									</li>
+									<li class=" tsd-kind-property tsd-parent-kind-class">
+										<a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html#logger" class="tsd-kind-icon">logger</a>
 									</li>
 									<li class=" tsd-kind-property tsd-parent-kind-class">
 										<a href="/doc/classes/what_src_plugin_babel.whatsrcbabelplugin.html#options" class="tsd-kind-icon">options</a>

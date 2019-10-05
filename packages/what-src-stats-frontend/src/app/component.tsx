@@ -71,13 +71,16 @@ React.memo(withTheme((props: AppProps) => {
           />
         </div>
         <div className='footer'>
-          <a id="api-docs" href="doc" tabIndex={0}>
-            Documentation
+          <a id="example-link" href="example" tabIndex={0}>
+            - Example
+          </a>
+          <a id="api-docs" href="doc" tabIndex={-1}>
+            - API Docs
           </a>
           <div
             id="refresh-btn"
             role="button"
-            tabIndex={-1}
+            tabIndex={-2}
             onClick={state.handleRefresh}
             className={!error ? 'hidden' : undefined}
           >
@@ -86,7 +89,7 @@ React.memo(withTheme((props: AppProps) => {
           <button
             id="info-bubble"
             aria-label={t('INFO-TXT')}
-            tabIndex={-2}
+            tabIndex={-3}
             onClick={state.handleRefresh}
           >
             <Info txt={t('INFO-TXT')} />

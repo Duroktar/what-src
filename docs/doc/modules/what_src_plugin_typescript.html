@@ -77,13 +77,16 @@
 					<h2 id="usage">Usage</h2>
 					<p>First install the package from npm.</p>
 					<pre><code class="language-sh"><span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">install</span> @<span class="hljs-keyword">what</span>-<span class="hljs-keyword">src</span>/<span class="hljs-keyword">typescript</span>-<span class="hljs-keyword">plugin</span> --save-dev</code></pre>
+					<blockquote>
+						<p>If you prefer to use <a href="https://github.com/babel/babel-loader">babel-loader</a>
+						instead follow the steps <a href="/packages/what-src-example-typescript-babel/">here</a>.</p>
+					</blockquote>
 					<h3 id="via-webpack-recommended">via Webpack (recommended)</h3>
 					<p>Via webpack.config.ts (or .json, .js, ...).</p>
 					<pre><code class="language-ts"><span class="hljs-keyword">import</span> devserver <span class="hljs-keyword">from</span> <span class="hljs-string">'webpack-dev-server'</span>
 <span class="hljs-keyword">import</span> webpack <span class="hljs-keyword">from</span> <span class="hljs-string">'webpack'</span>
-<span class="hljs-keyword">import</span> { whatSrcServerTsLoaderPlugin } <span class="hljs-keyword">from</span> <span class="hljs-string">'@what-src/plugin'</span>
-<span class="hljs-keyword">import</span> { WhatSrcServerWebpackPlugin } <span class="hljs-keyword">from</span> <span class="hljs-string">'@what-src/plugin'</span>
 
+<p><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> ws <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;@what-src/plugin&#39;</span></p>
 <p><span class="hljs-keyword">const</span> config: webpack.Configuration &amp; devserver.Configuration = {
   mode: process.env.NODE_ENV,
   <span class="hljs-keyword">module</span>: {
@@ -95,7 +98,9 @@
             loader: <span class="hljs-string">&#39;ts-loader&#39;</span>,
             options: {
               getCustomTransformers: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> ({
-                before: [whatSrcServerTsLoaderPlugin()],
+                before: [ws.whatSrcServerTsLoaderPlugin({
+                  <span class="hljs-comment">// options</span>
+                })],
               }),
             },
           },
@@ -103,7 +108,7 @@
       },
     ],
   },
-  plugins: [<span class="hljs-keyword">new</span> WhatSrcServerWebpackPlugin()],
+  plugins: [<span class="hljs-keyword">new</span> ws.WhatSrcServerWebpackPlugin()],
 }</code></pre></p>
 					<pre><code class="language-json">$ package.json
 {
@@ -115,11 +120,6 @@
   <span class="hljs-string">...</span>
 }</code></pre>
 					<pre><code class="language-sh">npm <span class="hljs-keyword">run</span><span class="bash"> develop</span></code></pre>
-					<h3 id="planned-support">Planned Support</h3>
-					<ul>
-						<li><a href="https://github.com/cevek/ttypescript">ttypescript</a></li>
-						<li><a href="https://levelup.gitconnected.com/writing-typescript-custom-ast-transformer-part-1-7585d6916819">custom compiler</a></li>
-					</ul>
 					<h2 id="example">Example</h2>
 					<p><strong>Check out the <a href="https://github.com/duroktar/what-src/tree/master/packages/what-src-example-typescript">example project</a>
 					for a more in depth setup.</strong></p>
@@ -168,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">What<wbr>Src<wbr>TsTransformer<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/types.ts#L2">what-src-plugin-typescript/src/types.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-typescript/src/types.ts#L2">what-src-plugin-typescript/src/types.ts:2</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -186,7 +186,7 @@
 					<div class="tsd-signature tsd-kind-icon">result<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TranspileOutput</span><span class="tsd-signature-symbol"> =&nbsp;ts.transpileModule(sourceText, {compilerOptions: {module: ts.ModuleKind.CommonJS,jsx: ts.JsxEmit.React,},transformers: { before: [createTransformer(transformerOptions)] },})</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/debug.ts#L17">what-src-plugin-typescript/src/debug.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-typescript/src/debug.ts#L17">what-src-plugin-typescript/src/debug.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -196,7 +196,7 @@
 					<div class="tsd-signature tsd-kind-icon">source<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"import * as React from &#x27;react&#x27;export const App &#x3D; () &#x3D;&gt; (&lt;div className&#x3D;&quot;first&quot;&gt;&lt;p&gt;some p thing&lt;/p&gt;&lt;/div&gt;)"</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;import * as React from &#x27;react&#x27;export const App &#x3D; () &#x3D;&gt; (&lt;div className&#x3D;&quot;first&quot;&gt;&lt;p&gt;some p thing&lt;/p&gt;&lt;/div&gt;)&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/debug.ts#L7">what-src-plugin-typescript/src/debug.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-typescript/src/debug.ts#L7">what-src-plugin-typescript/src/debug.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -206,7 +206,7 @@
 					<div class="tsd-signature tsd-kind-icon">transformer<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/debug.ts#L5">what-src-plugin-typescript/src/debug.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-typescript/src/debug.ts#L5">what-src-plugin-typescript/src/debug.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -222,19 +222,26 @@
 					<a name="createtransformer" class="tsd-anchor"></a>
 					<h3>create<wbr>Transformer</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Transformer<span class="tsd-signature-symbol">(</span>tsLoaderOpts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, userOpts<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ts.TransformerFactory</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SourceFile</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Transformer<span class="tsd-signature-symbol">(</span>userOpts<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, tsLoaderOpts<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ts.TransformerFactory</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SourceFile</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/0ce0c25/packages/what-src-plugin-typescript/src/transformer.ts#L14">what-src-plugin-typescript/src/transformer.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/Duroktar/what-src/blob/c7ee702/packages/what-src-plugin-typescript/src/transformer.ts#L21">what-src-plugin-typescript/src/transformer.ts:21</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Factory function for TS TransformerFactory&lt;ts.SourceFile&gt; instances.</p>
 								</div>
+								<p>When passed a single argument than it will be parsed as the plugin options.
+									When passed two arguments then the first will be parsed as ts.LoaderOpts
+								and the second will be parsed as the plugin options.</p>
+								<blockquote>
+									<p>NOTE: ts.LoaderOpts is currenlty unused so the two argument scenario
+									should be avoided.</p>
+								</blockquote>
 								<dl class="tsd-comment-tags">
 									<dt>export</dt>
 									<dd></dd>
@@ -243,10 +250,10 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>tsLoaderOpts: <span class="tsd-signature-type">any</span></h5>
+									<h5>userOpts: <span class="tsd-signature-type">any</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> userOpts: <span class="tsd-signature-type">any</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> tsLoaderOpts: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ts.TransformerFactory</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SourceFile</span><span class="tsd-signature-symbol">&gt;</span></h4>
